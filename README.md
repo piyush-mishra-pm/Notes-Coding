@@ -1,7 +1,7 @@
 Link to all my Coding related Notes:
 
 1. Coding Bootcamps:
-   1. Scaler:
+   1. [Scaler:](https://github.com/piyush-mishra-pm/Scaler-Gist)
    2. Coding-Ninjas:
 1. Mosh Academy:
    1. SQL
