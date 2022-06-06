@@ -179,3 +179,244 @@ private void dfs(TreeNode node){
 </br>
 
 ---
+
+### 10. Minimum Waiting Time:
+
+**Problem**: Given an array mentioning time required to execute tasks, output the minimum waiting times to execute all tasks.</br>
+**Example**: For jobs with execution times [3,2,1,2,6], the minimum eaiting time is 17. As they can be scheduled as [1,2,2,3,6] giving waiting times as [(0)+(0+1)+(0+1+2)+(0+1+2+2)+(0+1+2+2+3)] = [0+1+3+5+8] = 17.</br>
+**Solutions**: </br>
+
+1. Approach 1: Greedy. Sort in Ascending order, and add all execution times till penultimate array element. T: O(NlogN) ; S: O(1).</br>
+
+```java
+    private static int minWaitTime(int[] queries){
+        Arrays.sort(queries);
+        int totalWaitingTime=0;
+        for(int i=0 ; i<queries.length-1 ; i++){
+            int waitDuration = queries[i];
+            int timesRepeated = (queries.length-1 - i);
+            totalWaitingTime += waitDuration*timesRepeated;
+        }
+        return totalWaitingTime;
+    }
+```
+
+</br>
+
+---
+
+### 11. Class Photos:
+
+**Problem**: Given two arrays of student heights wearing and red and blue shirts. Number of students wearing red and blue shirts are same. They need to be arranged in two rows for a class photo. All red shirts need to be in the same row and all blue shirts need to be in same row. The student standing in front should be shorter than the one standing behind. You can reorder the red and blue shirt students in their rows. Return true if is possible to arrange students for such a class Photo. </br>
+**Example**: redShirts=[5,8,1,3,4] ; blueShirts=[9,4,2,4,5]. Answer is True. </br>
+**Solutions**: </br>
+
+1. Approach 1: Shirt group with tallest student needs to be in the row behind. Sort red and blue shirt heights. Then keep checking if traversing in descending order in red and blue shirts, the front row guy is always lesser than rear row guys. T: O(NlogN) ; S: O(1). </br>
+
+```java
+Copy solution.
+```
+
+</br>
+
+---
+
+### 12. Tandem Bicycle:
+
+**Problem**: Given two arrays of speeds of red shirt and blue shirt riders (of same length). We need to pair them to either get fastest or slowest total speeds. Speed of a pair is the max of the two rider. Find the maximum or minimum total speeds of the tandem bicycle riders.</br>
+**Example**: redShirts=[5,5,3,9,2] ; blueShirts=[3,6,7,2,1]. Fastest speed is 32, slowest speed is 25.</br>
+**Solutions**:</br>
+
+1. Approach 1: Sort the two arrays. If fastest pairing asked, then group largest of one with the most minimum of other. If slowest is asked, then pair slowest of one with slowest of other. T: O(NlogN) ; S: O(1).</br>
+
+```java
+Copy solution.
+```
+
+</br>
+
+---
+
+### 13. Remove Duplicates From Linked List:
+
+**Problem**: Given a sorted Linked Lists, remove the duplicates from the Linked List.</br>
+**Example**: LL given = {1->1->3->4->4->4->5->6->6}. Ans is {1->3->4->5->6}.</br>
+**Solutions**:</br>
+
+1. Approach 1: Sorted array means that duplicate values will be grouped. T: O(Nl) ; S: O(1).</br>
+
+---
+
+### 14. N-th Fibonacci:
+
+**Problem**: Find the N-th Fibanacci number.</br>
+**Solutions**:</br>
+
+1. Approach 1: Recursive, memoised. T: O(N) ; S: O(N).</br>
+2. Approach 2: Iterative DP: T: O(N) ; S: O(1).</br>
+   </br>
+
+---
+
+### 15. Product Sum:
+
+**Problem**: Array containing numbes and other special arrays. Find Product Sum of the array. For product sum, you sum up the numbers in that array, but if there is a special array inside it then you multiply the depth of that special array in sum of the elements of the special array.</br>
+**Example**: For special array [5,2,[7,-1],3,[6,[-13,8],4]], the productSum is 12.</br>
+**Solutions**:</br>
+
+1. Approach 1: Recursive.</br>
+
+```java
+code
+```
+
+</br>
+
+---
+
+### 16. Binary Search:
+
+**Problem**: Binary search for an element in array. </br>
+**Solutions**:</br>
+
+1. Approach 1: Recursive.</br>
+2. Approach 1: Iterative.</br>
+   </br>
+
+---
+
+### 17. Three Largest Numbers:
+
+**Problem**: Given an array, return the sorted array of three largest numbers. </br>
+**Solutions**:</br>
+
+1. Approach 1: Sort whole array and return 3 larges.
+2. Approach 2: Traverse the whole array and keep track of three largest numbers.
+3. Approach 3: Maintain a sorted array (initialized to -Inf values), and shift and update the three largest numbers collected in this array, while linearly traversing the main array.
+4. Approach 4: Priority Queue: MinHeap of size 3.
+   </br>
+
+---
+
+### 18. Bubble Sort:
+
+**Problem**: Given an array, Bubble sort the array.
+**Solutions**:
+
+1. Approach 1: Swap a pair of elements (i,i+1) if elements not sorted in these positions. This is bubbling up. If a swap is performed, then perform above check again. T : O(N^2) ; S : O(1).
+   </br>
+
+---
+
+### 19. Insertion Sort:
+
+**Problem**: Given an array, Insertion sort the array.</br>
+**Solutions**:
+
+1. Approach 1: At an iteration, array is relatively sorted before the current element and relatively unsorted after the current element position. Just try to place the current element in right place in sorted section, by swapping with consecutively previous element. Perform the rest of the iterations to cover rest of the array. T : O(N^2) ; S : O(1).
+   </br>
+
+---
+
+### 20. Selection Sort:
+
+**Problem**: Given an array, Selection sort the array. </br>
+**Solutions**:
+
+1. Approach 1: Array gets divided in two parts. Absolutely sorted part and unsorted part. Choose any position, and to get the element which belongs to this position, traverse on unsorted array side and find minimum number to place at the current position. Current position is now also part of the sorted part. Continue for the next element in array. T : O(N^2) ; S : O(1).
+   </br>
+
+---
+
+### 21. Palindrome Check:
+
+**Problem**: Check if given string is a palindrome or not.
+</br>
+
+---
+
+### 22. Caesar Cipher Encryptor:
+
+**Problem**: Given a string and shiftKey, find the Caesar Ciphered String.</br>
+**Example:** string ="xyz", and key=2 ==> encrypted string is "zab".</br>
+**Solution:**</br>
+
+```java
+copy
+```
+
+</br>
+
+---
+
+### 23. Run-Length Encoding:
+
+**Problem**: Compress the string into Run-Length Encoding. Max digits you could encode a repeating char is 9, as if double digit, then can create confusion in encoding (like which part is actually repeated).</br>
+**Example:** AAAAAAAAAAAAABBCCCCDD => 9A4A2B4C2D. Not 13A2B4C2D, as not clear whether 13A means 111A or 1AAA. Using delimiter also not allowed, as that might be a part of the string.</br>
+**Solution:**</br>
+
+```java
+copy
+```
+
+</br>
+
+---
+
+### 24. Generate Document:
+
+**Problem**: Given a source String and a destination string, tell if using all the characters of source String, we can make the destination string.</br>
+**Solution:** Make FreqMap of source string, and linearly traverse the destination string to reduce the count of characters available from source string. If all the destinatio string characters can be obtained from source string, then OK, but if any character is not available then false.</br>
+
+```java
+copy
+```
+
+</br>
+
+---
+
+### 25. First Non-Repeating Character:
+
+**Problem**: Given a string, return the first non-repeating character.</br>
+**Solution:**
+
+1. Approach 1: Brute force: Double for loop. Starting from the left, for every character, check if that character is present till the end. If present, then this can't be the first non-repeating char. So check the next char. If any such char only appears once, then it is the first non-repeating character. T: O(N^2) ; S: O(1).
+2. Approach 2: Char freq map (of only 26 chars possible). Two passes, where first pass is for calculating freq of each char. Second pass is where we check the first character with freq as 1. T: O(N) ; S: O(1).
+   </br>
+
+---
+
+### 26. Three Number Sum:
+
+**Problem**: Given an array with non-repeated ints, and a target sum. Find all triplets with the target sum. Do not give duplicate triplets.</br>
+**Example:** for arr: [12,3,1,2,-6,5,-8,6] and targetSum =0, we have triplets as [{-8,2,6},{-8,3,5},{-6,1,5}]. </br>
+**Solution:**</br>
+
+1. Approach 1: Brute force: 3 for Loops. T: O(N^3) ; S: O(1).
+2. Approach 2: Sort the array and use 2 pointers. T: O(N^2) ; S: O(1) {for storing triplets}.
+   </br>
+
+---
+
+### 27. Smallest Difference:
+
+**Problem**: Find two closest numbers from two given arrays. So one element comes form one array, and other comes from other elements.</br>
+**Example:** for arr1: [-1,5,10,20,28,3] and arr2:[26,134,135,15,17] and the required pair is [28,26].</br>
+**Solution:**</br>
+
+1. Approach 1: Brute force: 2 for Loops. 1 on one array and other on other array. T: O(N^2) ; S: O(1).
+2. Approach 2: Sort the arrays and use 1 pointer on each array. Keep capturing differences and try to move the smaller element pointer ahead. T: O(NlogN+MlogM) ; S: O(1).
+   </br>
+
+---
+
+### 28. Move Element to End:
+
+**Problem**: Given an array and a target number, move all elements equal to target number to the end of the array.</br>
+**Example:** for arr: [2,1,2,2,2,3,4,2] and element 2, we have output array as [1,3,4,2,2,2,2,2].</br>
+**Solution:**</br>
+
+1. Approach 1: Brute force: Sort the array and start to move the target elemetns to the end. T: O(NlogN) ; S: O(1).
+2. Approach 2: T: O(NlogN+MlogM) ; S: O(1).
+   </br>
