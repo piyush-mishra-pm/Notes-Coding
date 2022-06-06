@@ -211,13 +211,8 @@ private void dfs(TreeNode node){
 **Example**: redShirts=[5,8,1,3,4] ; blueShirts=[9,4,2,4,5]. Answer is True. </br>
 **Solutions**: </br>
 
-1. Approach 1: Shirt group with tallest student needs to be in the row behind. Sort red and blue shirt heights. Then keep checking if traversing in descending order in red and blue shirts, the front row guy is always lesser than rear row guys. T: O(NlogN) ; S: O(1). </br>
-
-```java
-Copy solution.
-```
-
-</br>
+1. Approach 1: Shirt group with tallest student needs to be in the row behind. Sort red and blue shirt heights. Then keep checking if traversing in descending order in red and blue shirts, the front row guy is always lesser than rear row guys. T: O(NlogN) ; S: O(1).
+   </br>
 
 ---
 
@@ -227,13 +222,8 @@ Copy solution.
 **Example**: redShirts=[5,5,3,9,2] ; blueShirts=[3,6,7,2,1]. Fastest speed is 32, slowest speed is 25.</br>
 **Solutions**:</br>
 
-1. Approach 1: Sort the two arrays. If fastest pairing asked, then group largest of one with the most minimum of other. If slowest is asked, then pair slowest of one with slowest of other. T: O(NlogN) ; S: O(1).</br>
-
-```java
-Copy solution.
-```
-
-</br>
+1. Approach 1: Sort the two arrays. If fastest pairing asked, then group largest of one with the most minimum of other. If slowest is asked, then pair slowest of one with slowest of other. T: O(NlogN) ; S: O(1).
+   </br>
 
 ---
 
@@ -267,7 +257,24 @@ Copy solution.
 1. Approach 1: Recursive.</br>
 
 ```java
-code
+// O(n) time | O(d) space - where n is total number of elements
+// including sub-elements, and d is the greatest depth of "special"
+public int productSum(List<Object> array) {
+	return productSumHelper(array, 1);
+}
+private int productSumHelper(List<Object> array, int multiplier){
+	int sum = 0;
+	for (Object el : array) {
+		if (el instanceof ArrayList) {
+			@SuppressWarnings("unchecked")
+			ArrayList<Object> ls = (ArrayList<Object>) el;
+			sum += productSumHelper(ls, multiplier + 1);
+		} else {
+			sum += (int) el;
+		}
+	}
+	return sum * multiplier;
+}
 ```
 
 </br>
