@@ -349,7 +349,20 @@ private int productSumHelper(List<Object> array, int multiplier){
 **Solution:**</br>
 
 ```java
-copy
+public static String caesarCypherEncryptor(String str, int key) {
+	char[] newLetters = new char[str.length()];
+	int newKey = key % 26;
+	for (int i = 0; i < str.length(); i++) {
+		newLetters[i] = getNewLetter(str.charAt(i), newKey);
+	}
+	return new String(newLetters);
+}
+public static char getNewLetter(char letter, int key) {
+	int newLetterCode = letter + key;
+	return newLetterCode <= 122 ?
+		(char) newLetterCode :
+		(char) ( 96 + (newLetterCode) % 122 );
+}
 ```
 
 </br>
@@ -363,7 +376,7 @@ copy
 **Solution:**</br>
 
 ```java
-copy
+write code
 ```
 
 </br>
@@ -418,12 +431,110 @@ copy
 
 ---
 
-### 28. Move Element to End:
+### 28. Move Element to End:</br>
 
 **Problem**: Given an array and a target number, move all elements equal to target number to the end of the array.</br>
 **Example:** for arr: [2,1,2,2,2,3,4,2] and element 2, we have output array as [1,3,4,2,2,2,2,2].</br>
-**Solution:**</br>
+**Solution:**
 
 1. Approach 1: Brute force: Sort the array and start to move the target elemetns to the end. T: O(NlogN) ; S: O(1).
-2. Approach 2: T: O(NlogN+MlogM) ; S: O(1).
+2. Approach 2: 2 Pointers. 1 at beginning and 1 at end. T: O(N) ; S: O(1).
    </br>
+
+```java
+
+// 0(n) time 1 0(1) space - where n is the length of the array
+public static List<Integer> moveElementToEnd(List<Integer> array, int toMove) {
+	int i = 0;
+	int j = array.size() - 1;
+	while (i < j) {
+		while (i < j && array.get(j) == toMove) // i<j is important here.
+			j--;
+		if (array.get(i) == toMove)
+			swap(i, j, array);
+		i++;
+	}
+	return array;
+}
+
+public static void swap(int i, int j, List<Integer> array) {
+	int temp = array.get(j);
+	array.set(j, array.get(i));
+	array.set(i, temp);
+}
+```
+
+</br>
+
+---
+
+### 29. Monotonic Array:</br>
+
+**Problem**: Given an array tell if it is a monotonic array. Monotonic means either entirely non-decreasing or entirely non-increasing (since duplicate elements possible).</br>
+**Solution:**
+
+1. Approach 1: Brute force: Determine the first direction taken by elements, and then ensure that all elements have that. Cumbersome to code.. T: O(N) ; S: O(1).
+2. Approach 2: 2 Traversals, once checking if non-increasing and other time checking non-decreasing. If either then true. Can also do within the same loop. T: O(N) ; S: O(1).
+   </br>
+
+```java
+// 0(n) time 1 0(1) space - where n is the length of the array
+public static boolean isMonotonic(int[] array) {
+	var isNonDecreasing = true;
+	var isNonIncreasing = true;
+	for (int i = 1; i < array.length; i++) {
+		if (array[i] < array[i - 1]){
+			isNonDecreasing = false;
+		}
+		if (array[i] > array[i - 1]) {
+			isNonIncreasing = false;
+		}
+	}
+	return isNonDecreasing || isNonIncreasing;
+}
+
+// DIRECTION Approach:
+// 0(n) time 1 0(1) space - where n is the length of the array
+public boolean isMonotonic(int[] array) {
+	if (array.length <= 2)
+		return true;
+	var direction = array[1] - array[0];
+	for (int i = 2; i < array.length; i++) {
+		if (direction == 0) {
+			direction = array[i] - array[i - 1];
+			continue;
+		}
+		if (breaksDirection(direction, array[i - 1], array[i])) {
+			return false;
+		}
+	}
+	return true;
+}
+public boolean breaksDirection(int direction, int previous, int current){
+	var difference = current - previous;
+	if (direction > 0) return difference < 0;
+	return difference > 0;
+}
+
+```
+
+</br>
+
+---
+
+### 30. Spiral Traverse:</br>
+
+**Problem**: Given a rectangular 2d array, return a 1D array which is spiral traversal of the 2d matrix.</br>
+**Solution:** </br>
+
+1. Approach 1: T: O(N \* M) ; S: O(1).
+2. Approach 2: Recursive Approach, where we deal with every perimeter in one recursion call stack. T: O(N) ; S: O(P), where P is number of perimeters (Min(N,M)).
+   </br>
+
+```java
+Both Code needed.
+```
+
+</br>
+
+---
