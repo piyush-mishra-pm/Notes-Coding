@@ -643,3 +643,16 @@ public static int longestPeak(int[] array) {
 </br>
 
 ---
+
+### 32. Array of Products:</br>
+
+**Problem**: Given an integer array, find the length of longest peak.</br>
+**Example**: For [5,1,4,2], the array we have is [8,40,10,20].
+**Solution:** </br>
+
+1. Approach 1: Nested 'For' loops at two levels. When i==j, then continue. T: O(N^2) ; S: O(N) (Since need to store products calculate in new array).
+2. Approach 2: Prefix and Suffix Product arrays. For each element, multiply prefix and suffix product array values. T: O(N) ; S: O(N).
+3. Approach 3: Construct only one amongst the Prefix or Suffix Product arrays. And take a running product element. For each element, running product element with suffix (or prefix product element). T: O(N) ; S: O(N).
+   </br>
+
+---
