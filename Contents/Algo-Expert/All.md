@@ -656,3 +656,16 @@ public static int longestPeak(int[] array) {
    </br>
 
 ---
+
+### 33. First Duplicate Value:</br>
+
+**Problem**: Given an integer array, containing numbers from 1 to n with duplicate values. Find the first duplicate value (occuring first as a duplicate in the array, if multiple duplicate values exist). If no duplicate value exists, then return -1. You can mutate the array.</br>
+**Example**: For [2,1,5,3,2,3,4] ans is 2 (not 3, since 2 occurs earlier in array).
+**Solution:** </br>
+
+1. Approach 1: Nested 'For' loops at two levels. The first duplicate value found is returned. T: O(N^2) ; S: O(1).
+2. Approach 2: Use a set, and return the first found duplicate value. T: O(N) ; S: O(N).
+3. Approach 3: Make the value and index of (|value|-1) to negative. And every time check if a value is negative. If negative, then this is duplicate value. T: O(N) ; S: O(1).
+   </br>
+
+---
