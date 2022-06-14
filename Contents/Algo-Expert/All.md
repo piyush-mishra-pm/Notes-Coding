@@ -669,3 +669,14 @@ public static int longestPeak(int[] array) {
    </br>
 
 ---
+
+### 34. Merge Overlapping Intervals:</br>
+
+**Problem**: Given an array of intervals (with start and end times), return an array of merged intervals. Two intervals are overlapping, if they share any number in their ranges.</br>
+**Example**: For [[1,2],[3,5],[4,7],[6,8],[9,20]]] , we get [[1,2],[3,8],[9,10]].
+**Solution:** </br>
+
+1. Approach 1:If intervals are sorted in ascending orders of their start times, then two meetings overlap if end0 >= start1 (where 0 and 1 are for two intervals whose start0 <= start1). T: O(NlogN) ; S: O(N) (for the output array of merged intervals).
+   </br>
+
+---
