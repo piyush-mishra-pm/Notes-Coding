@@ -830,3 +830,10 @@ class Program {
 ```
 
 ---
+
+### 36. BST Tree Traversals:</br>
+
+**Problem**: Inorder, Pre-Order, Post-Order.</br>
+**Solution:** </br>
+
+---
