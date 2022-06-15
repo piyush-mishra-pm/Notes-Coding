@@ -831,9 +831,45 @@ class Program {
 
 ---
 
-### 36. BST Tree Traversals:</br>
+### 37. BST Tree Traversals:</br>
 
 **Problem**: Inorder, Pre-Order, Post-Order.</br>
 **Solution:** </br>
+
+---
+
+### 38. Min Height BST:</br>
+
+**Problem**: Given a _sorted_ array of _distinct_ integers, return a BST with minimum height. Insert method given to you.</br>
+**Example:** for [1,2,5,7,10,13,14,15,22] we have following as a min Height BST.</br>
+
+```mermaid
+flowchart LR
+	10-->14-->15
+	14-->13
+    10-->2-->5-->7
+	2-->1
+```
+
+**Solution:** </br>
+
+- Approach 1: We want BST to be as balanced in left and right subtrees. So root node will be the middle element of the sorted input array. Recursively repeat the process.
+
+```java
+// O(n) time | O(n) space - where n is the length of the array
+public static BST minHeightBst(List<Integer> array) {
+	return constructMinHeightBst(array, 0, array.size() - 1);
+}
+public static BST constructMinHeightBst(List<Integer> array, int startIdx, int endIdx) {
+	if (endIdx < startIdx) return null;
+	int midIdx = (startIdx + endIdx) / 2;
+	BST bst = new BST(array.get(midIdx));
+	bst.left = constructMinHeightBst(array, startIdx, midIdx - 1);
+	bst.right = constructMinHeightBst(array, midIdx + 1, endIdx);
+	return bst;
+}
+```
+
+</br>
 
 ---
