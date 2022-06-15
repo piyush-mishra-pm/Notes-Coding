@@ -684,7 +684,6 @@ public static int longestPeak(int[] array) {
 ### 35. BST Construction:</br>
 
 **Problem**: Insertion, Searching and (importantly) Deletion.</br>
-**Example**: For [[1,2],[3,5],[4,7],[6,8],[9,20]]] , we get [[1,2],[3,8],[9,10]].
 **Solution:** </br>
 
 ```java
