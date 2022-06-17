@@ -873,3 +873,15 @@ public static BST constructMinHeightBst(List<Integer> array, int startIdx, int e
 </br>
 
 ---
+
+### 39. Find Kth Largest Value in BST:</br>
+
+**Problem**: Find K-th largest value in BST. </br>
+**Solution:** </br>
+
+- Approach 1: In order traversal with a counter in BST. Also track the value of kth node. T:O(N) ; S:O(N).
+- Approach 2: Reverse In order traversal with a counter in BST. Also track the kth node value. T:O(N) ; S:O(N).
+
+</br>
+
+---
