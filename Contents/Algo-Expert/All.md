@@ -995,7 +995,7 @@ class Solution {
 
 ---
 
-### 41. Binary Tree Diameter:</br>
+### 42. Binary Tree Diameter:</br>
 
 **Problem**: Find the diameter of a given binary tree. Diameter is the longest path between two leaf nodes. Diameter does not need to pass through the root node.</br>
 **Solution:**
@@ -1033,6 +1033,67 @@ class Solution{
 		int height = 1 + Math.max(leftInfo.height , rightInfo.height);
 
 		return new Info(maxDiam, height);
+	}
+}
+
+```
+
+</br>
+
+---
+
+### 43. Find Successor:</br>
+
+**Problem**: Find successor of a given node of Binary tree. Successor is the next node to be visited in an inorder traversal. </br>
+**Solution:**
+
+- Approach 1: Do an inorder traversal of entire binary tree, and store the entire inorder traversal in array. Find the value next to Given node value. T: O(N), S:O(N) .
+- Approach 2: But we don't need to traverse entire binary tree and store the entire inorder traversal in an array. T: O(height), S:O(1).
+
+  - If a node has a right subtree, then the inorder successor of that node can only be in its right subtree. Bcoz, inorder traversal is `left`, `node`, `right`, where `right` comes after `node`. We can look for the `left` most element in right subtree of the given node.
+    ![43. case 1](https://drive.google.com/uc?export=view&id=1QSXrpcHbNwRAESr20Wc_jzDHBGQpMYIB)
+  - If there is no right subtree for the given node, then we need to find the parent node. If given node is left child of parent, then just the parent will be the answer. If the given node is right child of the parent, then parent's parent is the answer. </br>
+    ![43. case 2](https://drive.google.com/uc?export=view&id=13N834V-0qXUt0eaq_7nc9Ci6xo4cf8vx)
+
+  - Lastly, if there is no further right subtree, or no parent whose left subtree contained the given node, then there is no successor. This was the last element in inorder traversal.
+
+```java
+// Approach 2:
+
+class Program {
+  	static class BinaryTree {
+		public int value;
+		public BinaryTree left = null;
+		public BinaryTree right = null;
+		public BinaryTree parent = null;
+
+		public BinaryTree(int value) {
+			this.value = value;
+		}
+  	}
+
+  	public BinaryTree findSuccessor(BinaryTree tree, BinaryTree node) {
+
+		// Case 1:
+		if (node.right != null) return getLeftMostChild(node.right);
+
+		// Case 2 and Case3:
+		return getRightMostParent(node);
+  	}
+
+	private BinaryTree getLeftMostChild(BinaryTree root) {
+		while (root.left != null) root = root.left;
+		return root;
+	}
+
+	private BinaryTree getRightMostParent(BinaryTree node){
+		// Checking for every traversal up the parent heirarchy:
+		//	- Existence of a parent (since if no parent, then no successor)
+		//	- That we came from right child of the parent node.
+		while((currentNode.parent != null) && (currentNode.parent.right == currentNode)){
+			currentNode = currentNode.parent;
+		}
+		return currentNode.parent;
 	}
 }
 
