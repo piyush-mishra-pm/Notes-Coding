@@ -885,3 +885,100 @@ public static BST constructMinHeightBst(List<Integer> array, int startIdx, int e
 </br>
 
 ---
+
+### 40. Reconstruct BST:</br>
+
+**Problem**: Given pre-order traversal of a BST consisting of unique values, construct a BST with the same pre-order traversal. </br>
+**Example**: For pre-order traversal array : [10,4,2,1,5,17,19,18], the BST is:
+
+```mermaid
+	graph TB;
+    A((10))-->B((4))
+    A-->C((17))-->G((\))
+    B-->D((2))
+	D-->E((1))
+	D-->Z((\))
+	B-->F((5))
+	C-->H((19))-->J((18))
+	H-->I((\))
+
+```
+
+**Insight:** For a given preorder traversaal, there are many Binary trees possible, but only 1 BST possible. For [1,2] as pre-order traversal, have following possible BTs. </br>
+
+```mermaid
+graph TB;
+    A((1))-->B((/))
+    A-->C((2))
+```
+
+```mermaid
+graph TB;
+	A((1))-->B((2))
+    A-->C((/))
+```
+
+**Solution:**
+
+- Approach 0: Unique Binary tree can be constructed using an inorder and preOrder traversal. BST's inorder traversal is a sorted array. So sort the preOrder array to get inOrder array, and construct the unique Binary tree for that. T: O(NlogN), S: O(N).
+- Approach 1: First node is root. Then onwards all the smaller elements constitute left subtree. And all the greater elements form right subtree. Do a postorder traversal where curent node's left and right subtrees are created first, and then linked to current node. T:O(N^2) ; S:O(N).
+- Approach 2: Tracking 3 things, and creating a node if node value ()is in range. T:O(N) ; S:O(N) :
+  - rootIndex: the index of the node in preorder traversal we are trying to create.
+  - lower bound value for node's value. Start with -Inf.
+  - upper bound value for node's value. Start with +Inf.
+
+```java
+
+// Approach 1:
+class Solution{
+	public void solve(int[] preOrder)){
+		if(preOrder.length == 0) return null;
+		return helper(preOrder, 0, preOrder.length);
+	}
+
+	private TreeNode helper(int[] preOrder, int lowIdx, int highIdx){
+		if(highIdx<lowIdx) return null;
+
+		int currNodeValue = new TreeNode(preOrder[lowIdx]);
+		int leftSubtreeRightBound = preOrder.length;
+		for(int i=lowIdx ; i<highIdx ; i++){
+			if(currNodeValue < preOrder[i] ){
+				leftSubtreeRightBound = i;
+				break;
+			}
+		}
+
+		TreeNode node = new TreeNode(currNodeValue);
+		node.left = helper(preOrder, lowIdx+1, leftSubTreeRightBound);
+		node.right = helper(preOrder, leftSubTreeRightBound , highIdx);
+
+		return node;
+	}
+}
+
+// Approach 2:
+class Solution {
+    int idx=0;
+    public TreeNode bstFromPreorder(int[] preorder) {
+        return helper(Integer.MIN_VALUE,Integer.MAX_VALUE,preorder);
+    }
+
+    private TreeNode helper(int lo, int hi, int[] preorder){
+        if(idx==preorder.length) return null;
+
+        int value = preorder[idx];
+        if(value<lo || value>hi) return null;
+
+        idx++;
+        TreeNode root = new TreeNode(value);
+        root.left  = helper(lo,value,preorder);
+        root.right = helper(value,hi,preorder);
+
+        return root;
+    }
+}
+```
+
+</br>
+
+---
