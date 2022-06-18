@@ -994,3 +994,50 @@ class Solution {
 </br>
 
 ---
+
+### 41. Binary Tree Diameter:</br>
+
+**Problem**: Find the diameter of a given binary tree. Diameter is the longest path between two leaf nodes. Diameter does not need to pass through the root node.</br>
+**Solution:**
+
+- Approach 1: DFS: For any node, consider max of diameter in left subtree, diameter in right subtree and path including the current node. Path requires knowing heights of left and right subtrees. Every node returns to the parent the max diameter and height of that node. T: O(N), S:O(N)
+
+```java
+class Info{
+	int diam;
+	int height;
+	public Info(int d,int h){
+		this.diam = d;
+		this.height = h;
+	}
+}
+
+class Solution{
+	public int solve(TreeNode root){
+		return helper(root).diam;
+	}
+
+	private Info helper(TreeNode node){
+		if(node == null) return new Info(0,0);
+
+		Info leftInfo = helper(node.left);
+		Info rightInfo = helper(node.right);
+
+		int pathLengthIncludingNode = leftInfo.height + rightInfo.height + 1;
+		int maxDiam = Math.max(
+			leftInfo.diam,
+			rightInfo.diam,
+			pathLengthIncludingNode
+		);
+
+		int height = 1 + Math.max(leftInfo.height , rightInfo.height);
+
+		return new Info(maxDiam, height);
+	}
+}
+
+```
+
+</br>
+
+---
