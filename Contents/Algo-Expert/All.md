@@ -908,14 +908,14 @@ public static BST constructMinHeightBst(List<Integer> array, int startIdx, int e
 
 ```mermaid
 graph TB;
+	subgraph case2
+	D((1))-->E((2))
+    D-->F((/))
+	end
+	subgraph case1
     A((1))-->B((/))
     A-->C((2))
-```
-
-```mermaid
-graph TB;
-	A((1))-->B((2))
-    A-->C((/))
+	end
 ```
 
 **Solution:**
@@ -982,3 +982,15 @@ class Solution {
 </br>
 
 ---
+
+### 41. Invert Binary Tree:</br>
+
+**Problem**: Given pre-order traversal of a BST consisting of unique values, construct a BST with the same pre-order traversal. </br>
+**Insight:** For a given preorder traversaal, there are many Binary trees possible, but only 1 BST possible. For [1,2] as pre-order traversal, have following possible BTs. </br>
+
+**Solution:**
+
+- Approach 1: Iterative-BFS: level by level, and swap every node's child nodes. Then move to the next level. T: O(N), S:O(N)
+- Approach 2: Recursively-DFS: Just invert the right and left child of each node. T:O(N) ; S:O(N).
+
+</br>
