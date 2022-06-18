@@ -985,12 +985,12 @@ class Solution {
 
 ### 41. Invert Binary Tree:</br>
 
-**Problem**: Given pre-order traversal of a BST consisting of unique values, construct a BST with the same pre-order traversal. </br>
-**Insight:** For a given preorder traversaal, there are many Binary trees possible, but only 1 BST possible. For [1,2] as pre-order traversal, have following possible BTs. </br>
-
+**Problem**: Invert a given Binary tree.</br>
 **Solution:**
 
 - Approach 1: Iterative-BFS: level by level, and swap every node's child nodes. Then move to the next level. T: O(N), S:O(N)
 - Approach 2: Recursively-DFS: Just invert the right and left child of each node. T:O(N) ; S:O(N).
 
 </br>
+
+---
