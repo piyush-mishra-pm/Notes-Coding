@@ -1113,3 +1113,15 @@ class Program {
 </br>
 
 ---
+
+### 45. Max Subset Sum with no adjacent elements:</br>
+
+**Problem**: Max Subset Sum with no adjacent elements. Array contains only +ve numbers only.</br>
+**Example**: For [7,10,12,7,9,11] the sum is 7+12+14=33.
+**Solution:**
+
+- Approach 1: maxSums[i]=max(maxSums[i-1], maxSums[i-2]+A[i]). T: O(N), S:O(N) .
+- Approach 2: current=max(first, second+A[i]). => second=first ; first=current. Loop for next element. T: O(N), S:O(1).
+  </br>
+
+---
