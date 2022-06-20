@@ -1102,3 +1102,14 @@ class Program {
 </br>
 
 ---
+
+### 44. Height Balanced Binary Tree:</br>
+
+**Problem**: In height Balanced Binary tree, for every node, the difference between the height of left subtree and right subtree is atmost 1. </br>
+**Solution:**
+
+- Approach 1: Do an postorder traversal, where children return the height and wether they are height balanced or not. T: O(N), S:O(N) .
+
+</br>
+
+---
