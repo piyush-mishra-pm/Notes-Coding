@@ -1172,3 +1172,27 @@ class Program {
   </br>
 
 ---
+
+### 50. Kadane's Algorithm:</br>
+
+**Problem**: Find maximum Subarray Sum in a given array, with positive and negative int values.</br>
+**Solution:**
+
+- Approach 1: 2 Nested for loops, to consider every subarray. T: O(N^2), S:O(1) .
+- Approach 2: Kadane's T: O(N), S:O(1).
+  </br>
+
+```java
+class Program {
+  public static int kadanesAlgorithm(int[] array) {
+    // Write your code here.
+    int currentSum = array[0], maximumSum = array[0];
+
+    for (int idx = 1; idx < array.length; idx++) {
+      currentSum = Math.max(array[idx], currentSum + array[idx]);
+      maximumSum = Math.max(currentSum, maximumSum);
+    }
+
+    return maximumSum;
+  }
+```
