@@ -1200,6 +1200,42 @@ public static int numberOfWaysToMakeChange(int n, int[] denominations) {
 
 ---
 
+### 47. Min Number Of Coins For Change:</br>
+
+**Problem**: Given a target sum, and infinite supply of coins of given denominations, find the minimum number of coins required to make the target sum. </br>
+**Hint:** Greedy won't work. </br>
+**Solution:**
+
+- Approach 1: DP solution. T: O(N\*D), S:O(N).
+  </br>
+
+```java
+public static int minNumberOfCoinsForChange(int n, int[] DENOMINATIONS) {
+	int[] minCoinsRequired = new int[n + 1];
+    Arrays.fill(minCoinsRequired, Integer.MAX_VALUE);
+
+    minCoinsRequired[0] = 0;
+    int minCoins = 0;
+
+    for (int denom : DENOMINATIONS) {
+      for (int target = 0; target <= n; target++) {
+        if (target < denom) continue;
+
+        minCoins =
+            minCoinsRequired[target - denom] == Integer.MAX_VALUE
+                ? Integer.MAX_VALUE
+                : 1 + minCoinsRequired[target - denom];
+
+        minCoinsRequired[target] = Math.min(minCoinsRequired[target], minCoins);
+      }
+    }
+
+    return minCoinsRequired[n] == Integer.MAX_VALUE ? -1 : minCoinsRequired[n];
+}
+```
+
+---
+
 ### 50. Kadane's Algorithm:</br>
 
 **Problem**: Find maximum Subarray Sum in a given array, with positive and negative int values.</br>
