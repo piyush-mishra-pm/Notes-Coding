@@ -1173,6 +1173,33 @@ class Program {
 
 ---
 
+### 46. Number of ways to make change:</br>
+
+**Problem**: For a given total sum and given set of denominations of coins, how many ways can you make change for the total sum. You can choose infinite coins for any given denomination.</br>
+**Example**: For $10 total sum, and denominations of [1,5,10,25], ways are 4. 1x10 ; 2x5 ; 1x5 + 5x1 ; 10x1.
+**Solution:**
+
+- Approach 1: DP solution. T: O(N\*D), S:O(N).
+  </br>
+
+```java
+public static int numberOfWaysToMakeChange(int n, int[] denominations) {
+    int[] numOfWays = new int[n + 1];
+    Arrays.fill(numOfWays, 0);
+    numOfWays[0] = 1;
+
+    for (int denomination : denominations) {
+      for (int target = 1; target <= n; target++) {
+        if (target >= denomination) numOfWays[target] += numOfWays[target - denomination];
+      }
+    }
+
+	return numOfWays[n];
+}
+```
+
+---
+
 ### 50. Kadane's Algorithm:</br>
 
 **Problem**: Find maximum Subarray Sum in a given array, with positive and negative int values.</br>
