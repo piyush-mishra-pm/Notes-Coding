@@ -1,47 +1,47 @@
 ## TOC:
 
-| Problem Name                           | Problem Name                         | Problem Name                       | Problem Name                               |
-| -------------------------------------- | ------------------------------------ | ---------------------------------- | ------------------------------------------ |
-| 1. Two Number Sum                      | 41. Invert Binary Tree               | 81. Four Number Sum                | 121. Shorten Path                          |
-| 2. Validate Subsequence                | 42. Binary Tree Diameter             | 82. Subarray Sort                  | 122. Largest Rectangle Under Skyline       |
-| 3. Sorted Squared Array                | 43. Find Successor                   | 83. Largest Range                  | 123. Longest Substring Without Duplication |
-| 4. Tournament Winner                   | 44. Height Balanced Binary Tree      | 84. Min Rewards                    | 124. Underscorify Substring                |
-| 5. Non-Constructible Change            | 45. Max Subset Sum No Adjacent       | 85. Zigzag Traverse                | 125. Pattern Matcher                       |
-| 6. Find Closest Value In BST           | 46. Number Of Ways To Make Change    | 86. Same BSTs                      | 126. Multi String Search                   |
-| 7. Branch Sums                         | 47. Min Number Of Coins For Change   | 87. Validate Three Nodes.mp4       | 127. Apartment Hunting                     |
-| 8. Node Depths                         | 48. Levenshtein Distance             | 88. Max Path Sum                   | 128. Calendar Matching                     |
-| 9. Depth-first Search                  | 49. Number Of Ways To Traverse Graph | 89. Find Nodes Distance K          | 129. Waterfall Streams                     |
-| 10. Minimum Waiting Time               | 50. Kadane's Algorithm               | 90. Max Sum Increasing Subsequence | 130. Minimum Area Rectangle                |
-| 11. Class Photos                       | 51. Single Cycle Check               | 91. Longest Common Subsequence     | 131. Line Through Points                   |
-| 12. Tandem Bicycle                     | 52. Breadth-first Search             | 92. Min Number Of Jumps            | 132. Right Smaller Than                    |
-| 13. Remove Duplicates From Linked List | 53. River Sizes                      | 83. Water Area                     | 133. Iterative In-order Traversal          |
-| 14. Nth Fibonacci                      | 54. Youngest Common Ancestor         | 94. Knapsack Problem               | 134. Flatten Binary Tree                   |
-| 15. Product Sum                        | 55. Remove Islands                   | 95. Disk Stacking                  | 135. Right Sibling Tree                    |
-| 16. Binary Search                      | 56. Cycle In Graph                   | 96. Numbers In Pi                  | 136. All Kinds Of Node Depths              |
-| 17. Find Three Largest Numbers         | 57. Minimum Passes Of Matrix         | 97. Maximum Sum Submatrix          | 137. Compare Leaf Traversal.mp4            |
-| 18. Bubble Sort                        | 58. Task Assignment                  | 98. Maximize Expression            | 138. Max Profit With K Transactions        |
-| 19. Insertion Sort                     | 59. Valid Starting City              | 99. Dijkstra's Algorithm           | 139. Palindrome Partitioning Min Cuts      |
-| 20. Selection Sort                     | 60. Min Heap Construction            | 100. Topological Sort              | 140. Longest Increasing Subsequence        |
-| 21. Palindrome Check                   | 61. Linked List Construction         | 101. Boggle Board                  | 141. Longest String Chain                  |
-| 22. Caesar Cipher Encryptor            | 62. Remove Nth Node From End         | 102. Continuous Median             | 142. Square Of Zeroes                      |
-| 23. Run-Length Encoding                | 63. Sum Of Linked Lists              | 103. Sort K-Sorted Array           | 143. Knuth–Morris–Pratt                    |
-| 24. Generate Document                  | 64. Permutations                     | 104. Laptop Rentals                | 144. A-Star Algorithm                      |
-| 25. First Non-Repeating Character      | 65. Powerset                         | 105. Find Loop                     | 145. Rectangle Mania                       |
-| 26. Three Number Sum                   | 66. Phone Number Mnemonics           | 106. Reverse Linked List           | 146. Detect Arbitrage                      |
-| 27. Smallest Difference                | 67. Staircase Traversal              | 107. Merge Linked Lists            | 147. Two-Edge-Connected Graph              |
-| 28. Move Element To End                | 68. Search In Sorted Matrix          | 108. Shift Linked List             | 148. Airport Connections                   |
-| 29. Monotonic Array                    | 69. Three Number Sort                | 109. Lowest Common Manager         | 149. Merge Sorted Arrays                   |
-| 30. Spiral Traverse                    | 70. Min Max Stack Construction       | 110. Interweaving Strings          | 150. LRU Cache                             |
-| 31. Longest Peak                       | 71. Balanced Brackets                | 111. Solve Sudoku                  | 151. Rearrange Linked List                 |
-| 32. Array Of Products                  | 72. Sunset Views                     | 112. Generate Div Tags             | 152. Linked List Palindrome                |
-| 33. First Duplicate Value              | 73. Sort Stack                       | 113. Ambiguous Measurements        | 153. Zip Linked List                       |
-| 34. Merge Overlapping Intervals        | 74. Next Greater Element             | 114. Shifted Binary Search         | 154. Node Swap                             |
-| 35. BST Construction                   | 75. Longest Palindromic Substring    | 115. Search For Range              | 155. Number Of Binary Tree Topologies      |
-| 36. Validate BST                       | 76. Group Anagrams                   | 116. Quickselect                   | 156. Non-Attacking Queens                  |
-| 37. BST Traversal                      | 77. Valid IP Addresses               | 117. Index Equals Value            | 157. Merge Sort                            |
-| 38. Min Height BST                     | 78. Reverse Words In String          | 118. Quick Sort                    | 158. Count Inversions                      |
-| 39. Find Kth Largest Value In BST      | 79. Minimum Characters For Words.mp4 | 119. Heap Sort                     | 159. Smallest Substring Containing         |
-| 40. Reconstruct BST                    | 80. Suffix Trie Construction         | 120. Radix Sort                    | 160. Longest Balanced Substring            |
+| Problem Name                                   | Problem Name                                 | Problem Name                               | Problem Name                                       |
+| ---------------------------------------------- | -------------------------------------------- | ------------------------------------------ | -------------------------------------------------- |
+| &check; 1. Two Number Sum                      | &check; 41. Invert Binary Tree               | &cross; 81. Four Number Sum                | &cross; 121. Shorten Path                          |
+| &check; 2. Validate Subsequence                | &check; 42. Binary Tree Diameter             | &cross; 82. Subarray Sort                  | &cross; 122. Largest Rectangle Under Skyline       |
+| &check; 3. Sorted Squared Array                | &check; 43. Find Successor                   | &cross; 83. Largest Range                  | &cross; 123. Longest Substring Without Duplication |
+| &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &cross; 84. Min Rewards                    | &cross; 124. Underscorify Substring                |
+| &check; 5. Non-Constructible Change            | &check; 45. Max Subset Sum No Adjacent       | &cross; 85. Zigzag Traverse                | &cross; 125. Pattern Matcher                       |
+| &check; 6. Find Closest Value In BST           | &check; 46. Number Of Ways To Make Change    | &cross; 86. Same BSTs                      | &cross; 126. Multi String Search                   |
+| &check; 7. Branch Sums                         | &check; 47. Min Number Of Coins For Change   | &cross; 87. Validate Three Nodes.mp4       | &cross; 127. Apartment Hunting                     |
+| &check; 8. Node Depths                         | &check; 48. Levenshtein Distance             | &cross; 88. Max Path Sum                   | &cross; 128. Calendar Matching                     |
+| &check; 9. Depth-first Search                  | &check; 49. Number Of Ways To Traverse Graph | &cross; 89. Find Nodes Distance K          | &cross; 129. Waterfall Streams                     |
+| &check; 10. Minimum Waiting Time               | &check; 50. Kadane's Algorithm               | &cross; 90. Max Sum Increasing Subsequence | &cross; 130. Minimum Area Rectangle                |
+| &check; 11. Class Photos                       | &cross; 51. Single Cycle Check               | &cross; 91. Longest Common Subsequence     | &cross; 131. Line Through Points                   |
+| &check; 12. Tandem Bicycle                     | &cross; 52. Breadth-first Search             | &cross; 92. Min Number Of Jumps            | &cross; 132. Right Smaller Than                    |
+| &check; 13. Remove Duplicates From Linked List | &cross; 53. River Sizes                      | &cross; 83. Water Area                     | &cross; 133. Iterative In-order Traversal          |
+| &check; 14. Nth Fibonacci                      | &cross; 54. Youngest Common Ancestor         | &cross; 94. Knapsack Problem               | &cross; 134. Flatten Binary Tree                   |
+| &check; 15. Product Sum                        | &cross; 55. Remove Islands                   | &cross; 95. Disk Stacking                  | &cross; 135. Right Sibling Tree                    |
+| &check; 16. Binary Search                      | &cross; 56. Cycle In Graph                   | &cross; 96. Numbers In Pi                  | &cross; 136. All Kinds Of Node Depths              |
+| &check; 17. Find Three Largest Numbers         | &cross; 57. Minimum Passes Of Matrix         | &cross; 97. Maximum Sum Submatrix          | &cross; 137. Compare Leaf Traversal.mp4            |
+| &check; 18. Bubble Sort                        | &cross; 58. Task Assignment                  | &cross; 98. Maximize Expression            | &cross; 138. Max Profit With K Transactions        |
+| &check; 19. Insertion Sort                     | &cross; 59. Valid Starting City              | &cross; 99. Dijkstra's Algorithm           | &cross; 139. Palindrome Partitioning Min Cuts      |
+| &check; 20. Selection Sort                     | &cross; 60. Min Heap Construction            | &cross; 100. Topological Sort              | &cross; 140. Longest Increasing Subsequence        |
+| &check; 21. Palindrome Check                   | &cross; 61. Linked List Construction         | &cross; 101. Boggle Board                  | &cross; 141. Longest String Chain                  |
+| &check; 22. Caesar Cipher Encryptor            | &cross; 62. Remove Nth Node From End         | &cross; 102. Continuous Median             | &cross; 142. Square Of Zeroes                      |
+| &check; 23. Run-Length Encoding                | &cross; 63. Sum Of Linked Lists              | &cross; 103. Sort K-Sorted Array           | &cross; 143. Knuth–Morris–Pratt                    |
+| &check; 24. Generate Document                  | &cross; 64. Permutations                     | &cross; 104. Laptop Rentals                | &cross; 144. A-Star Algorithm                      |
+| &check; 25. First Non-Repeating Character      | &cross; 65. Powerset                         | &cross; 105. Find Loop                     | &cross; 145. Rectangle Mania                       |
+| &check; 26. Three Number Sum                   | &cross; 66. Phone Number Mnemonics           | &cross; 106. Reverse Linked List           | &cross; 146. Detect Arbitrage                      |
+| &check;27. Smallest Difference                 | &cross; 67. Staircase Traversal              | &cross; 107. Merge Linked Lists            | &cross; 147. Two-Edge-Connected Graph              |
+| &check;28. Move Element To End                 | &cross; 68. Search In Sorted Matrix          | &cross; 108. Shift Linked List             | &cross; 148. Airport Connections                   |
+| &check;29. Monotonic Array                     | &cross; 69. Three Number Sort                | &cross; 109. Lowest Common Manager         | &cross; 149. Merge Sorted Arrays                   |
+| &check;30. Spiral Traverse                     | &cross; 70. Min Max Stack Construction       | &cross; 110. Interweaving Strings          | &cross; 150. LRU Cache                             |
+| &check;31. Longest Peak                        | &cross; 71. Balanced Brackets                | &cross; 111. Solve Sudoku                  | &cross; 151. Rearrange Linked List                 |
+| &check;32. Array Of Products                   | &cross; 72. Sunset Views                     | &cross; 112. Generate Div Tags             | &cross; 152. Linked List Palindrome                |
+| &check;33. First Duplicate Value               | &cross; 73. Sort Stack                       | &cross; 113. Ambiguous Measurements        | &cross; 153. Zip Linked List                       |
+| &check;34. Merge Overlapping Intervals         | &cross; 74. Next Greater Element             | &cross; 114. Shifted Binary Search         | &cross; 154. Node Swap                             |
+| &check;35. BST Construction                    | &cross; 75. Longest Palindromic Substring    | &cross; 115. Search For Range              | &cross; 155. Number Of Binary Tree Topologies      |
+| &check;36. Validate BST                        | &cross; 76. Group Anagrams                   | &cross; 116. Quickselect                   | &cross; 156. Non-Attacking Queens                  |
+| &check;37. BST Traversal                       | &cross; 77. Valid IP Addresses               | &cross; 117. Index Equals Value            | &cross; 157. Merge Sort                            |
+| &check;38. Min Height BST                      | &cross; 78. Reverse Words In String          | &cross; 118. Quick Sort                    | &cross; 158. Count Inversions                      |
+| &check;39. Find Kth Largest Value In BST       | &cross; 79. Minimum Characters For Words.mp4 | &cross; 119. Heap Sort                     | &cross; 159. Smallest Substring Containing         |
+| &check;40. Reconstruct BST                     | &cross; 80. Suffix Trie Construction         | &cross; 120. Radix Sort                    | &cross; 160. Longest Balanced Substring            |
 
 </br>
 
