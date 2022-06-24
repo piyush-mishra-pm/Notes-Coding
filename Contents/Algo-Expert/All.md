@@ -1259,3 +1259,13 @@ class Program {
     return maximumSum;
   }
 ```
+
+---
+
+### 71. Balanced Brackets:</br>
+
+**Problem**: For a given sequence of brackets of type (,{,[ , find if the sequence is balanced.</br>
+**Solution:**
+
+- Approach 1: Stack. T: O(N), S:O(N) .
+  </br>
