@@ -1262,6 +1262,31 @@ class Program {
 
 ---
 
+### 68. Search in Sorted Matrix:</br>
+
+**Problem**: Search for a target value, in a 2D matrix where rows and columns values are sorted.</br>
+**Solution:**
+
+- Approach 1: Search the matrix. T: O(N\*M), S:O(1) .
+- Approach 2: Staircase traversal, eliminating row or columns, dependeing upon whether value is <,=,> than target value. T: O(N+M), S:O(1) .
+  </br>
+
+```java
+public static int[] searchInSortedMatrix(int[][] matrix, int target) {
+    int row = 0, col = matrix[0].length - 1;
+
+    while (row < matrix.length && col >= 0) {
+    	if (matrix[row][col] > target) --col;
+    	else if (matrix[row][col] < target) ++row;
+    	else return new int[] {row, col};
+    }
+
+    return new int[] {-1, -1};
+}
+```
+
+---
+
 ### 71. Balanced Brackets:</br>
 
 **Problem**: For a given sequence of brackets of type (,{,[ , find if the sequence is balanced.</br>
