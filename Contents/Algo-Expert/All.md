@@ -36,7 +36,7 @@
 | &check;32. Array Of Products                   | &cross; 72. Sunset Views                     | &cross; 112. Generate Div Tags             | &cross; 152. Linked List Palindrome                |
 | &check;33. First Duplicate Value               | &cross; 73. Sort Stack                       | &cross; 113. Ambiguous Measurements        | &cross; 153. Zip Linked List                       |
 | &check;34. Merge Overlapping Intervals         | &cross; 74. Next Greater Element             | &cross; 114. Shifted Binary Search         | &cross; 154. Node Swap                             |
-| &check;35. BST Construction                    | &cross; 75. Longest Palindromic Substring    | &cross; 115. Search For Range              | &cross; 155. Number Of Binary Tree Topologies      |
+| &check;35. BST Construction                    | &check; 75. Longest Palindromic Substring    | &cross; 115. Search For Range              | &cross; 155. Number Of Binary Tree Topologies      |
 | &check;36. Validate BST                        | &cross; 76. Group Anagrams                   | &cross; 116. Quickselect                   | &cross; 156. Non-Attacking Queens                  |
 | &check;37. BST Traversal                       | &cross; 77. Valid IP Addresses               | &cross; 117. Index Equals Value            | &cross; 157. Merge Sort                            |
 | &check;38. Min Height BST                      | &cross; 78. Reverse Words In String          | &cross; 118. Quick Sort                    | &cross; 158. Count Inversions                      |
@@ -1294,3 +1294,38 @@ public static int[] searchInSortedMatrix(int[][] matrix, int target) {
 
 - Approach 1: Stack. T: O(N), S:O(N) .
   </br>
+
+---
+
+### 75. Longest Palindromic Substring:</br>
+
+**Problem**: Given a string s, return the longest palindromic substring in s.</br>
+**Solution:**
+
+```java
+// O(n^2) time | O(1) space
+public String longestPalindrome(String s) {
+    if(s==null || s.length() <1) return "";
+    int start=0, end =0;
+    for(int i=0;i<s.length();i++){
+        int len1 = expandAroundCenter(s,i,i);
+        int len2 = expandAroundCenter(s,i,i+1);
+        int len = Math.max( len1 , len2 );
+        if( len > end - start){
+            start = i - (len-1)/2;
+            end = i+(len)/2;
+        }
+    }
+    return s.substring(start,end+1);
+}
+
+private int expandAroundCenter(String s, int L, int R){
+    while(L>=0 && R<s.length() && s.charAt(R)==s.charAt(L)){
+        R++;
+        L--;
+    }
+    return R-L-1;
+}
+```
+
+---
