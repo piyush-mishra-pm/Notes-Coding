@@ -35,7 +35,7 @@
 | &check;31. Longest Peak                        | &cross; 71. Balanced Brackets                | &cross; 111. Solve Sudoku                  | &cross; 151. Rearrange Linked List                 |
 | &check;32. Array Of Products                   | &cross; 72. Sunset Views                     | &cross; 112. Generate Div Tags             | &cross; 152. Linked List Palindrome                |
 | &check;33. First Duplicate Value               | &cross; 73. Sort Stack                       | &cross; 113. Ambiguous Measurements        | &cross; 153. Zip Linked List                       |
-| &check;34. Merge Overlapping Intervals         | &cross; 74. Next Greater Element             | &cross; 114. Shifted Binary Search         | &cross; 154. Node Swap                             |
+| &check;34. Merge Overlapping Intervals         | &check; 74. Next Greater Element             | &cross; 114. Shifted Binary Search         | &cross; 154. Node Swap                             |
 | &check;35. BST Construction                    | &check; 75. Longest Palindromic Substring    | &cross; 115. Search For Range              | &cross; 155. Number Of Binary Tree Topologies      |
 | &check;36. Validate BST                        | &cross; 76. Group Anagrams                   | &cross; 116. Quickselect                   | &cross; 156. Non-Attacking Queens                  |
 | &check;37. BST Traversal                       | &cross; 77. Valid IP Addresses               | &cross; 117. Index Equals Value            | &cross; 157. Merge Sort                            |
@@ -1294,6 +1294,28 @@ public static int[] searchInSortedMatrix(int[][] matrix, int target) {
 
 - Approach 1: Stack. T: O(N), S:O(N) .
   </br>
+
+---
+
+### 74. Next Greater Element:</br>
+
+**Problem**: Given a circular integer array nums (i.e., the next element of nums[nums.length - 1] is nums[0]), return the next greater number for every element in nums.</br>
+**Solution:**
+
+```java
+public int[] nextGreaterElements(int[] nums) {
+    int[] res = new int[nums.length];
+    Stack<Integer> stack = new Stack<>();
+    for (int i = 2 * nums.length - 1; i >= 0; --i) {
+        while (!stack.empty() && nums[stack.peek()] <= nums[i % nums.length]) {
+            stack.pop();
+        }
+        res[i % nums.length] = stack.empty() ? -1 : nums[stack.peek()];
+        stack.push(i % nums.length);
+    }
+    return res;
+}
+```
 
 ---
 
