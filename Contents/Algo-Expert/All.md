@@ -2,7 +2,7 @@
 
 | Problem Name                                   | Problem Name                                 | Problem Name                               | Problem Name                                       |
 | ---------------------------------------------- | -------------------------------------------- | ------------------------------------------ | -------------------------------------------------- |
-| &check; 1. Two Number Sum                      | &check; 41. Invert Binary Tree               | &cross; 81. Four Number Sum                | &cross; 121. Shorten Path                          |
+| &check; 1. Two Number Sum                      | &check; 41. Invert Binary Tree               | &check; 81. Four Number Sum                | &cross; 121. Shorten Path                          |
 | &check; 2. Validate Subsequence                | &check; 42. Binary Tree Diameter             | &cross; 82. Subarray Sort                  | &cross; 122. Largest Rectangle Under Skyline       |
 | &check; 3. Sorted Squared Array                | &check; 43. Find Successor                   | &cross; 83. Largest Range                  | &cross; 123. Longest Substring Without Duplication |
 | &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &cross; 84. Min Rewards                    | &cross; 124. Underscorify Substring                |
@@ -1352,7 +1352,7 @@ private int expandAroundCenter(String s, int L, int R){
 
 ---
 
-### 81. Four Number Sum:</br>
+### 81. Four(K) Number Sum:</br>
 
 **Problem**: Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
 
