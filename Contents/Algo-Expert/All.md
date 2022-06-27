@@ -6,7 +6,7 @@
 | &check; 2. Validate Subsequence                | &check; 42. Binary Tree Diameter             | &cross; 82. Subarray Sort                  | &cross; 122. Largest Rectangle Under Skyline       |
 | &check; 3. Sorted Squared Array                | &check; 43. Find Successor                   | &cross; 83. Largest Range                  | &cross; 123. Longest Substring Without Duplication |
 | &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &cross; 84. Min Rewards                    | &cross; 124. Underscorify Substring                |
-| &check; 5. Non-Constructible Change            | &check; 45. Max Subset Sum No Adjacent       | &cross; 85. Zigzag Traverse                | &cross; 125. Pattern Matcher                       |
+| &check; 5. Non-Constructible Change            | &check; 45. Max Subset Sum No Adjacent       | &check; 85. Zigzag Traverse                | &cross; 125. Pattern Matcher                       |
 | &check; 6. Find Closest Value In BST           | &check; 46. Number Of Ways To Make Change    | &cross; 86. Same BSTs                      | &cross; 126. Multi String Search                   |
 | &check; 7. Branch Sums                         | &check; 47. Min Number Of Coins For Change   | &cross; 87. Validate Three Nodes.mp4       | &cross; 127. Apartment Hunting                     |
 | &check; 8. Node Depths                         | &check; 48. Levenshtein Distance             | &cross; 88. Max Path Sum                   | &cross; 128. Calendar Matching                     |
@@ -1443,6 +1443,58 @@ class Solution {
 
         return res;
     }
+}
+```
+
+---
+
+### 85. Zigzag Traverse:</br>
+
+**Solution:**
+
+- Approach 1: Recursion and two pointers.
+
+```java
+public static List<Integer> zigzagTraverse(List<List<Integer>> array) {
+	int height = array.size() - 1;
+	int width = array.get(0).size() - 1;
+	List<Integer> result = new ArrayList<Integer>();
+	int row = 0;
+	int col = 0;
+	boolean goingDown = true;
+	while (!isOutOfBounds(row, col, height, width)) {
+		result.add(array.get(row).get(col));
+		if (goingDown) {
+			if (col == 0 || row == height) {
+				goingDown = false;
+				if (row == height) {
+				col++;
+				} else {
+				row++;
+				}
+			} else {
+				row++;
+				col--;
+			}
+		} else {
+			if (row == 0 || col == width) {
+				goingDown = true;
+				if (col == width) {
+					row++;
+				} else {
+					col++;
+				}
+			} else {
+				row--;
+				col++;
+			}
+		}
+	}
+	return result;
+}
+
+public static boolean isOutOfBounds(int row, int col, int height, int width) {
+	return row < 0 || row > height || col < 0 || col > width;
 }
 ```
 
