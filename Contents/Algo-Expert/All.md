@@ -3,7 +3,7 @@
 | Problem Name                                   | Problem Name                                 | Problem Name                               | Problem Name                                       |
 | ---------------------------------------------- | -------------------------------------------- | ------------------------------------------ | -------------------------------------------------- |
 | &check; 1. Two Number Sum                      | &check; 41. Invert Binary Tree               | &check; 81. Four Number Sum                | &cross; 121. Shorten Path                          |
-| &check; 2. Validate Subsequence                | &check; 42. Binary Tree Diameter             | &cross; 82. Subarray Sort                  | &cross; 122. Largest Rectangle Under Skyline       |
+| &check; 2. Validate Subsequence                | &check; 42. Binary Tree Diameter             | &check; 82. Subarray Sort                  | &cross; 122. Largest Rectangle Under Skyline       |
 | &check; 3. Sorted Squared Array                | &check; 43. Find Successor                   | &cross; 83. Largest Range                  | &cross; 123. Longest Substring Without Duplication |
 | &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &cross; 84. Min Rewards                    | &cross; 124. Underscorify Substring                |
 | &check; 5. Non-Constructible Change            | &check; 45. Max Subset Sum No Adjacent       | &check; 85. Zigzag Traverse                | &cross; 125. Pattern Matcher                       |
@@ -1443,6 +1443,47 @@ class Solution {
 
         return res;
     }
+}
+```
+
+---
+
+### 82. Subarray Sort:</br>
+
+**Problem:** Given an integer array, return the indices range which is unsorted, and sorting which will make the whole array sorted.
+
+```java
+public static int[] subarraySort(int[] array) {
+	int minOutOfOrder = Integer.MAX_VALUE;
+	int maxOutOfOrder = Integer.MIN_VALUE;
+	for (int i = 0; i < array.length; i++) {
+		int num = array[i];
+		if (isOutOfOrder(i, num, array)) {
+			minOutOfOrder = Math.min(minOutOfOrder, num);
+			maxOutOfOrder = Math.max(maxOutOfOrder, num);
+		}
+	}
+	if (minOutOfOrder == Integer.MAX_VALUE) {
+		return new int[] {-1, -1};
+	}
+	int subarrayLeftIdx = 0;
+	while (minOutOfOrder >= array[subarrayLeftIdx]) {
+		subarrayLeftIdx++;
+	}
+	int subarrayRightIdx = array.length - 1;
+	while (maxOutOfOrder <= array[subarrayRightIdx]) {
+		subarrayRightIdx--;
+	}
+	return new int[] {subarrayLeftIdx, subarrayRightIdx};
+}
+public static boolean isOutOfOrder(int i, int num, int[] array) {
+	if (i == 0) {
+		return num > array[i + 1];
+	}
+	if (i == array.length - 1) {
+		return num < array[i - 1];
+	}
+	return num > array[i + 1] || num < array[i - 1];
 }
 ```
 
