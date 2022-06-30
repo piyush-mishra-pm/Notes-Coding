@@ -5,7 +5,7 @@
 | &check; 1. Two Number Sum                      | &check; 41. Invert Binary Tree               | &check; 81. Four Number Sum                | &cross; 121. Shorten Path                          |
 | &check; 2. Validate Subsequence                | &check; 42. Binary Tree Diameter             | &check; 82. Subarray Sort                  | &cross; 122. Largest Rectangle Under Skyline       |
 | &check; 3. Sorted Squared Array                | &check; 43. Find Successor                   | &check; 83. Largest Range                  | &cross; 123. Longest Substring Without Duplication |
-| &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &cross; 84. Min Rewards                    | &cross; 124. Underscorify Substring                |
+| &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &check; 84. Min Rewards                    | &cross; 124. Underscorify Substring                |
 | &check; 5. Non-Constructible Change            | &check; 45. Max Subset Sum No Adjacent       | &check; 85. Zigzag Traverse                | &cross; 125. Pattern Matcher                       |
 | &check; 6. Find Closest Value In BST           | &check; 46. Number Of Ways To Make Change    | &cross; 86. Same BSTs                      | &cross; 126. Multi String Search                   |
 | &check; 7. Branch Sums                         | &check; 47. Min Number Of Coins For Change   | &cross; 87. Validate Three Nodes.mp4       | &cross; 127. Apartment Hunting                     |
@@ -1527,6 +1527,88 @@ public static int[] largestRange(int[] array) {
 	}
 	return bestRange;
 }
+```
+
+---
+
+### 84. Min Rewards:</br>
+
+**Description:** Like distribute chocolates, where the one getting higher makrks than neighbours should get more chocolates.
+
+```java
+// Method 1:
+// O(n^2) time | O(n) space - where in is the length of the input array
+public static int minRewards(int[] scores) {
+	int[] rewards = new int[scores.length];
+	Arrays.fill(rewards, 1);
+	for (int i = 1; i < scores.length; i++) {
+		int j = i - 1;
+		if (scores[i] > scores[j]) {
+			rewards[i] = rewards[j] + 1;
+		} else {
+			while (j >= 0 && scores[j] > scores[j + 1]) {
+				rewards[j] = Math.max(rewards[j], rewards[j + 1] + 1);
+				j--;
+			}
+		}
+	}
+	return IntStream.of(rewards).sum();
+}
+
+// Method 2:
+// O(n) time | O(n) space - where in is the length of the input array
+public static int minRewards(int[] scores) {
+	int[] rewards = new int[scores.length];
+	Arrays.fill(rewards, 1);
+	List<Integer> localMinIdxs = getLocalMinIdxs(scores);
+	for (Integer localMinIdx : localMinIdxs) {
+		expandFromLocalMinIdx(localMinIdx, scores, rewards);
+	}
+	return IntStream.of(rewards).sum();
+}
+public static List<Integer> getLocalMinIdxs(int[] array) {
+	List<Integer> localMinIdxs = new ArrayList<Integer>();
+	if (array.length == 1) {
+		localMinIdxs.add(0);
+		return localMinIdxs;
+	}
+	for (int i = 0; i < array.length; i++) {
+		if (i == 0 && array[i] < array[i + 1]) localMinIdxs.add(i);
+		if (i == array.length - 1 && array[i] < array[i - 1]) localMinIdxs.add(i);
+		if (i == 0 || i == array.length - 1) continue;
+		if (array[i] < array[i + 1] && array[i] < array[i - 1]) localMinIdxs.add(i);
+	}
+	return localMinIdxs;
+}
+public static void expandFromLocalMinIdx(int localMinIdx, int[] scores, int[] rewards) {
+	int leftIdx = localMinIdx - 1;
+	while (leftIdx >= 0 && scores[leftIdx] > scores[leftIdx + 1]) {
+		rewards[leftIdx] = Math.max(rewards[leftIdx], rewards[leftIdx + 1] + 1);
+		leftIdx--;
+	}
+	int rightIdx = localMinIdx + 1;
+	while (rightIdx < scores.length && scores[rightIdx] > scores[rightIdx - 1]) {
+		rewards[rightIdx] = rewards[rightIdx - 1] + 1;
+		rightIdx++;
+	}
+}
+
+// Method 3:
+// O(n) time | O(n) space - where in is the length of the input array
+public static int minRewards(int[] scores) {
+	int[] rewards = new int[scores.length];
+	Arrays.fill(rewards, 1);
+	for (int i = 1; i < scores.length; i++) {
+	i	f (scores[i] > scores[i - 1]) rewards[i] = rewards[i - 1] + 1;
+	}
+	for (int i = scores.length - 2; i >= 0; i--) {
+		if (scores[i] > scores[i + 1]) {
+			rewards[i] = Math.max(rewards[i], rewards[i + 1] + 1);
+		}
+	}
+	return IntStream.of(rewards).sum();
+}
+
 ```
 
 ---
