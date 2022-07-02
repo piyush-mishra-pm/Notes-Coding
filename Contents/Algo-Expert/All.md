@@ -7,7 +7,7 @@
 | &check; 3. Sorted Squared Array                | &check; 43. Find Successor                   | &check; 83. Largest Range                  | &cross; 123. Longest Substring Without Duplication |
 | &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &check; 84. Min Rewards                    | &cross; 124. Underscorify Substring                |
 | &check; 5. Non-Constructible Change            | &check; 45. Max Subset Sum No Adjacent       | &check; 85. Zigzag Traverse                | &cross; 125. Pattern Matcher                       |
-| &check; 6. Find Closest Value In BST           | &check; 46. Number Of Ways To Make Change    | &cross; 86. Same BSTs                      | &cross; 126. Multi String Search                   |
+| &check; 6. Find Closest Value In BST           | &check; 46. Number Of Ways To Make Change    | &check; 86. Same BSTs                      | &cross; 126. Multi String Search                   |
 | &check; 7. Branch Sums                         | &check; 47. Min Number Of Coins For Change   | &cross; 87. Validate Three Nodes.mp4       | &cross; 127. Apartment Hunting                     |
 | &check; 8. Node Depths                         | &check; 48. Levenshtein Distance             | &cross; 88. Max Path Sum                   | &cross; 128. Calendar Matching                     |
 | &check; 9. Depth-first Search                  | &check; 49. Number Of Ways To Traverse Graph | &cross; 89. Find Nodes Distance K          | &cross; 129. Waterfall Streams                     |
@@ -1664,3 +1664,83 @@ public static boolean isOutOfBounds(int row, int col, int height, int width) {
 ```
 
 ---
+
+### 86. Same BSTs:</br>
+
+```java
+// METHOD 1:
+// O(n^2) time | O(n^2) space - where n is the number of
+// nodes in each array, respectively
+public static boolean sameBsts(List<Integer> arrayOne, List<Integer> arrayTwo) {
+	if (arrayOne.size() != arrayTwo.size()) return false;
+	if (arrayOne.size() == 0 && arrayTwo.size() == 0) return true;
+	if (arrayOne.get(0).intValue() != arrayTwo.get(0).intValue()) return false;
+	List<Integer> leftOne = getSmaller(arrayOne);
+	List<Integer> leftTwo = getSmaller(arrayTwo);
+	List<Integer> rightOne = getBiggerOrEqual(arrayOne);
+	List<Integer> rightTwo = getBiggerOrEqual(arrayTwo);
+	return sameBsts(leftOne, leftTwo) && sameBsts(rightOne, rightTwo);
+}
+public static List<Integer> getSmaller(List<Integer> array) {
+	List<Integer> smaller = new ArrayList<Integer>();
+	for (int i = 1; i < array.size(); i++) {
+	if (array.get(i).intValue() < array.get(0).intValue()) smaller.add(array.get(i));
+	}
+	return smaller;
+}
+public static List<Integer> getBiggerOrEqual(List<Integer> array) {
+	List<Integer> biggerOrEqual = new ArrayList<Integer>();
+	for (int i = 1; i < array.size(); i++) {
+	if (array.get(i).intValue() >= array.get(0).intValue()) biggerOrEqual.add(array.get(i));
+	}
+	return biggerOrEqual;
+}
+
+
+
+// METHOD 2:
+// O(n^2) time | O(d) space - where n is the number of
+// nodes in each array, respectively, and d is the depth
+// of the BST that they represent
+public static boolean sameBsts(List<Integer> arrayOne, List<Integer> arrayTwo) {
+	return areSameBsts(arrayOne, arrayTwo, 0, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
+}
+public static boolean areSameBsts(List<Integer> arrayOne,List<Integer> arrayTwo,int rootIdxOne,int rootIdxTwo,int minVal,int maxVal) {
+	if (rootIdxOne == -1 || rootIdxTwo == -1) return rootIdxOne == rootIdxTwo;
+	if (arrayOne.get(rootIdxOne).intValue() != arrayTwo.get(rootIdxTwo).intValue()) return false;
+	int leftRootIdxOne = getIdxOfFirstSmaller(arrayOne, rootIdxOne, minVal);
+	int leftRootIdxTwo = getIdxOfFirstSmaller(arrayTwo, rootIdxTwo, minVal);
+	int rightRootIdxOne = getIdxOfFirstBiggerOrEqual(arrayOne, rootIdxOne, maxVal);
+	int rightRootIdxTwo = getIdxOfFirstBiggerOrEqual(arrayTwo, rootIdxTwo, maxVal);
+	int currentValue = arrayOne.get(rootIdxOne);
+	boolean leftAreSame =
+	areSameBsts(arrayOne, arrayTwo, leftRootIdxOne, leftRootIdxTwo, minVal, currentValue);
+	boolean rightAreSame =
+	areSameBsts(arrayOne, arrayTwo, rightRootIdxOne, rightRootIdxTwo, currentValue, maxVal);
+	return leftAreSame && rightAreSame;
+}
+public static int getIdxOfFirstSmaller(List<Integer> array, int startingIdx, int minVal) {
+	// Find the index of the first smaller value after the startingIdx.
+	// Make sure that this value is greater than or equal to the minVal,
+	// which is the value of the previous parent node in the BST. If it
+	// isn't, then that value is located in the left subtree of the
+	// previous parent node.
+	for (int i = startingIdx + 1; i < array.size(); i++) {
+	if (array.get(i).intValue() < array.get(startingIdx).intValue()
+	&& array.get(i).intValue() >= minVal) return i;
+	}
+	return -1;
+}
+public static int getIdxOfFirstBiggerOrEqual(List<Integer> array, int startingIdx, int maxVal) {
+	// Find the index of the first bigger/equal value after the startingIdx.
+	// Make sure that this value is smaller than maxVal, which is the value
+	// of the previous parent node in the BST. If it isn't, then that value
+	// is located in the right subtree of the previous parent node.
+	for (int i = startingIdx + 1; i < array.size(); i++) {
+	if (array.get(i).intValue() >= array.get(startingIdx).intValue()
+	&& array.get(i).intValue() < maxVal) return i;
+	}
+	return -1;
+}
+
+```
