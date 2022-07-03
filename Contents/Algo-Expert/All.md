@@ -27,7 +27,7 @@
 | &check; 23. Run-Length Encoding                | &cross; 63. Sum Of Linked Lists              | &cross; 103. Sort K-Sorted Array           | &cross; 143. Knuth–Morris–Pratt                    |
 | &check; 24. Generate Document                  | &cross; 64. Permutations                     | &cross; 104. Laptop Rentals                | &cross; 144. A-Star Algorithm                      |
 | &check; 25. First Non-Repeating Character      | &cross; 65. Powerset                         | &cross; 105. Find Loop                     | &cross; 145. Rectangle Mania                       |
-| &check; 26. Three Number Sum                   | &cross; 66. Phone Number Mnemonics           | &cross; 106. Reverse Linked List           | &cross; 146. Detect Arbitrage                      |
+| &check; 26. Three Number Sum                   | &cross; 66. Phone Number Mnemonics           | &check; 106. Reverse Linked List           | &cross; 146. Detect Arbitrage                      |
 | &check;27. Smallest Difference                 | &cross; 67. Staircase Traversal              | &cross; 107. Merge Linked Lists            | &cross; 147. Two-Edge-Connected Graph              |
 | &check;28. Move Element To End                 | &cross; 68. Search In Sorted Matrix          | &cross; 108. Shift Linked List             | &cross; 148. Airport Connections                   |
 | &check;29. Monotonic Array                     | &cross; 69. Three Number Sort                | &cross; 109. Lowest Common Manager         | &cross; 149. Merge Sorted Arrays                   |
@@ -1744,3 +1744,22 @@ public static int getIdxOfFirstBiggerOrEqual(List<Integer> array, int startingId
 }
 
 ```
+
+### 106: Reverse Link List:
+
+```java
+// O(n) time | O(1) space - where n is the number of nodes in the Linked List
+public static LinkedList reverseLinkedList(LinkedList head) {
+	LinkedList p1 = null;
+	LinkedList p2 = head;
+	while (p2 != null) {
+	LinkedList p3 = p2.next;
+	p2.next = p1;
+	p1 = p2;
+	p2 = p3;
+	}
+	return p1;
+}
+```
+
+---
