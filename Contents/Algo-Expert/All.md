@@ -16,7 +16,7 @@
 | &check; 12. Tandem Bicycle                     | &cross; 52. Breadth-first Search             | &cross; 92. Min Number Of Jumps            | &cross; 132. Right Smaller Than                    |
 | &check; 13. Remove Duplicates From Linked List | &cross; 53. River Sizes                      | &cross; 83. Water Area                     | &cross; 133. Iterative In-order Traversal          |
 | &check; 14. Nth Fibonacci                      | &cross; 54. Youngest Common Ancestor         | &cross; 94. Knapsack Problem               | &cross; 134. Flatten Binary Tree                   |
-| &check; 15. Product Sum                        | &cross; 55. Remove Islands                   | &cross; 95. Disk Stacking                  | &cross; 135. Right Sibling Tree                    |
+| &check; 15. Product Sum                        | &cross; 55. Remove Islands                   | &check; 95. Disk Stacking                  | &cross; 135. Right Sibling Tree                    |
 | &check; 16. Binary Search                      | &cross; 56. Cycle In Graph                   | &cross; 96. Numbers In Pi                  | &cross; 136. All Kinds Of Node Depths              |
 | &check; 17. Find Three Largest Numbers         | &cross; 57. Minimum Passes Of Matrix         | &cross; 97. Maximum Sum Submatrix          | &cross; 137. Compare Leaf Traversal.mp4            |
 | &check; 18. Bubble Sort                        | &cross; 58. Task Assignment                  | &cross; 98. Maximize Expression            | &cross; 138. Max Profit With K Transactions        |
@@ -1696,8 +1696,6 @@ public static List<Integer> getBiggerOrEqual(List<Integer> array) {
 	return biggerOrEqual;
 }
 
-
-
 // METHOD 2:
 // O(n^2) time | O(d) space - where n is the number of
 // nodes in each array, respectively, and d is the depth
@@ -1743,6 +1741,55 @@ public static int getIdxOfFirstBiggerOrEqual(List<Integer> array, int startingId
 	return -1;
 }
 
+```
+
+### 95. Disk Stacking:</br>
+
+**Description:**Given array of disks, whose 3 dimensions are given. FInd the maximum stack height which can be constructed using these disks, so that any lower disk is strictly larger in all three dimensions than above disks.</br>
+
+**Solution:**LIS.
+
+```java
+// O(n^2) time | O(n) space
+public static List<Integer[]> diskStacking(List<Integer[]> disks) {
+	disks.sort((disk1, disk2) -> disk1[2].compareTo(disk2[2]));
+	int[] heights = new int[disks.size()];
+	for (int i = 0; i < disks.size(); i++) {
+		heights[i] = disks.get(i)[2];
+	}
+	int[] sequences = new int[disks.size()];
+	for (int i = 0; i < disks.size(); i++) {
+		sequences[i] = Integer.MIN_VALUE;
+	}
+	int maxHeightIdx = 0;
+	for (int i = 1; i < disks.size(); i++) {
+		Integer[] currentDisk = disks.get(i);
+		for (int j = 0; j < i; j++) {
+			Integer[] otherDisk = disks.get(j);
+			if (areValidDimensions(otherDisk, currentDisk)) {
+				if (heights[i] <= currentDisk[2] + heights[j]) {
+					heights[i] = currentDisk[2] + heights[j];
+					sequences[i] = j;
+				}
+			}
+		}
+		if (heights[i] >= heights[maxHeightIdx]) {
+			maxHeightIdx = i;
+		}
+	}
+	return buildSequence(disks, sequences, maxHeightIdx);
+}
+public static boolean areValidDimensions(Integer[] o, Integer[] c) {
+	return o[0] < c[0] && o[1] < c[1] && o[2] < c[2];
+}
+public static List<Integer[]> buildSequence(List<Integer[]> array, int[] sequences, int currentIdx) {
+	List<Integer[]> sequence = new ArrayList<Integer[]>();
+	while (currentIdx != Integer.MIN_VALUE) {
+		sequence.add(0, array.get(currentIdx));
+		currentIdx = sequences[currentIdx];
+	}
+	return sequence;
+}
 ```
 
 ### 106: Reverse Link List:
