@@ -4,7 +4,7 @@ Link to all my Coding related Notes:
    1. [Scaler:](https://github.com/piyush-mishra-pm/Scaler-Gist)
    2. Coding-Ninjas:
 1. Mosh Academy:
-   1. SQL
+   1. [SQL](https://github.com/piyush-mishra-pm/Mosh-Sql)
    2. Git
 1. DS-Algo:
    1. [Algo-Expert:](Contents/Algo-Expert/All.md)
