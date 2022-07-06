@@ -14,7 +14,7 @@
 | &check; 10. Minimum Waiting Time               | &check; 50. Kadane's Algorithm               | &cross; 90. Max Sum Increasing Subsequence | &cross; 130. Minimum Area Rectangle                |
 | &check; 11. Class Photos                       | &cross; 51. Single Cycle Check               | &cross; 91. Longest Common Subsequence     | &cross; 131. Line Through Points                   |
 | &check; 12. Tandem Bicycle                     | &cross; 52. Breadth-first Search             | &cross; 92. Min Number Of Jumps            | &cross; 132. Right Smaller Than                    |
-| &check; 13. Remove Duplicates From Linked List | &cross; 53. River Sizes                      | &cross; 83. Water Area                     | &cross; 133. Iterative In-order Traversal          |
+| &check; 13. Remove Duplicates From Linked List | &cross; 53. River Sizes                      | &check; 93. Water Area                     | &cross; 133. Iterative In-order Traversal          |
 | &check; 14. Nth Fibonacci                      | &cross; 54. Youngest Common Ancestor         | &cross; 94. Knapsack Problem               | &cross; 134. Flatten Binary Tree                   |
 | &check; 15. Product Sum                        | &cross; 55. Remove Islands                   | &check; 95. Disk Stacking                  | &cross; 135. Right Sibling Tree                    |
 | &check; 16. Binary Search                      | &cross; 56. Cycle In Graph                   | &cross; 96. Numbers In Pi                  | &cross; 136. All Kinds Of Node Depths              |
@@ -1742,6 +1742,41 @@ public static int getIdxOfFirstBiggerOrEqual(List<Integer> array, int startingId
 }
 
 ```
+
+---
+
+### 93. Water Area: </br>
+
+```java
+// O(n) time | O(n) space
+public static int waterArea(int[] heights) {
+	int[] maxes = new int[heights.length];
+	int leftMax = 0;
+	for (int i = 0; i < heights.length; i++) {
+		int height = heights[i];
+		maxes[i] = leftMax;
+		leftMax = Math.max(leftMax, height);
+	}
+	int rightMax = 0;
+	for (int i = heights.length - 1; i >= 0; i--) {
+		int height = heights[i];
+		int minHeight = Math.min(rightMax, maxes[i]);
+		if (height < minHeight) {
+			maxes[i] = minHeight - height;
+		} else {
+			maxes[i] = 0;
+		}
+		rightMax = Math.max(rightMax, height);
+	}
+	int total = 0;
+	for (int i = 0; i < heights.length; i++) {
+		total += maxes[i];
+	}
+	return total;
+}
+```
+
+---
 
 ### 95. Disk Stacking:</br>
 
