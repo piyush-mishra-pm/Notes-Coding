@@ -13,7 +13,7 @@
 | &check; 9. Depth-first Search                  | &check; 49. Number Of Ways To Traverse Graph | &cross; 89. Find Nodes Distance K          | &cross; 129. Waterfall Streams                     |
 | &check; 10. Minimum Waiting Time               | &check; 50. Kadane's Algorithm               | &cross; 90. Max Sum Increasing Subsequence | &cross; 130. Minimum Area Rectangle                |
 | &check; 11. Class Photos                       | &cross; 51. Single Cycle Check               | &cross; 91. Longest Common Subsequence     | &cross; 131. Line Through Points                   |
-| &check; 12. Tandem Bicycle                     | &cross; 52. Breadth-first Search             | &cross; 92. Min Number Of Jumps            | &cross; 132. Right Smaller Than                    |
+| &check; 12. Tandem Bicycle                     | &cross; 52. Breadth-first Search             | &check; 92. Min Number Of Jumps            | &cross; 132. Right Smaller Than                    |
 | &check; 13. Remove Duplicates From Linked List | &cross; 53. River Sizes                      | &check; 93. Water Area                     | &cross; 133. Iterative In-order Traversal          |
 | &check; 14. Nth Fibonacci                      | &cross; 54. Youngest Common Ancestor         | &cross; 94. Knapsack Problem               | &cross; 134. Flatten Binary Tree                   |
 | &check; 15. Product Sum                        | &cross; 55. Remove Islands                   | &check; 95. Disk Stacking                  | &cross; 135. Right Sibling Tree                    |
@@ -1739,6 +1739,49 @@ public static int getIdxOfFirstBiggerOrEqual(List<Integer> array, int startingId
 	&& array.get(i).intValue() < maxVal) return i;
 	}
 	return -1;
+}
+
+```
+
+---
+
+### 92. Min Number Of Jumps</br>
+
+```java
+// Method 1:
+// O(n^2) time | O(n) space
+public static int minNumberOfJumps(int[] array) {
+	int[] jumps = new int[array.length];
+	Arrays.fill(jumps, Integer.MAX_VALUE);
+	jumps[0] = 0;
+	for (int i = 1; i < array.length; i++) {
+		for (int j = 0; j < i; j++) {
+			if (array[j] >= i - j) {
+				jumps[i] = Math.min(jumps[j] + 1, jumps[i]);
+			}
+		}
+	}
+	return jumps[jumps.length - 1];
+}
+
+// Method 2:
+// O(n) time | O(1) space
+public static int minNumberOfJumps(int[] array) {
+	if (array.length == 1) {
+		return 0;
+	}
+	int jumps = 0;
+	int maxReach = array[0];
+	int steps = array[0];
+	for (int i = 1; i < array.length - 1; i++) {
+		maxReach = Math.max(maxReach, i + array[i]);
+		steps--;
+		if (steps == 0) {
+			jumps++;
+			steps = maxReach - i;
+		}
+	}
+	return jumps + 1;
 }
 
 ```
