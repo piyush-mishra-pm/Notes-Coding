@@ -28,7 +28,7 @@
 | &check; 24. Generate Document                  | &cross; 64. Permutations                     | &cross; 104. Laptop Rentals                | &cross; 144. A-Star Algorithm                      |
 | &check; 25. First Non-Repeating Character      | &cross; 65. Powerset                         | &cross; 105. Find Loop                     | &cross; 145. Rectangle Mania                       |
 | &check; 26. Three Number Sum                   | &cross; 66. Phone Number Mnemonics           | &check; 106. Reverse Linked List           | &cross; 146. Detect Arbitrage                      |
-| &check;27. Smallest Difference                 | &cross; 67. Staircase Traversal              | &cross; 107. Merge Linked Lists            | &cross; 147. Two-Edge-Connected Graph              |
+| &check;27. Smallest Difference                 | &cross; 67. Staircase Traversal              | &check; 107. Merge Linked Lists            | &cross; 147. Two-Edge-Connected Graph              |
 | &check;28. Move Element To End                 | &cross; 68. Search In Sorted Matrix          | &cross; 108. Shift Linked List             | &cross; 148. Airport Connections                   |
 | &check;29. Monotonic Array                     | &cross; 69. Three Number Sort                | &cross; 109. Lowest Common Manager         | &cross; 149. Merge Sorted Arrays                   |
 | &check;30. Spiral Traverse                     | &cross; 70. Min Max Stack Construction       | &cross; 110. Interweaving Strings          | &cross; 150. LRU Cache                             |
@@ -1957,6 +1957,55 @@ public static LinkedList reverseLinkedList(LinkedList head) {
 	}
 	return p1;
 }
+```
+
+---
+
+### 107. Merge Linked Lists
+
+```java
+  // Iterative Approach: TC: O(m+n) , SC: O(1).
+  public static LinkedList mergeLinkedLists(LinkedList headOne, LinkedList headTwo) {
+    if (headOne == null) return headTwo;
+
+    if (headTwo == null) return headOne;
+
+    LinkedList p1 = headOne, p2 = headTwo;
+    LinkedList res = null;
+
+    while (p1 != null && p2 != null) {
+      if (p1.value < p2.value) {
+        res = p1;
+        p1 = p1.next;
+      } else {
+        if (res != null) res.next = p2;
+        res = p2;
+        p2 = p2.next;
+        res.next = p1;
+      }
+    }
+
+    if (p1 == null) res.next = p2;
+
+    if (p2 == null) res.next = p1;
+
+    return headOne.value < headTwo.value ? headOne : headTwo;
+  }
+
+  //Recursive Approach: TC: O(m + n)SC:  O(m + n)
+  public static LinkedList mergeLinkedLists(LinkedList headOne, LinkedList headTwo) {
+  	if (headOne == null) return headTwo;
+
+  	if (headTwo == null) return headOne;
+
+  	if (headOne.value <= headTwo.value) {
+  		headOne.next = mergeLinkedLists(headOne.next, headTwo);
+  		return headOne;
+  	}
+
+  	headTwo.next = mergeLinkedLists(headOne, headTwo.next);
+    return headTwo;
+  }
 ```
 
 ---
