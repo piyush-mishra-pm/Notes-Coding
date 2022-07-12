@@ -29,7 +29,7 @@
 | &check; 25. First Non-Repeating Character      | &cross; 65. Powerset                         | &cross; 105. Find Loop                     | &cross; 145. Rectangle Mania                       |
 | &check; 26. Three Number Sum                   | &cross; 66. Phone Number Mnemonics           | &check; 106. Reverse Linked List           | &cross; 146. Detect Arbitrage                      |
 | &check;27. Smallest Difference                 | &cross; 67. Staircase Traversal              | &check; 107. Merge Linked Lists            | &cross; 147. Two-Edge-Connected Graph              |
-| &check;28. Move Element To End                 | &cross; 68. Search In Sorted Matrix          | &cross; 108. Shift Linked List             | &cross; 148. Airport Connections                   |
+| &check;28. Move Element To End                 | &cross; 68. Search In Sorted Matrix          | &check; 108. Shift Linked List             | &cross; 148. Airport Connections                   |
 | &check;29. Monotonic Array                     | &cross; 69. Three Number Sort                | &cross; 109. Lowest Common Manager         | &cross; 149. Merge Sorted Arrays                   |
 | &check;30. Spiral Traverse                     | &cross; 70. Min Max Stack Construction       | &cross; 110. Interweaving Strings          | &cross; 150. LRU Cache                             |
 | &check;31. Longest Peak                        | &cross; 71. Balanced Brackets                | &cross; 111. Solve Sudoku                  | &cross; 151. Rearrange Linked List                 |
@@ -2005,6 +2005,42 @@ public static LinkedList reverseLinkedList(LinkedList head) {
 
   	headTwo.next = mergeLinkedLists(headOne, headTwo.next);
     return headTwo;
+  }
+```
+
+---
+
+### 108. Shift Linked List:
+
+```java
+ public static LinkedList shiftLinkedList(LinkedList head, int k) {
+    if (k == 0) return head;
+
+    LinkedList tail = head, newTail = head;
+    int length = 1;
+
+    while (tail.next != null) {
+      tail = tail.next;
+      ++length;
+    }
+
+    int offset = Math.abs(k) % length;
+
+    if (offset == 0) return head;
+
+    int position = isNegative(k) ? offset : length - offset;
+
+    while (position-- > 1) newTail = newTail.next;
+
+    tail.next = head;
+    head = newTail.next;
+    newTail.next = null;
+
+    return head;
+  }
+
+  private static boolean isNegative(int k) {
+    return k < 0;
   }
 ```
 
