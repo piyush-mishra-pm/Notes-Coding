@@ -10,7 +10,7 @@
 | &check; 6. Find Closest Value In BST           | &check; 46. Number Of Ways To Make Change    | &check; 86. Same BSTs                      | &cross; 126. Multi String Search                   |
 | &check; 7. Branch Sums                         | &check; 47. Min Number Of Coins For Change   | &cross; 87. Validate Three Nodes.mp4       | &cross; 127. Apartment Hunting                     |
 | &check; 8. Node Depths                         | &check; 48. Levenshtein Distance             | &cross; 88. Max Path Sum                   | &cross; 128. Calendar Matching                     |
-| &check; 9. Depth-first Search                  | &check; 49. Number Of Ways To Traverse Graph | &cross; 89. Find Nodes Distance K          | &cross; 129. Waterfall Streams                     |
+| &check; 9. Depth-first Search                  | &check; 49. Number Of Ways To Traverse Graph | &check; 89. Find Nodes Distance K          | &cross; 129. Waterfall Streams                     |
 | &check; 10. Minimum Waiting Time               | &check; 50. Kadane's Algorithm               | &cross; 90. Max Sum Increasing Subsequence | &cross; 130. Minimum Area Rectangle                |
 | &check; 11. Class Photos                       | &cross; 51. Single Cycle Check               | &cross; 91. Longest Common Subsequence     | &cross; 131. Line Through Points                   |
 | &check; 12. Tandem Bicycle                     | &cross; 52. Breadth-first Search             | &check; 92. Min Number Of Jumps            | &cross; 132. Right Smaller Than                    |
@@ -1741,6 +1741,142 @@ public static int getIdxOfFirstBiggerOrEqual(List<Integer> array, int startingId
 	return -1;
 }
 
+```
+
+---
+
+### 89. Find Nodes Distance K:
+
+```java
+static class Pair<U, V> {
+    final U first;
+    final V second;
+
+    public Pair(U first, V second) {
+      this.first = first;
+      this.second = second;
+    }
+  }
+
+  public ArrayList<Integer> findNodesDistanceK(BinaryTree tree, int target, int k) {
+    // ? For BFS Approach
+    return findNodesDistanceKHelper(tree, target, k);
+
+    // ? For DFS Approach
+    // ArrayList<Integer> nodesDistanceK = new ArrayList<>();
+    // findNodesDistanceK(tree, target, k, nodesDistanceK);
+    // return nodesDistanceK;
+  }
+
+  /**
+   * * BFS Approach
+   *
+   * * TC: O(v + e) < O(2n), since e < v ~ O(n)
+   * * SC: O(n)
+   */
+  private ArrayList<Integer> findNodesDistanceKHelper(BinaryTree root, int target, int k) {
+    Map<Integer, BinaryTree> parents = new HashMap<>();
+    populateParents(root, null, parents);
+
+    Map<Integer, Boolean> visited = new HashMap<>();
+
+    BinaryTree targetNode = getTargetNode(root, target, parents);
+    Queue<Pair<BinaryTree, Integer>> queue = new LinkedList<>();
+    queue.add(new Pair<BinaryTree, Integer>(targetNode, 0));
+    visited.put(targetNode.value, true);
+
+    while (!queue.isEmpty()) {
+      Pair<BinaryTree, Integer> pair = queue.poll();
+      BinaryTree currentNode = pair.first;
+      int distance = pair.second;
+
+      if (distance == k) {
+        ArrayList<Integer> nodesDistanceK = new ArrayList<>();
+        nodesDistanceK.add(currentNode.value);
+        for (Pair<BinaryTree, Integer> p : queue) nodesDistanceK.add(p.first.value);
+        return nodesDistanceK;
+      }
+
+      List<BinaryTree> neighbors = new ArrayList<>();
+      neighbors.add(currentNode.left);
+      neighbors.add(currentNode.right);
+      neighbors.add(parents.get(currentNode.value));
+
+      for (BinaryTree node : neighbors) {
+        if (node == null) continue;
+
+        if (visited.containsKey(node.value)) continue;
+
+        visited.put(node.value, true);
+        queue.add(new Pair<BinaryTree, Integer>(node, distance + 1));
+      }
+    }
+
+    return new ArrayList<>();
+  }
+
+  private void populateParents(
+      BinaryTree root, BinaryTree parent, Map<Integer, BinaryTree> parents) {
+    if (root == null) return;
+
+    parents.put(root.value, parent);
+
+    populateParents(root.left, root, parents);
+    populateParents(root.right, root, parents);
+  }
+
+  private BinaryTree getTargetNode(BinaryTree root, int target, Map<Integer, BinaryTree> parents) {
+    if (root.value == target) return root;
+
+    BinaryTree parent = parents.get(target);
+
+    return parent.left != null && parent.left.value == target ? parent.left : parent.right;
+  }
+
+  /**
+   * * DFS Approach
+   *
+   * * TC: O(2n) ~ O(n)
+   * * SC: O(n)
+   */
+  private int findNodesDistanceK(
+  	BinaryTree root, int target, int k, List<Integer> nodesDistanceK
+  ) {
+  	if (root == null) return -1;
+
+  	if (root.value == target) {
+  		addNodesAtDistanceK(root, 0, k, nodesDistanceK);
+  		return 1;
+  	}
+
+  	int leftDistance = findNodesDistanceK(root.left, target, k, nodesDistanceK);
+  	int rightDistance = findNodesDistanceK(root.right, target, k, nodesDistanceK);
+
+  	if (leftDistance == k || rightDistance == k) nodesDistanceK.add(root.value);
+
+  	if (leftDistance != -1) {
+  		addNodesAtDistanceK(root.right, leftDistance + 1, k, nodesDistanceK);
+  		return leftDistance + 1;
+  	}
+
+  	if (rightDistance != -1) {
+  		addNodesAtDistanceK(root.left, rightDistance + 1, k, nodesDistanceK);
+  		return rightDistance + 1;
+  	}
+
+  	return -1;
+  }
+
+  private void addNodesAtDistanceK(
+  	BinaryTree node, int distance, int k, List<Integer> nodesDistanceK
+  ) {
+  	if (node == null) return;
+
+  	if (distance == k) nodesDistanceK.add(node.value);
+
+  	addNodesAtDistanceK(node.left, distance + 1, k, nodesDistanceK);
+  	addNodesAtDistanceK(node.right, distance + 1, k, nodesDistanceK);
+  }
 ```
 
 ---
