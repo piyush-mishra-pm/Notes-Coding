@@ -19,7 +19,7 @@
 | &check; 15. Product Sum                        | &cross; 55. Remove Islands                   | &check; 95. Disk Stacking                  | &cross; 135. Right Sibling Tree                    |
 | &check; 16. Binary Search                      | &cross; 56. Cycle In Graph                   | &cross; 96. Numbers In Pi                  | &cross; 136. All Kinds Of Node Depths              |
 | &check; 17. Find Three Largest Numbers         | &cross; 57. Minimum Passes Of Matrix         | &check; 97. Maximum Sum Submatrix          | &cross; 137. Compare Leaf Traversal.mp4            |
-| &check; 18. Bubble Sort                        | &cross; 58. Task Assignment                  | &cross; 98. Maximize Expression            | &cross; 138. Max Profit With K Transactions        |
+| &check; 18. Bubble Sort                        | &check; 58. Task Assignment                  | &cross; 98. Maximize Expression            | &cross; 138. Max Profit With K Transactions        |
 | &check; 19. Insertion Sort                     | &cross; 59. Valid Starting City              | &cross; 99. Dijkstra's Algorithm           | &cross; 139. Palindrome Partitioning Min Cuts      |
 | &check; 20. Selection Sort                     | &cross; 60. Min Heap Construction            | &cross; 100. Topological Sort              | &cross; 140. Longest Increasing Subsequence        |
 | &check; 21. Palindrome Check                   | &cross; 61. Linked List Construction         | &cross; 101. Boggle Board                  | &cross; 141. Longest String Chain                  |
@@ -1257,6 +1257,55 @@ class Program {
     }
 
     return maximumSum;
+  }
+```
+
+---
+
+### 58. Task Assignment:
+
+```java
+  private int getIndexOfTask(Map<Integer, List<Integer>> map, int task) {
+    List<Integer> indices = map.get(task);
+    int index = indices.remove(indices.size() - 1);
+    map.put(task, indices);
+
+    return index;
+  }
+
+  private Map<Integer, List<Integer>> mapTaskDurationToIndices(List<Integer> tasks) {
+    Map<Integer, List<Integer>> map = new HashMap<>();
+
+    for (int idx = 0; idx < tasks.size(); idx++) {
+      if (!map.containsKey(tasks.get(idx))) map.put(tasks.get(idx), new ArrayList<>());
+
+      map.get(tasks.get(idx)).add(idx);
+    }
+
+    return map;
+  }
+
+  public ArrayList<ArrayList<Integer>> taskAssignment(int k, ArrayList<Integer> tasks) {
+    ArrayList<ArrayList<Integer>> assignments = new ArrayList<>();
+    Map<Integer, List<Integer>> map = mapTaskDurationToIndices(tasks);
+    List<Integer> current = new ArrayList<>();
+    int start = 0, end = tasks.size() - 1;
+
+    Collections.sort(tasks);
+
+    while (k > 0 && start < end) {
+      current.add(getIndexOfTask(map, tasks.get(start)));
+      current.add(getIndexOfTask(map, tasks.get(end)));
+
+      assignments.add(new ArrayList<>(current));
+
+      current.clear();
+      ++start;
+      --end;
+      --k;
+    }
+
+    return assignments;
   }
 ```
 
