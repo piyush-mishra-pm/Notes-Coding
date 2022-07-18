@@ -12,7 +12,7 @@
 | &check; 8. Node Depths                         | &check; 48. Levenshtein Distance             | &cross; 88. Max Path Sum                   | &cross; 128. Calendar Matching                     |
 | &check; 9. Depth-first Search                  | &check; 49. Number Of Ways To Traverse Graph | &check; 89. Find Nodes Distance K          | &cross; 129. Waterfall Streams                     |
 | &check; 10. Minimum Waiting Time               | &check; 50. Kadane's Algorithm               | &cross; 90. Max Sum Increasing Subsequence | &cross; 130. Minimum Area Rectangle                |
-| &check; 11. Class Photos                       | &cross; 51. Single Cycle Check               | &cross; 91. Longest Common Subsequence     | &cross; 131. Line Through Points                   |
+| &check; 11. Class Photos                       | &check; 51. Single Cycle Check               | &cross; 91. Longest Common Subsequence     | &cross; 131. Line Through Points                   |
 | &check; 12. Tandem Bicycle                     | &cross; 52. Breadth-first Search             | &check; 92. Min Number Of Jumps            | &cross; 132. Right Smaller Than                    |
 | &check; 13. Remove Duplicates From Linked List | &cross; 53. River Sizes                      | &check; 93. Water Area                     | &cross; 133. Iterative In-order Traversal          |
 | &check; 14. Nth Fibonacci                      | &cross; 54. Youngest Common Ancestor         | &check; 94. Knapsack Problem               | &cross; 134. Flatten Binary Tree                   |
@@ -1258,6 +1258,32 @@ class Program {
 
     return maximumSum;
   }
+```
+
+---
+
+### 51. Single Cycle Check:
+
+```java
+private static int jump(int currentIdx, int[] array) {
+    int len = array.length;
+    int jumpIdx = (currentIdx + array[currentIdx]) % len;
+
+    return jumpIdx >= 0 ? jumpIdx : len + jumpIdx;
+}
+
+public static boolean hasSingleCycle(int[] array) {
+    int currentIdx = 0, visitedElements = 0;
+
+    while (visitedElements < array.length) {
+      if (visitedElements > 0 && currentIdx == 0) return false;
+      ++visitedElements;
+
+      currentIdx = jump(currentIdx, array);
+    }
+
+    return currentIdx == 0;
+}
 ```
 
 ---
