@@ -20,7 +20,7 @@
 | &check; 16. Binary Search                      | &cross; 56. Cycle In Graph                   | &cross; 96. Numbers In Pi                  | &cross; 136. All Kinds Of Node Depths              |
 | &check; 17. Find Three Largest Numbers         | &cross; 57. Minimum Passes Of Matrix         | &check; 97. Maximum Sum Submatrix          | &cross; 137. Compare Leaf Traversal.mp4            |
 | &check; 18. Bubble Sort                        | &check; 58. Task Assignment                  | &cross; 98. Maximize Expression            | &cross; 138. Max Profit With K Transactions        |
-| &check; 19. Insertion Sort                     | &cross; 59. Valid Starting City              | &cross; 99. Dijkstra's Algorithm           | &cross; 139. Palindrome Partitioning Min Cuts      |
+| &check; 19. Insertion Sort                     | &check; 59. Valid Starting City              | &cross; 99. Dijkstra's Algorithm           | &cross; 139. Palindrome Partitioning Min Cuts      |
 | &check; 20. Selection Sort                     | &cross; 60. Min Heap Construction            | &cross; 100. Topological Sort              | &cross; 140. Longest Increasing Subsequence        |
 | &check; 21. Palindrome Check                   | &cross; 61. Linked List Construction         | &cross; 101. Boggle Board                  | &cross; 141. Longest String Chain                  |
 | &check; 22. Caesar Cipher Encryptor            | &cross; 62. Remove Nth Node From End         | &cross; 102. Continuous Median             | &cross; 142. Square Of Zeroes                      |
@@ -1332,6 +1332,28 @@ public static boolean hasSingleCycle(int[] array) {
     }
 
     return assignments;
+  }
+```
+
+---
+
+### 59. Valid Starting City:
+
+```java
+  public int validStartingCity(int[] distances, int[] fuel, int mpg) {
+    // Write your code here.
+    int startingCityIdx = 0, minFuel = 0, milesTravelled = 0;
+
+    for (int idx = 1; idx < distances.length; idx++) {
+      milesTravelled += (mpg * fuel[idx - 1]) - distances[idx - 1];
+
+      if (milesTravelled < minFuel) {
+        minFuel = milesTravelled;
+        startingCityIdx = idx;
+      }
+    }
+
+    return startingCityIdx;
   }
 ```
 
