@@ -26,7 +26,7 @@
 | &check; 22. Caesar Cipher Encryptor            | &cross; 62. Remove Nth Node From End         | &cross; 102. Continuous Median             | &cross; 142. Square Of Zeroes                      |
 | &check; 23. Run-Length Encoding                | &cross; 63. Sum Of Linked Lists              | &check; 103. Sort K-Sorted Array           | &cross; 143. Knuth–Morris–Pratt                    |
 | &check; 24. Generate Document                  | &cross; 64. Permutations                     | &cross; 104. Laptop Rentals                | &cross; 144. A-Star Algorithm                      |
-| &check; 25. First Non-Repeating Character      | &cross; 65. Powerset                         | &cross; 105. Find Loop                     | &cross; 145. Rectangle Mania                       |
+| &check; 25. First Non-Repeating Character      | &check; 65. Powerset                         | &cross; 105. Find Loop                     | &cross; 145. Rectangle Mania                       |
 | &check; 26. Three Number Sum                   | &cross; 66. Phone Number Mnemonics           | &check; 106. Reverse Linked List           | &cross; 146. Detect Arbitrage                      |
 | &check;27. Smallest Difference                 | &cross; 67. Staircase Traversal              | &check; 107. Merge Linked Lists            | &cross; 147. Two-Edge-Connected Graph              |
 | &check;28. Move Element To End                 | &cross; 68. Search In Sorted Matrix          | &check; 108. Shift Linked List             | &cross; 148. Airport Connections                   |
@@ -1354,6 +1354,34 @@ public static boolean hasSingleCycle(int[] array) {
     }
 
     return startingCityIdx;
+  }
+```
+
+---
+
+### 65. Powerset:
+
+```java
+  public static List<List<Integer>> powerset(List<Integer> array) {
+    List<List<Integer>> set = new ArrayList<>();
+
+    powerset(array, new ArrayList<Integer>(), array.size() - 1, set);
+
+    return set;
+  }
+
+  private static void powerset(
+      List<Integer> array, List<Integer> current, int index, List<List<Integer>> set) {
+    if (index < 0) {
+      set.add(new ArrayList<>(current));
+      return;
+    }
+
+    current.add(array.get(index));
+    powerset(array, current, index - 1, set);
+
+    current.remove(current.size() - 1);
+    powerset(array, current, index - 1, set);
   }
 ```
 
