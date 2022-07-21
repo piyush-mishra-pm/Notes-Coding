@@ -30,7 +30,7 @@
 | &check; 26. Three Number Sum                   | &cross; 66. Phone Number Mnemonics           | &check; 106. Reverse Linked List           | &cross; 146. Detect Arbitrage                      |
 | &check;27. Smallest Difference                 | &cross; 67. Staircase Traversal              | &check; 107. Merge Linked Lists            | &cross; 147. Two-Edge-Connected Graph              |
 | &check;28. Move Element To End                 | &cross; 68. Search In Sorted Matrix          | &check; 108. Shift Linked List             | &cross; 148. Airport Connections                   |
-| &check;29. Monotonic Array                     | &cross; 69. Three Number Sort                | &cross; 109. Lowest Common Manager         | &cross; 149. Merge Sorted Arrays                   |
+| &check;29. Monotonic Array                     | &check; 69. Three Number Sort                | &cross; 109. Lowest Common Manager         | &cross; 149. Merge Sorted Arrays                   |
 | &check;30. Spiral Traverse                     | &cross; 70. Min Max Stack Construction       | &cross; 110. Interweaving Strings          | &cross; 150. LRU Cache                             |
 | &check;31. Longest Peak                        | &cross; 71. Balanced Brackets                | &cross; 111. Solve Sudoku                  | &cross; 151. Rearrange Linked List                 |
 | &check;32. Array Of Products                   | &cross; 72. Sunset Views                     | &cross; 112. Generate Div Tags             | &cross; 152. Linked List Palindrome                |
@@ -1411,6 +1411,35 @@ public static int[] searchInSortedMatrix(int[][] matrix, int target) {
 ```
 
 ---
+
+### 69. Three Number Sort (Dutch National Flag)
+
+```java
+ private void swap(int[] array, int index1, int index2) {
+    int temp = array[index1];
+    array[index1] = array[index2];
+    array[index2] = temp;
+  }
+
+  public int[] threeNumberSort(int[] array, int[] order) {
+
+    int firstIdx = 0, secondIdx = 0, thirdIdx = array.length - 1;
+
+    while (secondIdx <= thirdIdx) {
+      if (array[secondIdx] == order[0]) {
+        swap(array, firstIdx, secondIdx);
+        ++firstIdx;
+        ++secondIdx;
+      } else if (array[secondIdx] == order[1]) ++secondIdx;
+      else {
+        swap(array, secondIdx, thirdIdx);
+        --thirdIdx;
+      }
+    }
+
+    return array;
+  }
+```
 
 ### 71. Balanced Brackets:</br>
 
