@@ -24,7 +24,7 @@
 | &check; 20. Selection Sort                     | &cross; 60. Min Heap Construction            | &cross; 100. Topological Sort              | &cross; 140. Longest Increasing Subsequence        |
 | &check; 21. Palindrome Check                   | &cross; 61. Linked List Construction         | &cross; 101. Boggle Board                  | &cross; 141. Longest String Chain                  |
 | &check; 22. Caesar Cipher Encryptor            | &cross; 62. Remove Nth Node From End         | &cross; 102. Continuous Median             | &cross; 142. Square Of Zeroes                      |
-| &check; 23. Run-Length Encoding                | &cross; 63. Sum Of Linked Lists              | &check; 103. Sort K-Sorted Array           | &cross; 143. Knuth–Morris–Pratt                    |
+| &check; 23. Run-Length Encoding                | &check; 63. Sum Of Linked Lists              | &check; 103. Sort K-Sorted Array           | &cross; 143. Knuth–Morris–Pratt                    |
 | &check; 24. Generate Document                  | &cross; 64. Permutations                     | &cross; 104. Laptop Rentals                | &cross; 144. A-Star Algorithm                      |
 | &check; 25. First Non-Repeating Character      | &check; 65. Powerset                         | &cross; 105. Find Loop                     | &cross; 145. Rectangle Mania                       |
 | &check; 26. Three Number Sum                   | &cross; 66. Phone Number Mnemonics           | &check; 106. Reverse Linked List           | &cross; 146. Detect Arbitrage                      |
@@ -1354,6 +1354,36 @@ public static boolean hasSingleCycle(int[] array) {
     }
 
     return startingCityIdx;
+  }
+```
+
+---
+
+### 63. Sum Of Linked Lists
+
+```java
+public LinkedList sumOfLinkedLists(LinkedList linkedListOne, LinkedList linkedListTwo) {
+    LinkedList res = new LinkedList(-1), currNode = res;
+    LinkedList l1 = linkedListOne, l2 = linkedListTwo;
+    int sum = 0, carry = 0;
+
+    while (l1 != null || l2 != null) {
+      int value1 = l1 != null ? l1.value : 0;
+      int value2 = l2 != null ? l2.value : 0;
+
+      sum = carry + value1 + value2;
+
+      currNode.next = new LinkedList(sum % 10);
+      carry = sum / 10;
+
+      l1 = l1 != null ? l1.next : null;
+      l2 = l2 != null ? l2.next : null;
+      currNode = currNode.next;
+    }
+
+    if (carry != 0) currNode.next = new LinkedList(carry);
+
+    return res.next;
   }
 ```
 
