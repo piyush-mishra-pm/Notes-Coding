@@ -25,7 +25,7 @@
 | &check; 21. Palindrome Check                   | &cross; 61. Linked List Construction         | &cross; 101. Boggle Board                  | &cross; 141. Longest String Chain                  |
 | &check; 22. Caesar Cipher Encryptor            | &check; 62. Remove Nth Node From End         | &cross; 102. Continuous Median             | &cross; 142. Square Of Zeroes                      |
 | &check; 23. Run-Length Encoding                | &check; 63. Sum Of Linked Lists              | &check; 103. Sort K-Sorted Array           | &cross; 143. Knuth–Morris–Pratt                    |
-| &check; 24. Generate Document                  | &cross; 64. Permutations                     | &cross; 104. Laptop Rentals                | &cross; 144. A-Star Algorithm                      |
+| &check; 24. Generate Document                  | &check; 64. Permutations                     | &cross; 104. Laptop Rentals                | &cross; 144. A-Star Algorithm                      |
 | &check; 25. First Non-Repeating Character      | &check; 65. Powerset                         | &cross; 105. Find Loop                     | &cross; 145. Rectangle Mania                       |
 | &check; 26. Three Number Sum                   | &cross; 66. Phone Number Mnemonics           | &check; 106. Reverse Linked List           | &cross; 146. Detect Arbitrage                      |
 | &check;27. Smallest Difference                 | &cross; 67. Staircase Traversal              | &check; 107. Merge Linked Lists            | &cross; 147. Two-Edge-Connected Graph              |
@@ -1410,6 +1410,37 @@ public LinkedList sumOfLinkedLists(LinkedList linkedListOne, LinkedList linkedLi
     if (carry != 0) currNode.next = new LinkedList(carry);
 
     return res.next;
+  }
+```
+
+---
+
+### 64. Permutations:
+
+```java
+  private static void swap(List<Integer> array, int src, int dest) {
+    int temp = array.get(src);
+    array.set(src, array.get(dest));
+    array.set(dest, temp);
+  }
+
+  private static void getPermutationsHelper(
+      List<Integer> array, int start, int end, List<List<Integer>> permutations) {
+    if (start == end) permutations.add(new ArrayList<>(array));
+    else
+      for (int idx = start; idx <= end; idx++) {
+        swap(array, start, idx);
+        getPermutationsHelper(array, start + 1, end, permutations);
+        swap(array, start, idx);
+      }
+  }
+
+  public static List<List<Integer>> getPermutations(List<Integer> array) {
+    List<List<Integer>> permutations = new ArrayList<>();
+
+    getPermutationsHelper(array, 0, array.size() - 1, permutations);
+
+    return permutations;
   }
 ```
 
