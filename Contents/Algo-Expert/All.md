@@ -27,7 +27,7 @@
 | &check; 23. Run-Length Encoding                | &check; 63. Sum Of Linked Lists              | &check; 103. Sort K-Sorted Array           | &cross; 143. Knuth–Morris–Pratt                    |
 | &check; 24. Generate Document                  | &check; 64. Permutations                     | &cross; 104. Laptop Rentals                | &cross; 144. A-Star Algorithm                      |
 | &check; 25. First Non-Repeating Character      | &check; 65. Powerset                         | &cross; 105. Find Loop                     | &cross; 145. Rectangle Mania                       |
-| &check; 26. Three Number Sum                   | &cross; 66. Phone Number Mnemonics           | &check; 106. Reverse Linked List           | &cross; 146. Detect Arbitrage                      |
+| &check; 26. Three Number Sum                   | &check; 66. Phone Number Mnemonics           | &check; 106. Reverse Linked List           | &cross; 146. Detect Arbitrage                      |
 | &check;27. Smallest Difference                 | &cross; 67. Staircase Traversal              | &check; 107. Merge Linked Lists            | &cross; 147. Two-Edge-Connected Graph              |
 | &check;28. Move Element To End                 | &cross; 68. Search In Sorted Matrix          | &check; 108. Shift Linked List             | &cross; 148. Airport Connections                   |
 | &check;29. Monotonic Array                     | &check; 69. Three Number Sort                | &cross; 109. Lowest Common Manager         | &cross; 149. Merge Sorted Arrays                   |
@@ -1469,6 +1469,48 @@ public LinkedList sumOfLinkedLists(LinkedList linkedListOne, LinkedList linkedLi
 
     current.remove(current.size() - 1);
     powerset(array, current, index - 1, set);
+  }
+```
+
+---
+
+### 66. Phone Number Mnemonics:
+
+```java
+  private final String[] KEYPAD = {
+    "0", "1", "abc", "def", "ghi",
+    "jkl", "mno", "pqrs", "tuv", "wxyz"
+  };
+
+  private void phoneNumberMnemonics(
+      String phoneNumber, int index, StringBuilder current, ArrayList<String> mnemonics) {
+    /**
+     * Base Case.
+     */
+    if (index == phoneNumber.length()) {
+      mnemonics.add(current.toString());
+      return;
+    }
+
+    char[] keypadLetters = KEYPAD[phoneNumber.charAt(index) - '0'].toCharArray();
+    for (char letter : keypadLetters) {
+      // First, we append the
+      // current letter
+      current.append(letter);
+
+      // Then, we try out all
+      // the possibilities
+      phoneNumberMnemonics(phoneNumber, index + 1, current, mnemonics);
+
+      // Then, we remove the letter
+      current.deleteCharAt(current.length() - 1);
+    }
+  }
+
+  public ArrayList<String> phoneNumberMnemonics(String phoneNumber) {
+    ArrayList<String> mnemonics = new ArrayList<>();
+    phoneNumberMnemonics(phoneNumber, 0, new StringBuilder(""), mnemonics);
+    return mnemonics;
   }
 ```
 
