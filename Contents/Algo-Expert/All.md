@@ -33,7 +33,7 @@
 | &check;29. Monotonic Array                     | &check; 69. Three Number Sort                | &cross; 109. Lowest Common Manager         | &cross; 149. Merge Sorted Arrays                   |
 | &check;30. Spiral Traverse                     | &cross; 70. Min Max Stack Construction       | &cross; 110. Interweaving Strings          | &cross; 150. LRU Cache                             |
 | &check;31. Longest Peak                        | &cross; 71. Balanced Brackets                | &cross; 111. Solve Sudoku                  | &cross; 151. Rearrange Linked List                 |
-| &check;32. Array Of Products                   | &cross; 72. Sunset Views                     | &cross; 112. Generate Div Tags             | &cross; 152. Linked List Palindrome                |
+| &check;32. Array Of Products                   | &check; 72. Sunset Views                     | &cross; 112. Generate Div Tags             | &cross; 152. Linked List Palindrome                |
 | &check;33. First Duplicate Value               | &cross; 73. Sort Stack                       | &cross; 113. Ambiguous Measurements        | &cross; 153. Zip Linked List                       |
 | &check;34. Merge Overlapping Intervals         | &check; 74. Next Greater Element             | &cross; 114. Shifted Binary Search         | &cross; 154. Node Swap                             |
 | &check;35. BST Construction                    | &check; 75. Longest Palindromic Substring    | &cross; 115. Search For Range              | &cross; 155. Number Of Binary Tree Topologies      |
@@ -1579,6 +1579,30 @@ public static int[] searchInSortedMatrix(int[][] matrix, int target) {
   </br>
 
 ---
+
+### 72 SUnset Views:
+
+```java
+  public ArrayList<Integer> sunsetViews(int[] buildings, String direction) {
+    Stack<Integer> stack = new Stack<>();
+    ArrayList<Integer> views = new ArrayList<>();
+
+    int idx = direction.toLowerCase().equals("east") ? buildings.length - 1 : 0;
+    int step = direction.toLowerCase().equals("east") ? -1 : 1;
+
+    while (idx >= 0 && idx < buildings.length) {
+      if (stack.isEmpty() || buildings[idx] > buildings[stack.peek()]) stack.push(idx);
+
+      idx += step;
+    }
+
+    views.addAll(stack);
+
+    if (step == -1) Collections.reverse(views);
+
+    return views;
+  }
+```
 
 ### 74. Next Greater Element:</br>
 
