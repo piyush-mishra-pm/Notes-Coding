@@ -17,7 +17,7 @@
 | &check; 13. Remove Duplicates From Linked List | &cross; 53. River Sizes                      | &check; 93. Water Area                     | &cross; 133. Iterative In-order Traversal          |
 | &check; 14. Nth Fibonacci                      | &cross; 54. Youngest Common Ancestor         | &check; 94. Knapsack Problem               | &cross; 134. Flatten Binary Tree                   |
 | &check; 15. Product Sum                        | &cross; 55. Remove Islands                   | &check; 95. Disk Stacking                  | &cross; 135. Right Sibling Tree                    |
-| &check; 16. Binary Search                      | &cross; 56. Cycle In Graph                   | &cross; 96. Numbers In Pi                  | &cross; 136. All Kinds Of Node Depths              |
+| &check; 16. Binary Search                      | &check; 56. Cycle In Graph                   | &cross; 96. Numbers In Pi                  | &cross; 136. All Kinds Of Node Depths              |
 | &check; 17. Find Three Largest Numbers         | &cross; 57. Minimum Passes Of Matrix         | &check; 97. Maximum Sum Submatrix          | &cross; 137. Compare Leaf Traversal.mp4            |
 | &check; 18. Bubble Sort                        | &check; 58. Task Assignment                  | &cross; 98. Maximize Expression            | &cross; 138. Max Profit With K Transactions        |
 | &check; 19. Insertion Sort                     | &check; 59. Valid Starting City              | &cross; 99. Dijkstra's Algorithm           | &cross; 139. Palindrome Partitioning Min Cuts      |
@@ -1288,6 +1288,83 @@ public static boolean hasSingleCycle(int[] array) {
 
 ---
 
+### 56. Cycle In Graph:
+
+```java
+  public final int WHITE = 0;
+  public final int GRAY = 1;
+  public final int BLACK = 2;
+
+  public boolean cycleInGraph(int[][] edges) {
+    int[] colors = new int[edges.length];
+    Arrays.fill(colors, WHITE);
+
+    for (int vertex = 0; vertex < edges.length; vertex++) {
+      if (colors[vertex] != WHITE) continue;
+
+      if (hasCycle(edges, vertex, colors)) return true;
+    }
+
+    return false;
+  }
+
+  private boolean hasCycle(int[][] edges, int vertex, int[] colors) {
+    colors[vertex] = GRAY;
+
+    for (int neighbor : edges[vertex]) {
+      if (colors[neighbor] == GRAY) return true;
+
+      if (colors[neighbor] == BLACK) continue;
+
+      if (hasCycle(edges, neighbor, colors)) return true;
+    }
+
+    colors[vertex] = BLACK;
+
+    return false;
+  }
+
+  /**
+   * * TC: O(w * h)
+   * * SC: O(w * h)
+   */
+  // public boolean cycleInGraph(int[][] edges) {
+  //   // Write your code here.
+  //   int len = edges.length;
+  //   boolean[] visited = new boolean[len];
+  //   boolean[] inStack = new boolean[len];
+
+  //   for (int vertex = 0; vertex < len; vertex++) {
+  //     if (visited[vertex]) continue;
+
+  //     if (hasCycle(edges, vertex, visited, inStack)) return true;
+  //   }
+
+  //   return false;
+  // }
+
+  // private boolean hasCycle(
+  //   int[][] edges, int vertex, boolean[] visited, boolean[] inStack
+  // ) {
+  //   if (inStack[vertex]) return true;
+
+  //   if (visited[vertex]) return false;
+
+  //   inStack[vertex] = true;
+  //   visited[vertex] = true;
+
+  //   for (int idx = 0; idx < edges[vertex].length; idx++)
+  //     if (hasCycle(edges, edges[vertex][idx], visited, inStack))
+  //       return true;
+
+  //   inStack[vertex] = false;
+
+  //   return false;
+  // }
+```
+
+---
+
 ### 58. Task Assignment:
 
 ```java
@@ -1580,7 +1657,7 @@ public static int[] searchInSortedMatrix(int[][] matrix, int target) {
 
 ---
 
-### 72 SUnset Views:
+### 72 Sunset Views:
 
 ```java
   public ArrayList<Integer> sunsetViews(int[] buildings, String direction) {
