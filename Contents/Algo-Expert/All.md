@@ -29,7 +29,7 @@
 | &check; 25. First Non-Repeating Character      | &check; 65. Powerset                         | &cross; 105. Find Loop                     | &cross; 145. Rectangle Mania                       |
 | &check; 26. Three Number Sum                   | &check; 66. Phone Number Mnemonics           | &check; 106. Reverse Linked List           | &cross; 146. Detect Arbitrage                      |
 | &check;27. Smallest Difference                 | &cross; 67. Staircase Traversal              | &check; 107. Merge Linked Lists            | &cross; 147. Two-Edge-Connected Graph              |
-| &check;28. Move Element To End                 | &cross; 68. Search In Sorted Matrix          | &check; 108. Shift Linked List             | &cross; 148. Airport Connections                   |
+| &check;28. Move Element To End                 | &check; 68. Search In Sorted Matrix          | &check; 108. Shift Linked List             | &cross; 148. Airport Connections                   |
 | &check;29. Monotonic Array                     | &check; 69. Three Number Sort                | &cross; 109. Lowest Common Manager         | &cross; 149. Merge Sorted Arrays                   |
 | &check;30. Spiral Traverse                     | &cross; 70. Min Max Stack Construction       | &cross; 110. Interweaving Strings          | &cross; 150. LRU Cache                             |
 | &check;31. Longest Peak                        | &cross; 71. Balanced Brackets                | &cross; 111. Solve Sudoku                  | &cross; 151. Rearrange Linked List                 |
@@ -1614,6 +1614,24 @@ public static int[] searchInSortedMatrix(int[][] matrix, int target) {
 
     return new int[] {-1, -1};
 }
+```
+
+---
+
+### 68. Search In Sorted Matrix
+
+```java
+  public static int[] searchInSortedMatrix(int[][] matrix, int target) {
+    int row = 0, col = matrix[0].length - 1;
+
+    while (row < matrix.length && col >= 0) {
+      if (matrix[row][col] > target) --col;
+      else if (matrix[row][col] < target) ++row;
+      else return new int[] {row, col};
+    }
+
+    return new int[] {-1, -1};
+  }
 ```
 
 ---
