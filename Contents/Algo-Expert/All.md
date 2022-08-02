@@ -28,7 +28,7 @@
 | &check; 24. Generate Document                  | &check; 64. Permutations                     | &cross; 104. Laptop Rentals                | &cross; 144. A-Star Algorithm                      |
 | &check; 25. First Non-Repeating Character      | &check; 65. Powerset                         | &cross; 105. Find Loop                     | &cross; 145. Rectangle Mania                       |
 | &check; 26. Three Number Sum                   | &check; 66. Phone Number Mnemonics           | &check; 106. Reverse Linked List           | &cross; 146. Detect Arbitrage                      |
-| &check;27. Smallest Difference                 | &cross; 67. Staircase Traversal              | &check; 107. Merge Linked Lists            | &cross; 147. Two-Edge-Connected Graph              |
+| &check;27. Smallest Difference                 | &check; 67. Staircase Traversal              | &check; 107. Merge Linked Lists            | &cross; 147. Two-Edge-Connected Graph              |
 | &check;28. Move Element To End                 | &check; 68. Search In Sorted Matrix          | &check; 108. Shift Linked List             | &cross; 148. Airport Connections                   |
 | &check;29. Monotonic Array                     | &check; 69. Three Number Sort                | &cross; 109. Lowest Common Manager         | &cross; 149. Merge Sorted Arrays                   |
 | &check;30. Spiral Traverse                     | &cross; 70. Min Max Stack Construction       | &cross; 110. Interweaving Strings          | &cross; 150. LRU Cache                             |
@@ -1678,6 +1678,64 @@ public static int[] searchInSortedMatrix(int[][] matrix, int target) {
 
     return new int[] {-1, -1};
 }
+```
+
+---
+
+### 67. Staircase Traversal:
+
+```java
+  // Recursive Approach TC: O(k^n), SC: O(k^n)
+  // public int staircaseTraversal(int height, int maxSteps) {
+  //   if (height <= 1) return 1;
+
+  //   int numberOfWays = 0;
+
+  //   for (int step = 1; step <= Math.min(height, maxSteps); step++)
+  //     numberOfWays += staircaseTraversal(height - step, maxSteps);
+
+  //   return numberOfWays;
+  // }
+
+  // Dynamic Programming Approach TC: O(k*n), SC: O(n)
+
+  // public int staircaseTraversal(int height, int maxSteps) {
+  //   int[] dp = new int[height + 1];
+  // 	dp[0] = 1;
+  // 	dp[1] = 1;
+
+  // 	for (int currHeight = 2; currHeight <= height; currHeight++) {
+  // 		int step = 1;
+
+  // 		while (step <= maxSteps && step <= currHeight) {
+  // 			dp[currHeight] += dp[currHeight - step];
+  // 			++step;
+  // 		}
+  // 	}
+
+  // 	return dp[height];
+  // }
+
+  // Sliding Window Approach TC: O(n), SC: O(n)
+  public int staircaseTraversal(int height, int maxSteps) {
+    // Write your code here.
+    int[] numberOfWays = new int[height + 1];
+    numberOfWays[0] = 1;
+
+    int currentWays = 0, start = 0, end = 0;
+
+    for (int currHeight = 1; currHeight <= height; currHeight++) {
+      start = currHeight - maxSteps - 1;
+      end = currHeight - 1;
+
+      if (start >= 0) currentWays -= numberOfWays[start];
+
+      currentWays += numberOfWays[end];
+      numberOfWays[currHeight] = currentWays;
+    }
+
+    return numberOfWays[height];
+  }
 ```
 
 ---
