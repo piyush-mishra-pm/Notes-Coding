@@ -37,7 +37,7 @@
 | &check;33. First Duplicate Value               | &cross; 73. Sort Stack                       | &cross; 113. Ambiguous Measurements        | &cross; 153. Zip Linked List                       |
 | &check;34. Merge Overlapping Intervals         | &check; 74. Next Greater Element             | &cross; 114. Shifted Binary Search         | &cross; 154. Node Swap                             |
 | &check;35. BST Construction                    | &check; 75. Longest Palindromic Substring    | &cross; 115. Search For Range              | &cross; 155. Number Of Binary Tree Topologies      |
-| &check;36. Validate BST                        | &cross; 76. Group Anagrams                   | &cross; 116. Quickselect                   | &cross; 156. Non-Attacking Queens                  |
+| &check;36. Validate BST                        | &check; 76. Group Anagrams                   | &cross; 116. Quickselect                   | &cross; 156. Non-Attacking Queens                  |
 | &check;37. BST Traversal                       | &cross; 77. Valid IP Addresses               | &cross; 117. Index Equals Value            | &cross; 157. Merge Sort                            |
 | &check;38. Min Height BST                      | &cross; 78. Reverse Words In String          | &cross; 118. Quick Sort                    | &cross; 158. Count Inversions                      |
 | &check;39. Find Kth Largest Value In BST       | &cross; 79. Minimum Characters For Words.mp4 | &cross; 119. Heap Sort                     | &cross; 159. Smallest Substring Containing         |
@@ -1872,6 +1872,30 @@ private int expandAroundCenter(String s, int L, int R){
     }
     return R-L-1;
 }
+```
+
+---
+
+### 76. Group Anagrams:
+
+```java
+  public static List<List<String>> groupAnagrams(List<String> words) {
+    HashMap<String, List<String>> map = new HashMap<>();
+    List<List<String>> res = new ArrayList<>();
+
+    for (String word : words) {
+      char[] chars = word.toCharArray();
+      Arrays.sort(chars);
+      String sortedWord = new String(chars);
+
+      if (!map.containsKey(sortedWord)) map.put(sortedWord, new ArrayList<>());
+
+      map.get(sortedWord).add(word);
+    }
+
+    res.addAll(map.values());
+    return res;
+  }
 ```
 
 ---
