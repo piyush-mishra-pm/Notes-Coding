@@ -27,3 +27,21 @@ git init
 # To see hidden git subdirectory, which if deleted, removes project history.
 ls -a 
 ```
+
+### Staging:
+```bash
+echo Hello > file1.txt
+# recursively adds from current directory and children.
+git add .
+git add file1.txt file2.txt
+git add *.txt
+```
+
+### Commiting:
+```bash
+git commit -m "Commit heading."
+# For detailed message:
+git commit # PRESS ENTER. VS code opens where you can enter 1st line, then leave a line empty and then type detailed message from thrid line onwards.
+```
+
+
