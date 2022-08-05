@@ -14,7 +14,7 @@
 | &check; 10. Minimum Waiting Time               | &check; 50. Kadane's Algorithm               | &cross; 90. Max Sum Increasing Subsequence | &cross; 130. Minimum Area Rectangle                |
 | &check; 11. Class Photos                       | &check; 51. Single Cycle Check               | &cross; 91. Longest Common Subsequence     | &cross; 131. Line Through Points                   |
 | &check; 12. Tandem Bicycle                     | &cross; 52. Breadth-first Search             | &check; 92. Min Number Of Jumps            | &cross; 132. Right Smaller Than                    |
-| &check; 13. Remove Duplicates From Linked List | &cross; 53. River Sizes                      | &check; 93. Water Area                     | &cross; 133. Iterative In-order Traversal          |
+| &check; 13. Remove Duplicates From Linked List | &check; 53. River Sizes                      | &check; 93. Water Area                     | &cross; 133. Iterative In-order Traversal          |
 | &check; 14. Nth Fibonacci                      | &cross; 54. Youngest Common Ancestor         | &check; 94. Knapsack Problem               | &cross; 134. Flatten Binary Tree                   |
 | &check; 15. Product Sum                        | &cross; 55. Remove Islands                   | &check; 95. Disk Stacking                  | &cross; 135. Right Sibling Tree                    |
 | &check; 16. Binary Search                      | &check; 56. Cycle In Graph                   | &cross; 96. Numbers In Pi                  | &cross; 136. All Kinds Of Node Depths              |
@@ -1284,6 +1284,69 @@ public static boolean hasSingleCycle(int[] array) {
 
     return currentIdx == 0;
 }
+```
+
+---
+
+### 53. River Sizes:
+
+```java
+  public static List<Integer> riverSizes(int[][] matrix) {
+    List<Integer> sizes = new ArrayList<>();
+    int height = matrix.length, width = matrix[0].length;
+    boolean[][] visited = new boolean[height][width];
+
+    for (int row = 0; row < height; row++) {
+      for (int col = 0; col < width; col++) {
+        if (visited[row][col]) continue;
+
+        traverseNodes(matrix, row, col, visited, sizes);
+      }
+    }
+
+    return sizes;
+  }
+
+  private static void traverseNodes(
+      int[][] matrix, int row, int col, boolean[][] visited, List<Integer> sizes) {
+    int currentSize = 0;
+    Queue<Integer[]> queue = new LinkedList<>();
+    queue.add(new Integer[] {row, col});
+
+    while (!queue.isEmpty()) {
+      Integer[] currentNode = queue.poll();
+      row = currentNode[0];
+      col = currentNode[1];
+
+      if (visited[row][col]) continue;
+      visited[row][col] = true;
+
+      if (matrix[row][col] == 0) continue;
+
+      ++currentSize;
+      List<Integer[]> neighbors = getNeighborsOfCurrentNode(matrix, row, col, visited);
+
+      for (Integer[] neighbor : neighbors) queue.add(neighbor);
+    }
+
+    if (currentSize > 0) sizes.add(currentSize);
+  }
+
+  private static List<Integer[]> getNeighborsOfCurrentNode(
+      int[][] matrix, int row, int col, boolean[][] visited) {
+    List<Integer[]> neighbors = new ArrayList<>();
+    int height = matrix.length, width = matrix[0].length;
+
+    if (row > 0 && !visited[row - 1][col]) neighbors.add(new Integer[] {row - 1, col});
+
+    if (row < height - 1 && !visited[row + 1][col]) neighbors.add(new Integer[] {row + 1, col});
+
+    if (col > 0 && !visited[row][col - 1]) neighbors.add(new Integer[] {row, col - 1});
+
+    if (col < width - 1 && !visited[row][col + 1]) neighbors.add(new Integer[] {row, col + 1});
+
+    return neighbors;
+  }
 ```
 
 ---
