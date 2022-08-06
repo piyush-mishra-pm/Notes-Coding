@@ -85,3 +85,20 @@ git commit -m "msg"
 git mv file1.js file2.js
 git commit -m "msg"
 ```
+
+### Ignoring Files:
+If you haven't already committed a file in repository, you can still ignore it.
+```bash
+echo ignoreDir > .gitignore
+echo file.txt >> .gitignore
+echo *.log >> .gitignore
+git add .gitignore # ignoreDir and file.txt and *.log not even tracked now.
+git commit -m "Added gitignore"
+
+# If file already committed, then need to remove from staging area (but not working dir).
+git rm --cached - ignoreDir/ # only remove from index, recursively
+git ls-files # directory removed from staging area.
+git commit -m "Ignored accidentally commited folder."
+```
+
+Various gitignore templates: github.com/github/gitignore
