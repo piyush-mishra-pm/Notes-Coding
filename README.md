@@ -5,12 +5,12 @@ Link to all my Coding related Notes:
    2. Coding-Ninjas:
 1. Mosh Academy:
    1. [SQL](https://github.com/piyush-mishra-pm/Mosh-Sql)
-   2. Git
-1. DS-Algo:
+   2. [Git](Contents/Mosh/GIT.md)
+2. DS-Algo:
    1. [Algo-Expert:](Contents/Algo-Expert/All.md)
    2. Leetcode:
    3. Scaler-DS Algo:
-1. Books:
+3. Books:
    1. React:
       1. Learning React - Modern Patterns for Developing React Apps (Alex Banks, Eve Porcello)
    2. Design Patterns:
