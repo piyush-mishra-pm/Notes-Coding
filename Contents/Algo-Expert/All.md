@@ -16,7 +16,7 @@
 | &check; 12. Tandem Bicycle                     | &cross; 52. Breadth-first Search             | &check; 92. Min Number Of Jumps            | &cross; 132. Right Smaller Than                    |
 | &check; 13. Remove Duplicates From Linked List | &check; 53. River Sizes                      | &check; 93. Water Area                     | &cross; 133. Iterative In-order Traversal          |
 | &check; 14. Nth Fibonacci                      | &cross; 54. Youngest Common Ancestor         | &check; 94. Knapsack Problem               | &cross; 134. Flatten Binary Tree                   |
-| &check; 15. Product Sum                        | &cross; 55. Remove Islands                   | &check; 95. Disk Stacking                  | &cross; 135. Right Sibling Tree                    |
+| &check; 15. Product Sum                        | &check; 55. Remove Islands                   | &check; 95. Disk Stacking                  | &cross; 135. Right Sibling Tree                    |
 | &check; 16. Binary Search                      | &check; 56. Cycle In Graph                   | &cross; 96. Numbers In Pi                  | &cross; 136. All Kinds Of Node Depths              |
 | &check; 17. Find Three Largest Numbers         | &check; 57. Minimum Passes Of Matrix         | &check; 97. Maximum Sum Submatrix          | &cross; 137. Compare Leaf Traversal.mp4            |
 | &check; 18. Bubble Sort                        | &check; 58. Task Assignment                  | &cross; 98. Maximize Expression            | &cross; 138. Max Profit With K Transactions        |
@@ -1347,6 +1347,92 @@ public static boolean hasSingleCycle(int[] array) {
 
     return neighbors;
   }
+```
+
+---
+
+### 55. Remove Islands:
+
+```java
+  /**
+   * * TC: O(w * h)
+   * * SC: O(w * h) | Better Average Space
+   */
+  public int[][] removeIslands(int[][] matrix) {
+    int height = matrix.length, width = matrix[0].length;
+
+    for (int row = 0; row < height; row++) {
+      for (int col = 0; col < width; col++)
+        if (row == 0 || row == height - 1 || col == 0 || col == width - 1) DFS(matrix, row, col);
+    }
+
+    for (int row = 0; row < height; row++) {
+      for (int col = 0; col < width; col++) {
+        if (matrix[row][col] == 1) matrix[row][col] = 0;
+
+        if (matrix[row][col] == 2) matrix[row][col] = 1;
+      }
+    }
+
+    return matrix;
+  }
+
+  private void DFS(int[][] matrix, int row, int col) {
+    int height = matrix.length, width = matrix[0].length;
+    if (row < 0 || row >= height || col < 0 || col >= width || matrix[row][col] == 2) return;
+
+    if (matrix[row][col] == 0) return;
+
+    matrix[row][col] = 2;
+
+    DFS(matrix, row + 1, col);
+    DFS(matrix, row - 1, col);
+    DFS(matrix, row, col + 1);
+    DFS(matrix, row, col - 1);
+  }
+
+  /**
+   * * TC: O(w * h)
+   * * SC: O(w * h)
+   */
+  // public int[][] removeIslands(int[][] matrix) {
+  // 	int height = matrix.length, width = matrix[0].length;
+  // 	boolean[][] visited = new boolean[height][width];
+
+  // 	for (int row = 0; row < height; row++) {
+  // 		for (int col = 0; col < width; col++)
+  // 			if (row == 0 || row == height - 1 || col == 0 || col == width - 1)
+  // 				DFS(matrix, row, col, visited);
+  // 	}
+
+  // 	for (int row = 1; row < height - 1; row++) {
+  // 		for (int col = 1; col < width - 1; col++) {
+  // 			if (matrix[row][col] == 0) continue;
+
+  // 			if (matrix[row][col] == 1 && !visited[row][col])
+  // 				matrix[row][col] = 0;
+  // 		}
+  // 	}
+
+  // 	return matrix;
+  // }
+
+  // private void DFS(int[][] matrix, int row, int col, boolean[][] visited) {
+  // 	int height = matrix.length, width = matrix[0].length;
+  // 	if (
+  // 		row < 0 || row >= height || col < 0 || col >= width ||
+  // 		visited[row][col]
+  // 	) return;
+
+  // 	visited[row][col] = true;
+
+  // 	if (matrix[row][col] == 0) return;
+
+  // 	DFS(matrix, row + 1, col, visited);
+  // 	DFS(matrix, row - 1, col, visited);
+  // 	DFS(matrix, row, col + 1, visited);
+  // 	DFS(matrix, row, col - 1, visited);
+  // }
 ```
 
 ---
