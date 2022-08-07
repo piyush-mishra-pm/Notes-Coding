@@ -102,3 +102,15 @@ git commit -m "Ignored accidentally commited folder."
 ```
 
 Various gitignore templates: github.com/github/gitignore
+
+### Shorter Git Status
+```bash
+git status -s
+# status format:
+# SW file1.txt -> S is staging area, W is working Dir
+#  M file2.txt -> Modified in Working dir area, but not present in working dir.
+# M  file2.txt -> Added in staging area.
+# MM file2.txt -> Added in staging area, but modified in working dir too.
+# ?? file2.txt -> Untracked.
+# A  file2.txt -> Added in staging Area
+```
