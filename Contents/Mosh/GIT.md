@@ -114,3 +114,56 @@ git status -s
 # ?? file2.txt -> Untracked.
 # A  file2.txt -> Added in staging Area
 ```
+### Viewing Staged and Unstaged Changes:
+```bash
+# To see Staged Changes: Staged changes going to next commit.
+git diff --staged
+
+# To see Unstaged changes: Changes in working dir, which are not staged yet.
+git diff # if all changes are staged, then no output.
+```
+
+### Visual diff tools:
+P4Merge, KDiff3,, WinMerge, VSCode
+Configuring VSCode as difftool.
+```bash
+git config --global diff.tool vscode
+git config --global difftool.vscode.cmd "code --wait --diff $LOCAL $REMOTE"
+# Add $LOCAL and $REMOTE in config file, as they were missed.
+git config --global -e
+# Use difftool (with or without --staged)
+git difftool --staged
+```
+
+### Viewing the History (Commit List):
+```bash
+git log # to go next page, press space, to quit pres q.
+
+# oneline description
+git log --oneline
+
+# latest commit at bottom.
+git log --oneline reverse
+```
+
+### Viewing the Commit:
+```bash
+# Using ID, see the commit details (including diff)
+git show c594a45 # Just sufficient enough chars to distinguish commit id.
+
+# Using Head pointer, see the commit details (including diff)
+git show HEAD~1 # Commit previous to Head
+
+# Skip diff details, and look for how a file looked at a commit.
+git show HEAD~1:bin/app.txt
+
+# To see all files and directories in a commit. File is represented as blob, and Directory is represented as tree.
+git ls-tree HEAD~1
+git show casr350 #identifier of file. Shows content of that file (whose identifier mentioned).
+```
+
+#### Git Objects:
+- Commits,
+- Blobs (Files)
+- Trees (Directories)
+- Tags
