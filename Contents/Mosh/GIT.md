@@ -205,3 +205,27 @@ git restore --staged file1.txt file2.txt *.csv
 # restore everything in staging area.
 git restore --staged .
 ```
+
+### Discarding Local Changes:
+
+```bash
+# Undo the unstaged changes in local. file.txt was unstaged modified file.
+git restore file.txt
+git restore . # undo all local changes. But will not remove untracked file.
+
+# to remove untracked file, use clean.
+git clean -fd # -f:force, -d:remove whole directories.
+```
+
+### Restoring file to earlier version:
+
+Can undo a commit, or restore a file to prev version.
+
+```bash
+# removing a file.
+git rm file1.txt
+git commit -m "Delete file1.txt"
+git restore --source=HEAD~1 file1.txt # creates an untracked file (restored from last commit).
+```
+
+---
