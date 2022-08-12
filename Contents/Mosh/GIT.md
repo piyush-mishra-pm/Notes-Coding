@@ -229,3 +229,16 @@ git restore --source=HEAD~1 file1.txt # creates an untracked file (restored from
 ```
 
 ---
+
+## Browsing History:
+
+### Viewing History:
+
+```bash
+# shows the names of files changed, and the number of changes in each file (intersions and deletions)
+git log --oneline --stat
+git log --stat
+
+# To see the actual changes in each commit in each file:
+git log --oneline --patch
+```
