@@ -242,3 +242,36 @@ git log --stat
 # To see the actual changes in each commit in each file:
 git log --oneline --patch
 ```
+
+### Filtering History:
+
+```bash
+# last 3 commits:
+git log --oneline -3
+
+# by author:
+git log --oneline --author="Robinhood"
+
+# by date:
+git log --oneline --before="2020-12-31"
+git log --oneline --after="2020-12-31"
+
+# by relative dates:
+git log --oneline --after="yesterday"
+git log --oneline --after="one week ago"
+
+# grepping by commit message:
+git log --oneline --grep="PlayerController"
+
+# by content:
+git log --oneline -S"public class PlayerController {"
+git log --oneline -S"public class PlayerController {" --patch
+
+# by commit range (between two ids):
+git log --oneline ca0r321..rtg5698
+
+# by commits which modify a file.
+git log --oneline file.txt
+git log --oneline -- file.txt # if file name ambiguous (mixes with options)
+git log --oneline --patch -- file.txt # patch option mentioned before filename (else thinks that there is file named patch)
+```
