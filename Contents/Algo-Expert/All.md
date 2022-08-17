@@ -31,7 +31,7 @@
 | &check;27. Smallest Difference                 | &check; 67. Staircase Traversal              | &check; 107. Merge Linked Lists            | &cross; 147. Two-Edge-Connected Graph              |
 | &check;28. Move Element To End                 | &check; 68. Search In Sorted Matrix          | &check; 108. Shift Linked List             | &cross; 148. Airport Connections                   |
 | &check;29. Monotonic Array                     | &check; 69. Three Number Sort                | &cross; 109. Lowest Common Manager         | &cross; 149. Merge Sorted Arrays                   |
-| &check;30. Spiral Traverse                     | &cross; 70. Min Max Stack Construction       | &cross; 110. Interweaving Strings          | &cross; 150. LRU Cache                             |
+| &check;30. Spiral Traverse                     | &check; 70. Min Max Stack Construction       | &cross; 110. Interweaving Strings          | &cross; 150. LRU Cache                             |
 | &check;31. Longest Peak                        | &check; 71. Balanced Brackets                | &cross; 111. Solve Sudoku                  | &cross; 151. Rearrange Linked List                 |
 | &check;32. Array Of Products                   | &check; 72. Sunset Views                     | &cross; 112. Generate Div Tags             | &cross; 152. Linked List Palindrome                |
 | &check;33. First Duplicate Value               | &cross; 73. Sort Stack                       | &cross; 113. Ambiguous Measurements        | &cross; 153. Zip Linked List                       |
@@ -1935,6 +1935,63 @@ public static int[] searchInSortedMatrix(int[][] matrix, int target) {
     return array;
   }
 ```
+
+---
+
+### 70. Min Max Stack Construction:
+
+```java
+class Program {
+  static class Pair {
+    int value;
+    int min;
+    int max;
+
+    public Pair(int value, int min, int max) {
+      this.value = value;
+      this.min = min;
+      this.max = max;
+    }
+  }
+
+  static class MinMaxStack {
+    Stack<Pair> stack = new Stack<>();
+
+    public int peek() {
+      return stack.peek() != null ? stack.peek().value : -1;
+    }
+
+    public int pop() {
+      return stack.peek() != null ? stack.pop().value : -1;
+    }
+
+    public void push(Integer number) {
+      if (stack.isEmpty()) {
+        stack.push(new Pair(number, number, number));
+        return;
+      }
+
+      int minValue = getMin();
+      if (minValue != -1) minValue = Math.min(minValue, number);
+
+      int maxValue = getMax();
+      if (maxValue != -1) maxValue = Math.max(maxValue, number);
+
+      stack.push(new Pair(number, minValue, maxValue));
+    }
+
+    public int getMin() {
+      return stack.peek() != null ? stack.peek().min : -1;
+    }
+
+    public int getMax() {
+      return stack.peek() != null ? stack.peek().max : -1;
+    }
+  }
+}
+```
+
+---
 
 ### 71. Balanced Brackets:</br>
 
