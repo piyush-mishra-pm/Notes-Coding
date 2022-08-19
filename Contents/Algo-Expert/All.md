@@ -39,7 +39,7 @@
 | &check;35. BST Construction                    | &check; 75. Longest Palindromic Substring    | &cross; 115. Search For Range              | &cross; 155. Number Of Binary Tree Topologies      |
 | &check;36. Validate BST                        | &check; 76. Group Anagrams                   | &cross; 116. Quickselect                   | &cross; 156. Non-Attacking Queens                  |
 | &check;37. BST Traversal                       | &check; 77. Valid IP Addresses               | &cross; 117. Index Equals Value            | &cross; 157. Merge Sort                            |
-| &check;38. Min Height BST                      | &cross; 78. Reverse Words In String          | &cross; 118. Quick Sort                    | &cross; 158. Count Inversions                      |
+| &check;38. Min Height BST                      | &check; 78. Reverse Words In String          | &cross; 118. Quick Sort                    | &cross; 158. Count Inversions                      |
 | &check;39. Find Kth Largest Value In BST       | &cross; 79. Minimum Characters For Words.mp4 | &cross; 119. Heap Sort                     | &cross; 159. Smallest Substring Containing         |
 | &check;40. Reconstruct BST                     | &cross; 80. Suffix Trie Construction         | &cross; 120. Radix Sort                    | &cross; 160. Longest Balanced Substring            |
 
@@ -2140,6 +2140,32 @@ private boolean isValidPart(String part) {
     }
 
     return validIPs;
+  }
+```
+
+---
+
+### 78. Reverse Words In String:
+
+```java
+public String reverseWordsInString(String string) {
+    List<String> words = new ArrayList<>();
+    int start = 0;
+
+    for (int idx = 0; idx < string.length(); ++idx) {
+      if (string.charAt(idx) == ' ') {
+        words.add(string.substring(start, idx));
+        start = idx;
+      } else if (string.charAt(start) == ' ') {
+        words.add(" ");
+        start = idx;
+      }
+    }
+
+    words.add(string.substring(start));
+
+    Collections.reverse(words);
+    return String.join("", words);
   }
 ```
 
