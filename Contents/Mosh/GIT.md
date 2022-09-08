@@ -275,3 +275,20 @@ git log --oneline file.txt
 git log --oneline -- file.txt # if file name ambiguous (mixes with options)
 git log --oneline --patch -- file.txt # patch option mentioned before filename (else thinks that there is file named patch)
 ```
+
+### Formatting the Log Output:
+
+```bash
+# formats log using placeholders, colors, etc.
+git log --pretty=format:"%Cgreen%an%Creset committed %h on %cd")
+```
+
+### Creating Alias:
+
+```bash
+git config --global alias.lg "log --pretty=format:'%an committed %h'"
+git lg # can start using
+
+git config --global alias.unstage "restore --staged ."
+git unstage
+```
