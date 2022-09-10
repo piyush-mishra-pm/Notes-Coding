@@ -8,8 +8,8 @@
 | &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &check; 84. Min Rewards                    | &cross; 124. Underscorify Substring                |
 | &check; 5. Non-Constructible Change            | &check; 45. Max Subset Sum No Adjacent       | &check; 85. Zigzag Traverse                | &cross; 125. Pattern Matcher                       |
 | &check; 6. Find Closest Value In BST           | &check; 46. Number Of Ways To Make Change    | &check; 86. Same BSTs                      | &cross; 126. Multi String Search                   |
-| &check; 7. Branch Sums                         | &check; 47. Min Number Of Coins For Change   | &cross; 87. Validate Three Nodes.mp4       | &cross; 127. Apartment Hunting                     |
-| &check; 8. Node Depths                         | &check; 48. Levenshtein Distance             | &cross; 88. Max Path Sum                   | &cross; 128. Calendar Matching                     |
+| &check; 7. Branch Sums                         | &check; 47. Min Number Of Coins For Change   | &check; 87. Validate Three Nodes           | &cross; 127. Apartment Hunting                     |
+| &check; 8. Node Depths                         | &check; 48. Levenshtein Distance             | &check; 88. Max Path Sum                   | &cross; 128. Calendar Matching                     |
 | &check; 9. Depth-first Search                  | &check; 49. Number Of Ways To Traverse Graph | &check; 89. Find Nodes Distance K          | &cross; 129. Waterfall Streams                     |
 | &check; 10. Minimum Waiting Time               | &check; 50. Kadane's Algorithm               | &cross; 90. Max Sum Increasing Subsequence | &cross; 130. Minimum Area Rectangle                |
 | &check; 11. Class Photos                       | &check; 51. Single Cycle Check               | &cross; 91. Longest Common Subsequence     | &cross; 131. Line Through Points                   |
@@ -38,8 +38,8 @@
 | &check;34. Merge Overlapping Intervals         | &check; 74. Next Greater Element             | &cross; 114. Shifted Binary Search         | &cross; 154. Node Swap                             |
 | &check;35. BST Construction                    | &check; 75. Longest Palindromic Substring    | &cross; 115. Search For Range              | &cross; 155. Number Of Binary Tree Topologies      |
 | &check;36. Validate BST                        | &check; 76. Group Anagrams                   | &cross; 116. Quickselect                   | &cross; 156. Non-Attacking Queens                  |
-| &check;37. BST Traversal                       | &cross; 77. Valid IP Addresses               | &cross; 117. Index Equals Value            | &cross; 157. Merge Sort                            |
-| &check;38. Min Height BST                      | &cross; 78. Reverse Words In String          | &cross; 118. Quick Sort                    | &cross; 158. Count Inversions                      |
+| &check;37. BST Traversal                       | &check; 77. Valid IP Addresses               | &cross; 117. Index Equals Value            | &cross; 157. Merge Sort                            |
+| &check;38. Min Height BST                      | &check; 78. Reverse Words In String          | &cross; 118. Quick Sort                    | &cross; 158. Count Inversions                      |
 | &check;39. Find Kth Largest Value In BST       | &cross; 79. Minimum Characters For Words.mp4 | &cross; 119. Heap Sort                     | &cross; 159. Smallest Substring Containing         |
 | &check;40. Reconstruct BST                     | &cross; 80. Suffix Trie Construction         | &cross; 120. Radix Sort                    | &cross; 160. Longest Balanced Substring            |
 
@@ -900,7 +900,7 @@ flowchart LR
 
 **Solution:** </br>
 
-- Approach 1: We want BST to be as balanced in left and right subtrees. So root node will be the middle element of the sorted input array. Recursively repeat the process.
+-   Approach 1: We want BST to be as balanced in left and right subtrees. So root node will be the middle element of the sorted input array. Recursively repeat the process.
 
 ```java
 // O(n) time | O(n) space - where n is the length of the array
@@ -926,8 +926,8 @@ public static BST constructMinHeightBst(List<Integer> array, int startIdx, int e
 **Problem**: Find K-th largest value in BST. </br>
 **Solution:** </br>
 
-- Approach 1: In order traversal with a counter in BST. Also track the value of kth node. T:O(N) ; S:O(N).
-- Approach 2: Reverse In order traversal with a counter in BST. Also track the kth node value. T:O(N) ; S:O(N).
+-   Approach 1: In order traversal with a counter in BST. Also track the value of kth node. T:O(N) ; S:O(N).
+-   Approach 2: Reverse In order traversal with a counter in BST. Also track the kth node value. T:O(N) ; S:O(N).
 
 </br>
 
@@ -967,12 +967,12 @@ graph TB;
 
 **Solution:**
 
-- Approach 0: Unique Binary tree can be constructed using an inorder and preOrder traversal. BST's inorder traversal is a sorted array. So sort the preOrder array to get inOrder array, and construct the unique Binary tree for that. T: O(NlogN), S: O(N).
-- Approach 1: First node is root. Then onwards all the smaller elements constitute left subtree. And all the greater elements form right subtree. Do a postorder traversal where curent node's left and right subtrees are created first, and then linked to current node. T:O(N^2) ; S:O(N).
-- Approach 2: Tracking 3 things, and creating a node if node value ()is in range. T:O(N) ; S:O(N) :
-  - rootIndex: the index of the node in preorder traversal we are trying to create.
-  - lower bound value for node's value. Start with -Inf.
-  - upper bound value for node's value. Start with +Inf.
+-   Approach 0: Unique Binary tree can be constructed using an inorder and preOrder traversal. BST's inorder traversal is a sorted array. So sort the preOrder array to get inOrder array, and construct the unique Binary tree for that. T: O(NlogN), S: O(N).
+-   Approach 1: First node is root. Then onwards all the smaller elements constitute left subtree. And all the greater elements form right subtree. Do a postorder traversal where curent node's left and right subtrees are created first, and then linked to current node. T:O(N^2) ; S:O(N).
+-   Approach 2: Tracking 3 things, and creating a node if node value ()is in range. T:O(N) ; S:O(N) :
+    -   rootIndex: the index of the node in preorder traversal we are trying to create.
+    -   lower bound value for node's value. Start with -Inf.
+    -   upper bound value for node's value. Start with +Inf.
 
 ```java
 
@@ -1035,8 +1035,8 @@ class Solution {
 **Problem**: Invert a given Binary tree.</br>
 **Solution:**
 
-- Approach 1: Iterative-BFS: level by level, and swap every node's child nodes. Then move to the next level. T: O(N), S:O(N)
-- Approach 2: Recursively-DFS: Just invert the right and left child of each node. T:O(N) ; S:O(N).
+-   Approach 1: Iterative-BFS: level by level, and swap every node's child nodes. Then move to the next level. T: O(N), S:O(N)
+-   Approach 2: Recursively-DFS: Just invert the right and left child of each node. T:O(N) ; S:O(N).
 
 </br>
 
@@ -1047,7 +1047,7 @@ class Solution {
 **Problem**: Find the diameter of a given binary tree. Diameter is the longest path between two leaf nodes. Diameter does not need to pass through the root node.</br>
 **Solution:**
 
-- Approach 1: DFS: For any node, consider max of diameter in left subtree, diameter in right subtree and path including the current node. Path requires knowing heights of left and right subtrees. Every node returns to the parent the max diameter and height of that node. T: O(N), S:O(N)
+-   Approach 1: DFS: For any node, consider max of diameter in left subtree, diameter in right subtree and path including the current node. Path requires knowing heights of left and right subtrees. Every node returns to the parent the max diameter and height of that node. T: O(N), S:O(N)
 
 ```java
 class Info{
@@ -1094,15 +1094,15 @@ class Solution{
 **Problem**: Find successor of a given node of Binary tree. Successor is the next node to be visited in an inorder traversal. </br>
 **Solution:**
 
-- Approach 1: Do an inorder traversal of entire binary tree, and store the entire inorder traversal in array. Find the value next to Given node value. T: O(N), S:O(N) .
-- Approach 2: But we don't need to traverse entire binary tree and store the entire inorder traversal in an array. T: O(height), S:O(1).
+-   Approach 1: Do an inorder traversal of entire binary tree, and store the entire inorder traversal in array. Find the value next to Given node value. T: O(N), S:O(N) .
+-   Approach 2: But we don't need to traverse entire binary tree and store the entire inorder traversal in an array. T: O(height), S:O(1).
 
-  - If a node has a right subtree, then the inorder successor of that node can only be in its right subtree. Bcoz, inorder traversal is `left`, `node`, `right`, where `right` comes after `node`. We can look for the `left` most element in right subtree of the given node.
-    ![43. case 1](https://drive.google.com/uc?export=view&id=1QSXrpcHbNwRAESr20Wc_jzDHBGQpMYIB)
-  - If there is no right subtree for the given node, then we need to find the parent node. If given node is left child of parent, then just the parent will be the answer. If the given node is right child of the parent, then parent's parent is the answer. </br>
-    ![43. case 2](https://drive.google.com/uc?export=view&id=13N834V-0qXUt0eaq_7nc9Ci6xo4cf8vx)
+    -   If a node has a right subtree, then the inorder successor of that node can only be in its right subtree. Bcoz, inorder traversal is `left`, `node`, `right`, where `right` comes after `node`. We can look for the `left` most element in right subtree of the given node.
+        ![43. case 1](https://drive.google.com/uc?export=view&id=1QSXrpcHbNwRAESr20Wc_jzDHBGQpMYIB)
+    -   If there is no right subtree for the given node, then we need to find the parent node. If given node is left child of parent, then just the parent will be the answer. If the given node is right child of the parent, then parent's parent is the answer. </br>
+        ![43. case 2](https://drive.google.com/uc?export=view&id=13N834V-0qXUt0eaq_7nc9Ci6xo4cf8vx)
 
-  - Lastly, if there is no further right subtree, or no parent whose left subtree contained the given node, then there is no successor. This was the last element in inorder traversal.
+    -   Lastly, if there is no further right subtree, or no parent whose left subtree contained the given node, then there is no successor. This was the last element in inorder traversal.
 
 ```java
 // Approach 2:
@@ -1155,7 +1155,7 @@ class Program {
 **Problem**: In height Balanced Binary tree, for every node, the difference between the height of left subtree and right subtree is atmost 1. </br>
 **Solution:**
 
-- Approach 1: Do an postorder traversal, where children return the height and wether they are height balanced or not. T: O(N), S:O(N) .
+-   Approach 1: Do an postorder traversal, where children return the height and wether they are height balanced or not. T: O(N), S:O(N) .
 
 </br>
 
@@ -1167,9 +1167,9 @@ class Program {
 **Example**: For [7,10,12,7,9,11] the sum is 7+12+14=33.
 **Solution:**
 
-- Approach 1: maxSums[i]=max(maxSums[i-1], maxSums[i-2]+A[i]). T: O(N), S:O(N) .
-- Approach 2: current=max(first, second+A[i]). => second=first ; first=current. Loop for next element. T: O(N), S:O(1).
-  </br>
+-   Approach 1: maxSums[i]=max(maxSums[i-1], maxSums[i-2]+A[i]). T: O(N), S:O(N) .
+-   Approach 2: current=max(first, second+A[i]). => second=first ; first=current. Loop for next element. T: O(N), S:O(1).
+    </br>
 
 ---
 
@@ -1179,8 +1179,8 @@ class Program {
 **Example**: For $10 total sum, and denominations of [1,5,10,25], ways are 4. 1x10 ; 2x5 ; 1x5 + 5x1 ; 10x1.
 **Solution:**
 
-- Approach 1: DP solution. T: O(N\*D), S:O(N).
-  </br>
+-   Approach 1: DP solution. T: O(N\*D), S:O(N).
+    </br>
 
 ```java
 public static int numberOfWaysToMakeChange(int n, int[] denominations) {
@@ -1206,8 +1206,8 @@ public static int numberOfWaysToMakeChange(int n, int[] denominations) {
 **Hint:** Greedy won't work. </br>
 **Solution:**
 
-- Approach 1: DP solution. T: O(N\*D), S:O(N).
-  </br>
+-   Approach 1: DP solution. T: O(N\*D), S:O(N).
+    </br>
 
 ```java
 public static int minNumberOfCoinsForChange(int n, int[] DENOMINATIONS) {
@@ -1241,9 +1241,9 @@ public static int minNumberOfCoinsForChange(int n, int[] DENOMINATIONS) {
 **Problem**: Find maximum Subarray Sum in a given array, with positive and negative int values.</br>
 **Solution:**
 
-- Approach 1: 2 Nested for loops, to consider every subarray. T: O(N^2), S:O(1) .
-- Approach 2: Kadane's T: O(N), S:O(1).
-  </br>
+-   Approach 1: 2 Nested for loops, to consider every subarray. T: O(N^2), S:O(1) .
+-   Approach 2: Kadane's T: O(N), S:O(1).
+    </br>
 
 ```java
 class Program {
@@ -1811,9 +1811,9 @@ public LinkedList sumOfLinkedLists(LinkedList linkedListOne, LinkedList linkedLi
 **Problem**: Search for a target value, in a 2D matrix where rows and columns values are sorted.</br>
 **Solution:**
 
-- Approach 1: Search the matrix. T: O(N\*M), S:O(1) .
-- Approach 2: Staircase traversal, eliminating row or columns, dependeing upon whether value is <,=,> than target value. T: O(N+M), S:O(1) .
-  </br>
+-   Approach 1: Search the matrix. T: O(N\*M), S:O(1) .
+-   Approach 2: Staircase traversal, eliminating row or columns, dependeing upon whether value is <,=,> than target value. T: O(N+M), S:O(1) .
+    </br>
 
 ```java
 public static int[] searchInSortedMatrix(int[][] matrix, int target) {
@@ -1998,8 +1998,8 @@ class Program {
 **Problem**: For a given sequence of brackets of type (,{,[ , find if the sequence is balanced.</br>
 **Solution:**
 
-- Approach 1: Stack. T: O(N), S:O(N) .
-  </br>
+-   Approach 1: Stack. T: O(N), S:O(N) .
+    </br>
 
 ---
 
@@ -2106,19 +2106,84 @@ private int expandAroundCenter(String s, int L, int R){
 
 ---
 
+### 77. Valid IP Addresses:
+
+```java
+private boolean isValidPart(String part) {
+    int partAsInt = Integer.valueOf(part);
+    if (partAsInt > 255) return false;
+    return part.length() == ("" + partAsInt).length();
+  }
+
+  public ArrayList<String> validIPAddresses(String string) {
+    ArrayList<String> validIPs = new ArrayList<>();
+    String[] addressParts = new String[4];
+
+    for (int i = 1; i < Math.min(string.length(), 4); ++i) {
+      addressParts[0] = string.substring(0, i);
+
+      if (!isValidPart(addressParts[0])) continue;
+
+      for (int j = i + 1; j < i + Math.min(string.length() - i, 4); ++j) {
+        addressParts[1] = string.substring(i, j);
+
+        if (!isValidPart(addressParts[1])) continue;
+
+        for (int k = j + 1; k < j + Math.min(string.length() - j, 4); ++k) {
+          addressParts[2] = string.substring(j, k);
+          addressParts[3] = string.substring(k);
+
+          if (isValidPart(addressParts[2]) && isValidPart(addressParts[3]))
+            validIPs.add(String.join(".", addressParts));
+        }
+      }
+    }
+
+    return validIPs;
+  }
+```
+
+---
+
+### 78. Reverse Words In String:
+
+```java
+public String reverseWordsInString(String string) {
+    List<String> words = new ArrayList<>();
+    int start = 0;
+
+    for (int idx = 0; idx < string.length(); ++idx) {
+      if (string.charAt(idx) == ' ') {
+        words.add(string.substring(start, idx));
+        start = idx;
+      } else if (string.charAt(start) == ' ') {
+        words.add(" ");
+        start = idx;
+      }
+    }
+
+    words.add(string.substring(start));
+
+    Collections.reverse(words);
+    return String.join("", words);
+  }
+```
+
+---
+
 ### 81. Four(K) Number Sum:</br>
 
 **Problem**: Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
 
-- 0 <= a, b, c, d < n
-- a, b, c, and d are distinct.
-- nums[a] + nums[b] + nums[c] + nums[d] == target. </br>
-  </br>
+-   0 <= a, b, c, d < n
+-   a, b, c, and d are distinct.
+-   nums[a] + nums[b] + nums[c] + nums[d] == target. </br>
+    </br>
 
 **Solution:**
 
-- Approach 1: Recursion and two pointers.
-- Approach 2: Recursion and Hashmap.
+-   Approach 1: Recursion and two pointers.
+-   Approach 2: Recursion and Hashmap.
 
 ```java
 class Solution {
@@ -2371,7 +2436,7 @@ public static int minRewards(int[] scores) {
 
 **Solution:**
 
-- Approach 1: Recursion and two pointers.
+-   Approach 1: Recursion and two pointers.
 
 ```java
 public static List<Integer> zigzagTraverse(List<List<Integer>> array) {
@@ -2495,6 +2560,124 @@ public static int getIdxOfFirstBiggerOrEqual(List<Integer> array, int startingId
 	return -1;
 }
 
+```
+
+### 87. Validate Three Nodes:
+
+```java
+/**
+   * * TC: O(d), d - distance between nodeOne and nodeThree
+   * * SC: O(1)
+   */
+  public boolean validateThreeNodes(BST nodeOne, BST nodeTwo, BST nodeThree) {
+    // Write your code here.
+    BST searchOne = nodeOne, searchTwo = nodeThree;
+
+    while (true) {
+      boolean foundThreeFromOne = searchOne == nodeThree;
+      boolean foundOneFromThree = searchTwo == nodeOne;
+      boolean foundNodeTwo = searchOne == nodeTwo || searchTwo == nodeTwo;
+      boolean hasFinishedSearching = searchOne == null && searchTwo == null;
+
+      if (foundThreeFromOne || foundOneFromThree || foundNodeTwo || hasFinishedSearching) break;
+
+      if (searchOne != null)
+        searchOne = searchOne.value < nodeTwo.value ? searchOne.right : searchOne.left;
+
+      if (searchTwo != null)
+        searchTwo = searchTwo.value < nodeTwo.value ? searchTwo.right : searchTwo.left;
+    }
+
+    boolean foundOneFromOther = searchOne == nodeThree || searchTwo == nodeOne;
+    boolean foundNodeTwo = searchOne == nodeTwo || searchTwo == nodeTwo;
+
+    if (foundOneFromOther || !foundNodeTwo) return false;
+
+    return searchForTarget(nodeTwo, (searchOne == nodeTwo) ? nodeThree : nodeOne);
+  }
+
+  private boolean searchForTarget(BST node, BST target) {
+    while (node != null) {
+      if (node == target) return true;
+
+      node = node.value < target.value ? node.right : node.left;
+    }
+
+    return false;
+  }
+
+  // public boolean validateThreeNodes(BST nodeOne, BST nodeTwo, BST nodeThree) {
+  // 	if (isDescendant(nodeOne, nodeTwo)) return isDescendant(nodeTwo, nodeThree);
+
+  // 	return isDescendant(nodeThree, nodeTwo) && isDescendant(nodeTwo, nodeOne);
+  // }
+
+  /**
+   * * TC: O(h)
+   * * SC: O(1)
+   */
+  // private boolean isDescendant(BST node, BST target) {
+  // 	while (node != null) {
+  // 		if (node == target) return true;
+
+  // 		node = node.value < target.value ? node.right : node.left;
+  // 	}
+
+  // 	return false;
+  // }
+
+  /**
+   * * TC: O(h)
+   * * SC: O(h)
+   */
+  // 	private boolean isDescendantRec(BST node, BST target) {
+  // 		if (node == null) return false;
+
+  // 		if (node == target) return true;
+
+  // 		return node.value < target.value ?
+  // 			isDescendantRec(node.right, target)
+  // 			: isDescendantRec(node.left, target);
+  // 	}
+```
+
+---
+
+### 88. Max Path Sum:
+
+```java
+  public static int maxPathSum(BinaryTree tree) {
+    // Write your code here.
+    return maxPathSumHelper(tree)[1];
+  }
+
+  /**
+   * * TC: O(n)
+   * * SC: O(log (n))
+   */
+  private static int[] maxPathSumHelper(BinaryTree root) {
+    if (root == null) return new int[] {0, Integer.MIN_VALUE};
+
+    int[] leftSumArray = maxPathSumHelper(root.left);
+    int leftMaxSumAsBranch = leftSumArray[0], leftMaxPathSum = leftSumArray[1];
+
+    int[] rightSumArray = maxPathSumHelper(root.right);
+    int rightMaxSumAsBranch = rightSumArray[0], rightMaxPathSum = rightSumArray[1];
+
+    int maxChildSumAsBranch = max(leftMaxSumAsBranch, rightMaxSumAsBranch);
+    int maxSumAsBranch = max(maxChildSumAsBranch + root.value, root.value);
+    int maxSumAsRootNode =
+        max(leftMaxSumAsBranch + root.value + rightMaxSumAsBranch, maxSumAsBranch);
+    int maxPathSum = max(leftMaxPathSum, rightMaxPathSum, maxSumAsRootNode);
+
+    return new int[] {maxSumAsBranch, maxPathSum};
+  }
+
+  private static int max(int... nums) {
+    int max = Integer.MIN_VALUE;
+    for (int num : nums) max = Math.max(max, num);
+    return max;
+  }
 ```
 
 ---
