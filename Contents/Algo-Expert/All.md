@@ -9,7 +9,7 @@
 | &check; 5. Non-Constructible Change            | &check; 45. Max Subset Sum No Adjacent       | &check; 85. Zigzag Traverse                | &cross; 125. Pattern Matcher                       |
 | &check; 6. Find Closest Value In BST           | &check; 46. Number Of Ways To Make Change    | &check; 86. Same BSTs                      | &cross; 126. Multi String Search                   |
 | &check; 7. Branch Sums                         | &check; 47. Min Number Of Coins For Change   | &check; 87. Validate Three Nodes           | &cross; 127. Apartment Hunting                     |
-| &check; 8. Node Depths                         | &check; 48. Levenshtein Distance             | &cross; 88. Max Path Sum                   | &cross; 128. Calendar Matching                     |
+| &check; 8. Node Depths                         | &check; 48. Levenshtein Distance             | &check; 88. Max Path Sum                   | &cross; 128. Calendar Matching                     |
 | &check; 9. Depth-first Search                  | &check; 49. Number Of Ways To Traverse Graph | &check; 89. Find Nodes Distance K          | &cross; 129. Waterfall Streams                     |
 | &check; 10. Minimum Waiting Time               | &check; 50. Kadane's Algorithm               | &cross; 90. Max Sum Increasing Subsequence | &cross; 130. Minimum Area Rectangle                |
 | &check; 11. Class Photos                       | &check; 51. Single Cycle Check               | &cross; 91. Longest Common Subsequence     | &cross; 131. Line Through Points                   |
@@ -2639,6 +2639,45 @@ public static int getIdxOfFirstBiggerOrEqual(List<Integer> array, int startingId
   // 			isDescendantRec(node.right, target)
   // 			: isDescendantRec(node.left, target);
   // 	}
+```
+
+---
+
+### 88. Max Path Sum:
+
+```java
+  public static int maxPathSum(BinaryTree tree) {
+    // Write your code here.
+    return maxPathSumHelper(tree)[1];
+  }
+
+  /**
+   * * TC: O(n)
+   * * SC: O(log (n))
+   */
+  private static int[] maxPathSumHelper(BinaryTree root) {
+    if (root == null) return new int[] {0, Integer.MIN_VALUE};
+
+    int[] leftSumArray = maxPathSumHelper(root.left);
+    int leftMaxSumAsBranch = leftSumArray[0], leftMaxPathSum = leftSumArray[1];
+
+    int[] rightSumArray = maxPathSumHelper(root.right);
+    int rightMaxSumAsBranch = rightSumArray[0], rightMaxPathSum = rightSumArray[1];
+
+    int maxChildSumAsBranch = max(leftMaxSumAsBranch, rightMaxSumAsBranch);
+    int maxSumAsBranch = max(maxChildSumAsBranch + root.value, root.value);
+    int maxSumAsRootNode =
+        max(leftMaxSumAsBranch + root.value + rightMaxSumAsBranch, maxSumAsBranch);
+    int maxPathSum = max(leftMaxPathSum, rightMaxPathSum, maxSumAsRootNode);
+
+    return new int[] {maxSumAsBranch, maxPathSum};
+  }
+
+  private static int max(int... nums) {
+    int max = Integer.MIN_VALUE;
+    for (int num : nums) max = Math.max(max, num);
+    return max;
+  }
 ```
 
 ---
