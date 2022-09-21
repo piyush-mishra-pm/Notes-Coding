@@ -11,7 +11,7 @@
 | &check; 7. Branch Sums                         | &check; 47. Min Number Of Coins For Change   | &check; 87. Validate Three Nodes           | &cross; 127. Apartment Hunting                     |
 | &check; 8. Node Depths                         | &check; 48. Levenshtein Distance             | &check; 88. Max Path Sum                   | &cross; 128. Calendar Matching                     |
 | &check; 9. Depth-first Search                  | &check; 49. Number Of Ways To Traverse Graph | &check; 89. Find Nodes Distance K          | &cross; 129. Waterfall Streams                     |
-| &check; 10. Minimum Waiting Time               | &check; 50. Kadane's Algorithm               | &cross; 90. Max Sum Increasing Subsequence | &cross; 130. Minimum Area Rectangle                |
+| &check; 10. Minimum Waiting Time               | &check; 50. Kadane's Algorithm               | &check; 90. Max Sum Increasing Subsequence | &cross; 130. Minimum Area Rectangle                |
 | &check; 11. Class Photos                       | &check; 51. Single Cycle Check               | &cross; 91. Longest Common Subsequence     | &cross; 131. Line Through Points                   |
 | &check; 12. Tandem Bicycle                     | &cross; 52. Breadth-first Search             | &check; 92. Min Number Of Jumps            | &cross; 132. Right Smaller Than                    |
 | &check; 13. Remove Duplicates From Linked List | &check; 53. River Sizes                      | &check; 93. Water Area                     | &cross; 133. Iterative In-order Traversal          |
@@ -2813,6 +2813,50 @@ static class Pair<U, V> {
 
   	addNodesAtDistanceK(node.left, distance + 1, k, nodesDistanceK);
   	addNodesAtDistanceK(node.right, distance + 1, k, nodesDistanceK);
+  }
+```
+
+---
+
+### 90. Max Sum Increasing Subsequence:
+
+```java
+  //  TC: O(n^2) ; SC: O(n)
+  public static List<List<Integer>> maxSumIncreasingSubsequence(int[] array) {
+    int len = array.length, maxSumIdx = 0;
+    int[] sums = array.clone();
+    int[] sequences = new int[len];
+    Arrays.fill(sequences, Integer.MIN_VALUE);
+
+    for (int i = 0; i < len; i++) {
+      int currentNum = array[i];
+      for (int j = 0; j < i; j++) {
+        int otherNum = array[j];
+        if (otherNum < currentNum && currentNum + sums[j] > sums[i]) {
+          sums[i] = currentNum + sums[j];
+          sequences[i] = j;
+        }
+      }
+
+      if (sums[i] > sums[maxSumIdx]) maxSumIdx = i;
+    }
+
+    return buildSequence(array, sequences, maxSumIdx, sums[maxSumIdx]);
+  }
+
+  private static List<List<Integer>> buildSequence(
+      int[] array, int[] sequences, int currentIdx, int maxSum) {
+    List<List<Integer>> seq = new ArrayList<>();
+    seq.add(new ArrayList<>());
+    seq.add(new ArrayList<>());
+    seq.get(0).add(maxSum);
+
+    while (currentIdx != Integer.MIN_VALUE) {
+      seq.get(1).add(0, array[currentIdx]);
+      currentIdx = sequences[currentIdx];
+    }
+
+    return seq;
   }
 ```
 
