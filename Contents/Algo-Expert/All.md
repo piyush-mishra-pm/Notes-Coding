@@ -17,7 +17,7 @@
 | &check; 13. Remove Duplicates From Linked List | &check; 53. River Sizes                      | &check; 93. Water Area                     | &cross; 133. Iterative In-order Traversal          |
 | &check; 14. Nth Fibonacci                      | &cross; 54. Youngest Common Ancestor         | &check; 94. Knapsack Problem               | &cross; 134. Flatten Binary Tree                   |
 | &check; 15. Product Sum                        | &check; 55. Remove Islands                   | &check; 95. Disk Stacking                  | &cross; 135. Right Sibling Tree                    |
-| &check; 16. Binary Search                      | &check; 56. Cycle In Graph                   | &cross; 96. Numbers In Pi                  | &cross; 136. All Kinds Of Node Depths              |
+| &check; 16. Binary Search                      | &check; 56. Cycle In Graph                   | &check; 96. Numbers In Pi                  | &cross; 136. All Kinds Of Node Depths              |
 | &check; 17. Find Three Largest Numbers         | &check; 57. Minimum Passes Of Matrix         | &check; 97. Maximum Sum Submatrix          | &cross; 137. Compare Leaf Traversal.mp4            |
 | &check; 18. Bubble Sort                        | &check; 58. Task Assignment                  | &cross; 98. Maximize Expression            | &cross; 138. Max Profit With K Transactions        |
 | &check; 19. Insertion Sort                     | &check; 59. Valid Starting City              | &cross; 99. Dijkstra's Algorithm           | &cross; 139. Palindrome Partitioning Min Cuts      |
@@ -3094,6 +3094,83 @@ public static List<Integer[]> buildSequence(List<Integer[]> array, int[] sequenc
 ```
 
 ---
+
+### 96. Numbers In Pi:
+
+```java
+    // int minSpaces = numbersInPiRec(0, pi, getNumbersMap(numbers));
+
+    int[] cache = new int[pi.length()];
+    Arrays.fill(cache, Integer.MAX_VALUE);
+    int minSpaces = numbersInPiMem(0, pi, getNumbersMap(numbers), cache);
+
+    return minSpaces == Integer.MAX_VALUE ? -1 : minSpaces;
+  }
+
+  private static Map<String, Boolean> getNumbersMap(String[] numbers) {
+    Map<String, Boolean> map = new HashMap<>();
+    for (String number : numbers) map.put(number, true);
+    return map;
+  }
+
+  /**
+   * * Memoization Approach
+   *
+   * * TC: O(n^3 + m)
+   * * SC: O(n + m) approximately
+   */
+  private static int numbersInPiMem(
+      int index, String pi, Map<String, Boolean> numbersMap, int[] cache) {
+    if (index == pi.length()) return -1;
+
+    if (cache[index] != Integer.MAX_VALUE) return cache[index];
+
+    int minSpaces = Integer.MAX_VALUE;
+    for (int i = index; i < pi.length(); i++) {
+      String prefix = pi.substring(index, i + 1);
+
+      if (numbersMap.containsKey(prefix)) {
+        int minSpacesInSuffix = 1 + numbersInPiMem(i + 1, pi, numbersMap, cache);
+
+        if (minSpacesInSuffix != Integer.MIN_VALUE) minSpaces = min(minSpaces, minSpacesInSuffix);
+      }
+    }
+
+    return cache[index] = minSpaces;
+  }
+
+  /**
+   * * Recursive Approach
+   *
+   * * TC: O(n^3 + m)
+   * * SC: O(n^3 + m) approximately
+   */
+  // private static int numbersInPiRec(
+  // 	int index, String pi, Map<String, Boolean> numbersMap
+  // ) {
+  // 	if (index == pi.length()) return -1;
+
+  // 	int minSpaces = Integer.MAX_VALUE;
+  // 	for (int i = index; i < pi.length(); i++) {
+  // 		String prefix = pi.substring(index, i + 1);
+
+  // 		if (numbersMap.containsKey(prefix)) {
+  // 			int minSpacesInSuffix = 1 + numbersInPiRec(i + 1, pi, numbersMap);
+
+  // 			if (minSpacesInSuffix != Integer.MIN_VALUE)
+  // 				minSpaces = min(minSpaces, minSpacesInSuffix);
+  // 		}
+  // 	}
+
+  // 	return minSpaces;
+  // }
+
+  private static int min(int... a) {
+    int minValue = Integer.MAX_VALUE;
+    for (int val : a) minValue = Math.min(minValue, val);
+    return minValue;
+  }
+```
 
 ### 97. Maximum Sum Submatrix
 
