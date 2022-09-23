@@ -12,7 +12,7 @@
 | &check; 8. Node Depths                         | &check; 48. Levenshtein Distance             | &check; 88. Max Path Sum                   | &cross; 128. Calendar Matching                     |
 | &check; 9. Depth-first Search                  | &check; 49. Number Of Ways To Traverse Graph | &check; 89. Find Nodes Distance K          | &cross; 129. Waterfall Streams                     |
 | &check; 10. Minimum Waiting Time               | &check; 50. Kadane's Algorithm               | &check; 90. Max Sum Increasing Subsequence | &cross; 130. Minimum Area Rectangle                |
-| &check; 11. Class Photos                       | &check; 51. Single Cycle Check               | &cross; 91. Longest Common Subsequence     | &cross; 131. Line Through Points                   |
+| &check; 11. Class Photos                       | &check; 51. Single Cycle Check               | &check; 91. Longest Common Subsequence     | &cross; 131. Line Through Points                   |
 | &check; 12. Tandem Bicycle                     | &cross; 52. Breadth-first Search             | &check; 92. Min Number Of Jumps            | &cross; 132. Right Smaller Than                    |
 | &check; 13. Remove Duplicates From Linked List | &check; 53. River Sizes                      | &check; 93. Water Area                     | &cross; 133. Iterative In-order Traversal          |
 | &check; 14. Nth Fibonacci                      | &cross; 54. Youngest Common Ancestor         | &check; 94. Knapsack Problem               | &cross; 134. Flatten Binary Tree                   |
@@ -2857,6 +2857,42 @@ static class Pair<U, V> {
     }
 
     return seq;
+  }
+```
+
+---
+
+### 91. Longest Common Subsequence:
+
+```java
+  // TC: O(mn); SC O(mn)
+  public static List<Character> longestCommonSubsequence(String str1, String str2) {
+    int[][] lcs = new int[str1.length() + 1][str2.length() + 1];
+
+    for (int i = 1; i < lcs.length; i++) {
+      for (int j = 1; j < lcs[i].length; j++) {
+        if (str1.charAt(i - 1) == str2.charAt(j - 1)) lcs[i][j] = 1 + lcs[i - 1][j - 1];
+        else lcs[i][j] = Math.max(lcs[i - 1][j], lcs[i][j - 1]);
+      }
+    }
+
+    return buildSequence(lcs, str1, str2);
+  }
+
+  private static List<Character> buildSequence(int[][] lcs, String str1, String str2) {
+    List<Character> sequence = new ArrayList<>();
+    int i = lcs.length - 1, j = lcs[0].length - 1;
+
+    while (i > 0 && j > 0) {
+      if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
+        sequence.add(0, str1.charAt(i - 1));
+        --i;
+        --j;
+      } else if (lcs[i - 1][j] > lcs[i][j - 1]) --i;
+      else --j;
+    }
+
+    return sequence;
   }
 ```
 
