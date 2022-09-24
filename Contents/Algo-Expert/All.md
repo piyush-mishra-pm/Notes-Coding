@@ -19,7 +19,7 @@
 | &check; 15. Product Sum                        | &check; 55. Remove Islands                   | &check; 95. Disk Stacking                  | &cross; 135. Right Sibling Tree                    |
 | &check; 16. Binary Search                      | &check; 56. Cycle In Graph                   | &check; 96. Numbers In Pi                  | &cross; 136. All Kinds Of Node Depths              |
 | &check; 17. Find Three Largest Numbers         | &check; 57. Minimum Passes Of Matrix         | &check; 97. Maximum Sum Submatrix          | &cross; 137. Compare Leaf Traversal.mp4            |
-| &check; 18. Bubble Sort                        | &check; 58. Task Assignment                  | &cross; 98. Maximize Expression            | &cross; 138. Max Profit With K Transactions        |
+| &check; 18. Bubble Sort                        | &check; 58. Task Assignment                  | &check; 98. Maximize Expression            | &cross; 138. Max Profit With K Transactions        |
 | &check; 19. Insertion Sort                     | &check; 59. Valid Starting City              | &cross; 99. Dijkstra's Algorithm           | &cross; 139. Palindrome Partitioning Min Cuts      |
 | &check; 20. Selection Sort                     | &cross; 60. Min Heap Construction            | &cross; 100. Topological Sort              | &cross; 140. Longest Increasing Subsequence        |
 | &check; 21. Palindrome Check                   | &cross; 61. Linked List Construction         | &cross; 101. Boggle Board                  | &cross; 141. Longest String Chain                  |
@@ -3248,6 +3248,41 @@ public static List<Integer[]> buildSequence(List<Integer[]> array, int[] sequenc
     }
 
     return dpSums;
+  }
+```
+
+---
+
+### 98. Maximize Expression:
+
+```java
+//TC: O(n) ,SC: O(4n) ~ O(n)
+  public int maximizeExpression(int[] array) {
+    int len = array.length;
+    if (len < 4) return 0;
+
+    int[] maxA = new int[len];
+    maxA[0] = array[0];
+    for (int i = 1; i < len; i++) maxA[i] = Math.max(maxA[i - 1], array[i]);
+
+    int[] maxAMinusB = new int[len];
+    maxAMinusB[0] = Integer.MIN_VALUE;
+    for (int i = 1; i < len; i++)
+      maxAMinusB[i] = Math.max(maxAMinusB[i - 1], maxA[i - 1] - array[i]);
+
+    int[] maxAMinusBPlusC = new int[len];
+    maxAMinusBPlusC[0] = maxAMinusBPlusC[1] = Integer.MIN_VALUE;
+    for (int i = 2; i < len; i++)
+      maxAMinusBPlusC[i] = Math.max(maxAMinusBPlusC[i - 1], maxAMinusB[i - 1] + array[i]);
+
+    int[] maxAMinusBPlusCMinusD = new int[len];
+    maxAMinusBPlusCMinusD[0] =
+        maxAMinusBPlusCMinusD[1] = maxAMinusBPlusCMinusD[2] = Integer.MIN_VALUE;
+    for (int i = 3; i < len; i++)
+      maxAMinusBPlusCMinusD[i] =
+          Math.max(maxAMinusBPlusCMinusD[i - 1], maxAMinusBPlusC[i - 1] - array[i]);
+
+    return maxAMinusBPlusCMinusD[len - 1];
   }
 ```
 
