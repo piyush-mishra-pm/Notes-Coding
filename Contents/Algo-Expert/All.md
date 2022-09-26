@@ -13,7 +13,7 @@
 | &check; 9. Depth-first Search                  | &check; 49. Number Of Ways To Traverse Graph | &check; 89. Find Nodes Distance K          | &cross; 129. Waterfall Streams                     |
 | &check; 10. Minimum Waiting Time               | &check; 50. Kadane's Algorithm               | &check; 90. Max Sum Increasing Subsequence | &cross; 130. Minimum Area Rectangle                |
 | &check; 11. Class Photos                       | &check; 51. Single Cycle Check               | &check; 91. Longest Common Subsequence     | &cross; 131. Line Through Points                   |
-| &check; 12. Tandem Bicycle                     | &cross; 52. Breadth-first Search             | &check; 92. Min Number Of Jumps            | &cross; 132. Right Smaller Than                    |
+| &check; 12. Tandem Bicycle                     | &check; 52. Breadth-first Search             | &check; 92. Min Number Of Jumps            | &cross; 132. Right Smaller Than                    |
 | &check; 13. Remove Duplicates From Linked List | &check; 53. River Sizes                      | &check; 93. Water Area                     | &cross; 133. Iterative In-order Traversal          |
 | &check; 14. Nth Fibonacci                      | &cross; 54. Youngest Common Ancestor         | &check; 94. Knapsack Problem               | &cross; 134. Flatten Binary Tree                   |
 | &check; 15. Product Sum                        | &check; 55. Remove Islands                   | &check; 95. Disk Stacking                  | &cross; 135. Right Sibling Tree                    |
@@ -1284,6 +1284,40 @@ public static boolean hasSingleCycle(int[] array) {
 
     return currentIdx == 0;
 }
+```
+
+---
+
+### 52. Breadth-first Search:
+
+```java
+  static class Node {
+    String name;
+    List<Node> children = new ArrayList<Node>();
+
+    public Node(String name) {
+      this.name = name;
+    }
+
+    public List<String> breadthFirstSearch(List<String> array) {
+      // Write your code here.
+      Queue<Node> queue = new LinkedList<>();
+      queue.add(this);
+
+      while (!queue.isEmpty()) {
+        Node current = queue.poll();
+        array.add(current.name);
+        queue.addAll(current.children);
+      }
+
+      return array;
+    }
+
+    public Node addChild(String name) {
+      Node child = new Node(name);
+      children.add(child);
+      return this;
+    }
 ```
 
 ---
