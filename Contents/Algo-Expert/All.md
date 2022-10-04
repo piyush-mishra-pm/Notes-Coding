@@ -22,7 +22,7 @@
 | &check; 18. Bubble Sort                        | &check; 58. Task Assignment                  | &check; 98. Maximize Expression            | &cross; 138. Max Profit With K Transactions        |
 | &check; 19. Insertion Sort                     | &check; 59. Valid Starting City              | &cross; 99. Dijkstra's Algorithm           | &cross; 139. Palindrome Partitioning Min Cuts      |
 | &check; 20. Selection Sort                     | &check; 60. Min Heap Construction            | &cross; 100. Topological Sort              | &cross; 140. Longest Increasing Subsequence        |
-| &check; 21. Palindrome Check                   | &cross; 61. Linked List Construction         | &cross; 101. Boggle Board                  | &cross; 141. Longest String Chain                  |
+| &check; 21. Palindrome Check                   | &check; 61. Linked List Construction         | &cross; 101. Boggle Board                  | &cross; 141. Longest String Chain                  |
 | &check; 22. Caesar Cipher Encryptor            | &check; 62. Remove Nth Node From End         | &cross; 102. Continuous Median             | &cross; 142. Square Of Zeroes                      |
 | &check; 23. Run-Length Encoding                | &check; 63. Sum Of Linked Lists              | &check; 103. Sort K-Sorted Array           | &cross; 143. Knuth–Morris–Pratt                    |
 | &check; 24. Generate Document                  | &check; 64. Permutations                     | &cross; 104. Laptop Rentals                | &cross; 144. A-Star Algorithm                      |
@@ -34,7 +34,7 @@
 | &check;30. Spiral Traverse                     | &check; 70. Min Max Stack Construction       | &cross; 110. Interweaving Strings          | &cross; 150. LRU Cache                             |
 | &check;31. Longest Peak                        | &check; 71. Balanced Brackets                | &cross; 111. Solve Sudoku                  | &cross; 151. Rearrange Linked List                 |
 | &check;32. Array Of Products                   | &check; 72. Sunset Views                     | &cross; 112. Generate Div Tags             | &cross; 152. Linked List Palindrome                |
-| &check;33. First Duplicate Value               | &cross; 73. Sort Stack                       | &cross; 113. Ambiguous Measurements        | &cross; 153. Zip Linked List                       |
+| &check;33. First Duplicate Value               | &check; 73. Sort Stack                       | &cross; 113. Ambiguous Measurements        | &cross; 153. Zip Linked List                       |
 | &check;34. Merge Overlapping Intervals         | &check; 74. Next Greater Element             | &cross; 114. Shifted Binary Search         | &cross; 154. Node Swap                             |
 | &check;35. BST Construction                    | &check; 75. Longest Palindromic Substring    | &cross; 115. Search For Range              | &cross; 155. Number Of Binary Tree Topologies      |
 | &check;36. Validate BST                        | &check; 76. Group Anagrams                   | &cross; 116. Quickselect                   | &cross; 156. Non-Attacking Queens                  |
@@ -2324,6 +2324,41 @@ class Program {
     return views;
   }
 ```
+
+---
+
+### 73. Sort Stack:
+
+```java
+ //TC: O(n^2), SC: O(n)
+  public ArrayList<Integer> sortStack(ArrayList<Integer> stack) {
+    if (stack.isEmpty()) return stack;
+
+    sort(stack);
+    return stack;
+  }
+
+  private void sort(ArrayList<Integer> stack) {
+    if (stack.size() == 1) return;
+
+    int poppedValue = stack.remove(stack.size() - 1);
+    sort(stack);
+    insert(stack, poppedValue);
+  }
+
+  private void insert(ArrayList<Integer> stack, int value) {
+    if (stack.isEmpty() || stack.get(stack.size() - 1) <= value) {
+      stack.add(value);
+      return;
+    }
+
+    int poppedValue = stack.remove(stack.size() - 1);
+    insert(stack, value);
+    stack.add(poppedValue);
+  }
+```
+
+---
 
 ### 74. Next Greater Element:</br>
 
