@@ -40,7 +40,7 @@
 | &check;36. Validate BST                        | &check; 76. Group Anagrams                   | &cross; 116. Quickselect                   | &cross; 156. Non-Attacking Queens                  |
 | &check;37. BST Traversal                       | &check; 77. Valid IP Addresses               | &cross; 117. Index Equals Value            | &cross; 157. Merge Sort                            |
 | &check;38. Min Height BST                      | &check; 78. Reverse Words In String          | &cross; 118. Quick Sort                    | &cross; 158. Count Inversions                      |
-| &check;39. Find Kth Largest Value In BST       | &cross; 79. Minimum Characters For Words.mp4 | &cross; 119. Heap Sort                     | &cross; 159. Smallest Substring Containing         |
+| &check;39. Find Kth Largest Value In BST       | &check; 79. Minimum Characters For Words     | &cross; 119. Heap Sort                     | &cross; 159. Smallest Substring Containing         |
 | &check;40. Reconstruct BST                     | &cross; 80. Suffix Trie Construction         | &cross; 120. Radix Sort                    | &cross; 160. Longest Balanced Substring            |
 
 </br>
@@ -2499,6 +2499,47 @@ public String reverseWordsInString(String string) {
 
     Collections.reverse(words);
     return String.join("", words);
+  }
+```
+
+---
+
+### 79. Minimum Characters For Words:
+
+```java
+    // If we want to maintain
+    // the insertion order, then
+    // we can use LinkedHashMap
+    // Map<Character, Integer>
+    // 	outerMap = new LinkedHashMap<>(), innerMap = new LinkedHashMap<>();
+
+    Map<Character, Integer> outerMap = new HashMap<>(), innerMap = new HashMap<>();
+
+    for (String word : words) {
+      for (char letter : word.toCharArray()) {
+        innerMap.put(letter, innerMap.getOrDefault(letter, 0) + 1);
+
+        if (!outerMap.containsKey(letter) || outerMap.get(letter) < innerMap.get(letter))
+          outerMap.put(letter, innerMap.get(letter));
+      }
+
+      innerMap.clear();
+    }
+
+    return getMinimumChars(outerMap);
+  }
+
+  private String[] getMinimumChars(Map<Character, Integer> map) {
+    List<String> list = new ArrayList<>();
+
+    for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+      String s = String.valueOf(entry.getKey());
+      for (int i = 0; i < entry.getValue(); i++) list.add(s);
+    }
+
+    String[] chars = new String[list.size()];
+    chars = list.toArray(chars);
+    return chars;
   }
 ```
 
