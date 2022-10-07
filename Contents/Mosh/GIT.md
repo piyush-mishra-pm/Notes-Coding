@@ -49,11 +49,11 @@ git commit -m "Commit heading."
 git commit # PRESS ENTER. VS code opens where you can enter 1st line, then leave a line empty and then type detailed message from thrid line onwards.
 ```
 
-- Commits neither be too big nor too small. Commit often.
-- Commit on states you want to record.
-- Logically separate commits. Bugs and typos should be commited separately.
-- Meanigful commit messages. If doing too many things in 1 commit, then difficult mesaging.
-- tense: Present (Fix the bug), or Past (Foxed the bug). Depends on team practices.
+-   Commits neither be too big nor too small. Commit often.
+-   Commit on states you want to record.
+-   Logically separate commits. Bugs and typos should be commited separately.
+-   Meanigful commit messages. If doing too many things in 1 commit, then difficult mesaging.
+-   tense: Present (Fix the bug), or Past (Foxed the bug). Depends on team practices.
 
 ### Skipping the Staging Area:
 
@@ -183,20 +183,20 @@ git show casr350 #identifier of file. Shows content of that file (whose identifi
 
 #### Git Objects:
 
-- Commits,
-- Blobs (Files)
-- Trees (Directories)
-- Tags
+-   Commits,
+-   Blobs (Files)
+-   Trees (Directories)
+-   Tags
 
 ### Unstaging Files:
 
 Undoing Add operation. Two ways:
 
-- Reset (Hard or soft).
-- Restore: Takes a copy from the next environment (for staging envt, the next environment is last commit). For untracked file which is staged, restore will make it untracked file again. If file in working directory, then restores from staging area. If file in staging area, then restores it from last commit.
-  - soft : removes the commit only (working dir and stagir area intact, only commit reset).
-  - mixed : Unstages files (working dir intact, but staging and commit are reset).
-  - hard : discards local changes (staging, working dir and commit are all reset).
+-   Reset (Hard or soft).
+-   Restore: Takes a copy from the next environment (for staging envt, the next environment is last commit). For untracked file which is staged, restore will make it untracked file again. If file in working directory, then restores from staging area. If file in staging area, then restores it from last commit.
+    -   soft : removes the commit only (working dir and stagir area intact, only commit reset).
+    -   mixed : Unstages files (working dir intact, but staging and commit are reset).
+    -   hard : discards local changes (staging, working dir and commit are all reset).
 
 ```bash
 # restore files in staging area. Will transfer changes to working directory, and no staged changes exist for those files.
