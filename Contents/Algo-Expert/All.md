@@ -41,7 +41,7 @@
 | &check;37. BST Traversal                       | &check; 77. Valid IP Addresses               | &cross; 117. Index Equals Value            | &cross; 157. Merge Sort                            |
 | &check;38. Min Height BST                      | &check; 78. Reverse Words In String          | &cross; 118. Quick Sort                    | &cross; 158. Count Inversions                      |
 | &check;39. Find Kth Largest Value In BST       | &check; 79. Minimum Characters For Words     | &cross; 119. Heap Sort                     | &cross; 159. Smallest Substring Containing         |
-| &check;40. Reconstruct BST                     | &cross; 80. Suffix Trie Construction         | &cross; 120. Radix Sort                    | &cross; 160. Longest Balanced Substring            |
+| &check;40. Reconstruct BST                     | &check; 80. Suffix Trie Construction         | &cross; 120. Radix Sort                    | &cross; 160. Longest Balanced Substring            |
 
 </br>
 
@@ -2540,6 +2540,55 @@ public String reverseWordsInString(String string) {
     String[] chars = new String[list.size()];
     chars = list.toArray(chars);
     return chars;
+  }
+```
+
+---
+
+### 80. Suffix Trie Construction:
+
+```java
+ static class TrieNode {
+    Map<Character, TrieNode> children = new HashMap<Character, TrieNode>();
+  }
+
+  static class SuffixTrie {
+    TrieNode root = new TrieNode();
+    char endSymbol = '*';
+
+    public SuffixTrie(String str) {
+      populateSuffixTrieFrom(str);
+    }
+
+    private void insertSubstringStartingAt(int idx, String str) {
+      TrieNode node = root;
+
+      for (char letter : str.substring(idx).toCharArray()) {
+        if (!node.children.containsKey(letter)) node.children.put(letter, new TrieNode());
+
+        node = node.children.get(letter);
+      }
+
+      node.children.put(endSymbol, null);
+    }
+
+    // O(n^2) time | O(n^2) space
+    public void populateSuffixTrieFrom(String str) {
+      for (int idx = 0; idx < str.length(); idx++) insertSubstringStartingAt(idx, str);
+    }
+
+    // O(m) time | O(1) space
+    public boolean contains(String str) {
+      TrieNode node = root;
+
+      for (char letter : str.toCharArray()) {
+        if (!node.children.containsKey(letter)) return false;
+
+        node = node.children.get(letter);
+      }
+
+      return node.children.containsKey(endSymbol);
+    }
   }
 ```
 
