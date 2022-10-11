@@ -21,7 +21,7 @@
 | &check; 17. Find Three Largest Numbers         | &check; 57. Minimum Passes Of Matrix         | &check; 97. Maximum Sum Submatrix          | &cross; 137. Compare Leaf Traversal.mp4            |
 | &check; 18. Bubble Sort                        | &check; 58. Task Assignment                  | &check; 98. Maximize Expression            | &cross; 138. Max Profit With K Transactions        |
 | &check; 19. Insertion Sort                     | &check; 59. Valid Starting City              | &check; 99. Dijkstra's Algorithm           | &cross; 139. Palindrome Partitioning Min Cuts      |
-| &check; 20. Selection Sort                     | &check; 60. Min Heap Construction            | &cross; 100. Topological Sort              | &cross; 140. Longest Increasing Subsequence        |
+| &check; 20. Selection Sort                     | &check; 60. Min Heap Construction            | &check; 100. Topological Sort              | &cross; 140. Longest Increasing Subsequence        |
 | &check; 21. Palindrome Check                   | &check; 61. Linked List Construction         | &cross; 101. Boggle Board                  | &cross; 141. Longest String Chain                  |
 | &check; 22. Caesar Cipher Encryptor            | &check; 62. Remove Nth Node From End         | &cross; 102. Continuous Median             | &cross; 142. Square Of Zeroes                      |
 | &check; 23. Run-Length Encoding                | &check; 63. Sum Of Linked Lists              | &check; 103. Sort K-Sorted Array           | &cross; 143. Knuth–Morris–Pratt                    |
@@ -3920,6 +3920,208 @@ public static List<Integer[]> buildSequence(List<Integer[]> array, int[] sequenc
       return heap.size() == 0;
     }
   }
+```
+
+---
+
+### 100: Topological Sort:
+
+```java
+  /**
+   * * DFS Approach
+   *
+   * * TC: O(v + e)
+   * * SC: O(v)
+   */
+  public static List<Integer> topologicalSort(List<Integer> jobs, List<Integer[]> deps) {
+    return getOrderedJobs(createJobGraph(jobs, deps));
+  }
+
+  private static JobGraph createJobGraph(List<Integer> jobs, List<Integer[]> deps) {
+    JobGraph graph = new JobGraph(jobs);
+    for (Integer[] dep : deps) graph.addPrerequisite(dep[1], dep[0]);
+
+    return graph;
+  }
+
+  private static List<Integer> getOrderedJobs(JobGraph graph) {
+    List<Integer> orderedJobs = new ArrayList<>();
+    List<JobNode> nodes = new ArrayList<>(graph.nodes);
+    boolean hasCycle = false;
+
+    while (nodes.size() > 0) {
+      JobNode currentNode = nodes.remove(nodes.size() - 1);
+      hasCycle = depthFirstTraversal(currentNode, orderedJobs);
+
+      if (hasCycle) return new ArrayList<>();
+    }
+
+    return orderedJobs;
+  }
+
+  private static boolean depthFirstTraversal(JobNode node, List<Integer> orderedJobs) {
+    if (node.isVisited) return false;
+
+    if (node.isVisiting) return true;
+
+    node.isVisiting = true;
+    for (JobNode prerequisiteNode : node.prerequisites) {
+      boolean hasCycle = depthFirstTraversal(prerequisiteNode, orderedJobs);
+
+      if (hasCycle) return true;
+    }
+
+    node.isVisited = true;
+    node.isVisiting = false;
+    orderedJobs.add(node.job);
+    return false;
+  }
+
+  static class JobGraph {
+    List<JobNode> nodes;
+    Map<Integer, JobNode> graph;
+
+    public JobGraph(List<Integer> jobs) {
+      nodes = new ArrayList<>();
+      graph = new HashMap<>();
+      for (int job : jobs) addNode(job);
+    }
+
+    public void addPrerequisite(int job, int prerequisite) {
+      JobNode jobNode = getNode(job);
+      JobNode prerequisiteNode = getNode(prerequisite);
+
+      jobNode.prerequisites.add(prerequisiteNode);
+    }
+
+    private void addNode(int job) {
+      graph.put(job, new JobNode(job));
+      nodes.add(graph.get(job));
+    }
+
+    private JobNode getNode(int job) {
+      if (!graph.containsKey(job)) addNode(job);
+
+      return graph.get(job);
+    }
+  }
+
+  static class JobNode {
+    int job;
+    List<JobNode> prerequisites;
+    boolean isVisited;
+    boolean isVisiting;
+
+    public JobNode(int job) {
+      this.job = job;
+      prerequisites = new ArrayList<>();
+      isVisited = false;
+      isVisiting = false;
+    }
+  }
+
+  /**
+   * * Keeping Track of Dependencies Approach
+   *
+   * * TC: O(v + e)
+   * * SC: O(v)
+   */
+  // public static List<Integer> topologicalSort(
+  // 	List<Integer> jobs, List<Integer[]> deps
+  // ) {
+  // 	return getOrderedJobs(createJobGraph(jobs, deps));
+  // }
+
+  // private static JobGraph createJobGraph(
+  // 	List<Integer> jobs, List<Integer[]> deps
+  // ) {
+  // 	JobGraph graph = new JobGraph(jobs);
+  // 	for (Integer[] dep : deps) graph.addDependency(dep[0], dep[1]);
+
+  // 	return graph;
+  // }
+
+  // private static List<Integer> getOrderedJobs(JobGraph graph) {
+  // 	List<Integer> orderedJobs = new ArrayList<>();
+  // 	List<JobNode> nodesWithNoPrereqs = filter(graph.nodes);
+
+  // 	while (nodesWithNoPrereqs.size() > 0) {
+  // 		JobNode currentNode =
+  // 			nodesWithNoPrereqs.remove(nodesWithNoPrereqs.size() - 1);
+  // 		orderedJobs.add(currentNode.job);
+  // 		removeDependencies(currentNode, nodesWithNoPrereqs);
+  // 	}
+
+  // 	return graphHasEdges(graph.nodes) ? new ArrayList<>() : orderedJobs;
+  // }
+
+  // private static List<JobNode> filter(List<JobNode> nodes) {
+  // 	List<JobNode> filteredNodes = new ArrayList<>();
+  // 	for (JobNode node : nodes) {
+  // 		if (node.numberOfPrerequisites == 0) filteredNodes.add(node);
+  // 	}
+
+  // 	return filteredNodes;
+  // }
+
+  // private static void removeDependencies(
+  // 	JobNode node, List<JobNode> nodesWithNoPrereqs
+  // ) {
+  // 	while (node.dependencies.size() > 0) {
+  // 		JobNode dep = node.dependencies.remove(node.dependencies.size() - 1);
+  // 		dep.numberOfPrerequisites--;
+  // 		if (dep.numberOfPrerequisites == 0) nodesWithNoPrereqs.add(dep);
+  // 	}
+  // }
+
+  // private static boolean graphHasEdges(List<JobNode> nodes) {
+  // 	for (JobNode node : nodes)
+  // 		if (node.numberOfPrerequisites > 0) return true;
+
+  // 	return false;
+  // }
+
+  // static class JobGraph {
+  // 	List<JobNode> nodes;
+  // 	Map<Integer, JobNode> graph;
+
+  // 	public JobGraph(List<Integer> jobs) {
+  // 		nodes = new ArrayList<>();
+  // 		graph = new HashMap<>();
+  // 		for (int job : jobs) addNode(job);
+  // 	}
+
+  // 	public void addDependency(int job, int dependency) {
+  // 		JobNode jobNode = getNode(job);
+  // 		JobNode depNode = getNode(dependency);
+
+  // 		jobNode.dependencies.add(depNode);
+  // 		depNode.numberOfPrerequisites++;
+  // 	}
+
+  // 	private void addNode(int job) {
+  // 		graph.put(job, new JobNode(job));
+  // 		nodes.add(graph.get(job));
+  // 	}
+
+  // 	private JobNode getNode(int job) {
+  // 		if (!graph.containsKey(job)) addNode(job);
+
+  // 		return graph.get(job);
+  // 	}
+  // }
+
+  // static class JobNode {
+  // 	int job;
+  // 	List<JobNode> dependencies;
+  // 	int numberOfPrerequisites;
+
+  // 	public JobNode(int job) {
+  // 		this.job = job;
+  // 		dependencies = new ArrayList<>();
+  // 		numberOfPrerequisites = 0;
+  // 	}
+  // }
 ```
 
 ---
