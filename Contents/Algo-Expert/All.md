@@ -2,7 +2,7 @@
 
 | Problem Name                                   | Problem Name                                 | Problem Name                               | Problem Name                                       |
 | ---------------------------------------------- | -------------------------------------------- | ------------------------------------------ | -------------------------------------------------- |
-| &check; 1. Two Number Sum                      | &check; 41. Invert Binary Tree               | &check; 81. Four Number Sum                | &cross; 121. Shorten Path                          |
+| &check; 1. Two Number Sum                      | &check; 41. Invert Binary Tree               | &check; 81. Four Number Sum                | &check; 121. Shorten Path                          |
 | &check; 2. Validate Subsequence                | &check; 42. Binary Tree Diameter             | &check; 82. Subarray Sort                  | &cross; 122. Largest Rectangle Under Skyline       |
 | &check; 3. Sorted Squared Array                | &check; 43. Find Successor                   | &check; 83. Largest Range                  | &cross; 123. Longest Substring Without Duplication |
 | &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &check; 84. Min Rewards                    | &cross; 124. Underscorify Substring                |
@@ -23,7 +23,7 @@
 | &check; 19. Insertion Sort                     | &check; 59. Valid Starting City              | &check; 99. Dijkstra's Algorithm           | &cross; 139. Palindrome Partitioning Min Cuts      |
 | &check; 20. Selection Sort                     | &check; 60. Min Heap Construction            | &check; 100. Topological Sort              | &cross; 140. Longest Increasing Subsequence        |
 | &check; 21. Palindrome Check                   | &check; 61. Linked List Construction         | &cross; 101. Boggle Board                  | &cross; 141. Longest String Chain                  |
-| &check; 22. Caesar Cipher Encryptor            | &check; 62. Remove Nth Node From End         | &cross; 102. Continuous Median             | &cross; 142. Square Of Zeroes                      |
+| &check; 22. Caesar Cipher Encryptor            | &check; 62. Remove Nth Node From End         | &check; 102. Continuous Median             | &cross; 142. Square Of Zeroes                      |
 | &check; 23. Run-Length Encoding                | &check; 63. Sum Of Linked Lists              | &check; 103. Sort K-Sorted Array           | &cross; 143. Knuth–Morris–Pratt                    |
 | &check; 24. Generate Document                  | &check; 64. Permutations                     | &cross; 104. Laptop Rentals                | &cross; 144. A-Star Algorithm                      |
 | &check; 25. First Non-Repeating Character      | &check; 65. Powerset                         | &cross; 105. Find Loop                     | &cross; 145. Rectangle Mania                       |
@@ -4122,6 +4122,49 @@ public static List<Integer[]> buildSequence(List<Integer[]> array, int[] sequenc
   // 		numberOfPrerequisites = 0;
   // 	}
   // }
+```
+
+---
+
+### 102. Continuous Median:
+
+```java
+ // TC: O(log n), SC: O(n)
+  static class ContinuousMedianHandler {
+    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+    PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+    double median = 0;
+
+    public void insert(int number) {
+      if (maxHeap.isEmpty() || number < maxHeap.peek()) maxHeap.add(number);
+      else minHeap.add(number);
+
+      reBalanceHeaps();
+      updateMedian();
+    }
+
+    private void reBalanceHeaps() {
+      if (maxHeap.size() - minHeap.size() == 2) minHeap.add(maxHeap.poll());
+      else if (minHeap.size() - maxHeap.size() == 2) maxHeap.add(minHeap.poll());
+    }
+
+    private void updateMedian() {
+      if (maxHeap.size() == minHeap.size()) calcEvenMedian();
+      else calcOddMedian();
+    }
+
+    private void calcEvenMedian() {
+      median = (double) (minHeap.peek() + maxHeap.peek()) / 2;
+    }
+
+    private void calcOddMedian() {
+      median = maxHeap.size() > minHeap.size() ? maxHeap.peek() : minHeap.peek();
+    }
+
+    public double getMedian() {
+      return median;
+    }
+  }
 ```
 
 ---
