@@ -3,7 +3,7 @@
 | Problem Name                                   | Problem Name                                 | Problem Name                               | Problem Name                                       |
 | ---------------------------------------------- | -------------------------------------------- | ------------------------------------------ | -------------------------------------------------- |
 | &check; 1. Two Number Sum                      | &check; 41. Invert Binary Tree               | &check; 81. Four Number Sum                | &check; 121. Shorten Path                          |
-| &check; 2. Validate Subsequence                | &check; 42. Binary Tree Diameter             | &check; 82. Subarray Sort                  | &cross; 122. Largest Rectangle Under Skyline       |
+| &check; 2. Validate Subsequence                | &check; 42. Binary Tree Diameter             | &check; 82. Subarray Sort                  | &check; 122. Largest Rectangle Under Skyline       |
 | &check; 3. Sorted Squared Array                | &check; 43. Find Successor                   | &check; 83. Largest Range                  | &cross; 123. Longest Substring Without Duplication |
 | &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &check; 84. Min Rewards                    | &cross; 124. Underscorify Substring                |
 | &check; 5. Non-Constructible Change            | &check; 45. Max Subset Sum No Adjacent       | &check; 85. Zigzag Traverse                | &cross; 125. Pattern Matcher                       |
@@ -4353,5 +4353,31 @@ public static LinkedList reverseLinkedList(LinkedList head) {
       this.lowestCommonManager = lowestCommonManager;
       this.numberOfImpReports = numberOfImpReports;
     }
+  }
+```
+
+### 122. Largest Rectangle Under Skyline:
+
+```java
+  /* TC: O(n) , SC: O(n) */
+  public int largestRectangleUnderSkyline(ArrayList<Integer> buildings) {
+    List<Integer> extendedBuildings = new ArrayList<>(buildings);
+    extendedBuildings.add(0);
+    Stack<Integer> stack = new Stack<>();
+    int maxArea = 0;
+
+    for (int idx = 0; idx < extendedBuildings.size(); idx++) {
+      int currentHeight = extendedBuildings.get(idx);
+
+      while (!stack.isEmpty() && currentHeight < extendedBuildings.get(stack.peek())) {
+        int previousHeight = extendedBuildings.get(stack.pop());
+        int width = stack.isEmpty() ? idx : idx - stack.peek() - 1;
+        maxArea = Math.max(maxArea, width * previousHeight);
+      }
+
+      stack.push(idx);
+    }
+
+    return maxArea;
   }
 ```
