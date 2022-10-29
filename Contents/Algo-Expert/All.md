@@ -2,8 +2,8 @@
 
 | Problem Name                                   | Problem Name                                 | Problem Name                               | Problem Name                                       |
 | ---------------------------------------------- | -------------------------------------------- | ------------------------------------------ | -------------------------------------------------- |
-| &check; 1. Two Number Sum                      | &check; 41. Invert Binary Tree               | &check; 81. Four Number Sum                | &cross; 121. Shorten Path                          |
-| &check; 2. Validate Subsequence                | &check; 42. Binary Tree Diameter             | &check; 82. Subarray Sort                  | &cross; 122. Largest Rectangle Under Skyline       |
+| &check; 1. Two Number Sum                      | &check; 41. Invert Binary Tree               | &check; 81. Four Number Sum                | &check; 121. Shorten Path                          |
+| &check; 2. Validate Subsequence                | &check; 42. Binary Tree Diameter             | &check; 82. Subarray Sort                  | &check; 122. Largest Rectangle Under Skyline       |
 | &check; 3. Sorted Squared Array                | &check; 43. Find Successor                   | &check; 83. Largest Range                  | &cross; 123. Longest Substring Without Duplication |
 | &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &check; 84. Min Rewards                    | &cross; 124. Underscorify Substring                |
 | &check; 5. Non-Constructible Change            | &check; 45. Max Subset Sum No Adjacent       | &check; 85. Zigzag Traverse                | &cross; 125. Pattern Matcher                       |
@@ -20,10 +20,10 @@
 | &check; 16. Binary Search                      | &check; 56. Cycle In Graph                   | &check; 96. Numbers In Pi                  | &cross; 136. All Kinds Of Node Depths              |
 | &check; 17. Find Three Largest Numbers         | &check; 57. Minimum Passes Of Matrix         | &check; 97. Maximum Sum Submatrix          | &cross; 137. Compare Leaf Traversal.mp4            |
 | &check; 18. Bubble Sort                        | &check; 58. Task Assignment                  | &check; 98. Maximize Expression            | &cross; 138. Max Profit With K Transactions        |
-| &check; 19. Insertion Sort                     | &check; 59. Valid Starting City              | &cross; 99. Dijkstra's Algorithm           | &cross; 139. Palindrome Partitioning Min Cuts      |
-| &check; 20. Selection Sort                     | &check; 60. Min Heap Construction            | &cross; 100. Topological Sort              | &cross; 140. Longest Increasing Subsequence        |
+| &check; 19. Insertion Sort                     | &check; 59. Valid Starting City              | &check; 99. Dijkstra's Algorithm           | &cross; 139. Palindrome Partitioning Min Cuts      |
+| &check; 20. Selection Sort                     | &check; 60. Min Heap Construction            | &check; 100. Topological Sort              | &cross; 140. Longest Increasing Subsequence        |
 | &check; 21. Palindrome Check                   | &check; 61. Linked List Construction         | &cross; 101. Boggle Board                  | &cross; 141. Longest String Chain                  |
-| &check; 22. Caesar Cipher Encryptor            | &check; 62. Remove Nth Node From End         | &cross; 102. Continuous Median             | &cross; 142. Square Of Zeroes                      |
+| &check; 22. Caesar Cipher Encryptor            | &check; 62. Remove Nth Node From End         | &check; 102. Continuous Median             | &cross; 142. Square Of Zeroes                      |
 | &check; 23. Run-Length Encoding                | &check; 63. Sum Of Linked Lists              | &check; 103. Sort K-Sorted Array           | &cross; 143. Knuth–Morris–Pratt                    |
 | &check; 24. Generate Document                  | &check; 64. Permutations                     | &cross; 104. Laptop Rentals                | &cross; 144. A-Star Algorithm                      |
 | &check; 25. First Non-Repeating Character      | &check; 65. Powerset                         | &cross; 105. Find Loop                     | &cross; 145. Rectangle Mania                       |
@@ -41,7 +41,7 @@
 | &check;37. BST Traversal                       | &check; 77. Valid IP Addresses               | &cross; 117. Index Equals Value            | &cross; 157. Merge Sort                            |
 | &check;38. Min Height BST                      | &check; 78. Reverse Words In String          | &cross; 118. Quick Sort                    | &cross; 158. Count Inversions                      |
 | &check;39. Find Kth Largest Value In BST       | &check; 79. Minimum Characters For Words     | &cross; 119. Heap Sort                     | &cross; 159. Smallest Substring Containing         |
-| &check;40. Reconstruct BST                     | &cross; 80. Suffix Trie Construction         | &cross; 120. Radix Sort                    | &cross; 160. Longest Balanced Substring            |
+| &check;40. Reconstruct BST                     | &check; 80. Suffix Trie Construction         | &cross; 120. Radix Sort                    | &cross; 160. Longest Balanced Substring            |
 
 </br>
 
@@ -2545,6 +2545,55 @@ public String reverseWordsInString(String string) {
 
 ---
 
+### 80. Suffix Trie Construction:
+
+```java
+ static class TrieNode {
+    Map<Character, TrieNode> children = new HashMap<Character, TrieNode>();
+  }
+
+  static class SuffixTrie {
+    TrieNode root = new TrieNode();
+    char endSymbol = '*';
+
+    public SuffixTrie(String str) {
+      populateSuffixTrieFrom(str);
+    }
+
+    private void insertSubstringStartingAt(int idx, String str) {
+      TrieNode node = root;
+
+      for (char letter : str.substring(idx).toCharArray()) {
+        if (!node.children.containsKey(letter)) node.children.put(letter, new TrieNode());
+
+        node = node.children.get(letter);
+      }
+
+      node.children.put(endSymbol, null);
+    }
+
+    // O(n^2) time | O(n^2) space
+    public void populateSuffixTrieFrom(String str) {
+      for (int idx = 0; idx < str.length(); idx++) insertSubstringStartingAt(idx, str);
+    }
+
+    // O(m) time | O(1) space
+    public boolean contains(String str) {
+      TrieNode node = root;
+
+      for (char letter : str.toCharArray()) {
+        if (!node.children.containsKey(letter)) return false;
+
+        node = node.children.get(letter);
+      }
+
+      return node.children.containsKey(endSymbol);
+    }
+  }
+```
+
+---
+
 ### 81. Four(K) Number Sum:</br>
 
 **Problem**: Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
@@ -3662,6 +3711,464 @@ public static List<Integer[]> buildSequence(List<Integer[]> array, int[] sequenc
 
 ---
 
+### 99. Dijkstra's Algorithm:
+
+```java
+  /**
+   * * O((v + e) * log v) time | O(v) space
+   */
+  public int[] dijkstrasAlgorithm(int start, int[][][] edges) {
+    // Write your code here.
+    int len = edges.length;
+
+    int[] minDistances = new int[len];
+    Arrays.fill(minDistances, Integer.MAX_VALUE);
+    minDistances[start] = 0;
+
+    List<Item> minDistancesPairs = new ArrayList<>();
+    for (int i = 0; i < len; i++) minDistancesPairs.add(new Item(i, Integer.MAX_VALUE));
+
+    MinHeap minHeap = new MinHeap(minDistancesPairs);
+    minHeap.update(start, 0);
+
+    while (!minHeap.isEmpty()) {
+      Item minItem = minHeap.remove();
+      int srcVertex = minItem.vertex;
+      int currentMinDistance = minItem.distance;
+
+      if (currentMinDistance == Integer.MAX_VALUE) break;
+
+      for (int[] edge : edges[srcVertex]) {
+        int destVertex = edge[0];
+        int newPathDistance = edge[1] + currentMinDistance;
+
+        if (newPathDistance < minDistances[destVertex]) {
+          minDistances[destVertex] = newPathDistance;
+          minHeap.update(destVertex, newPathDistance);
+        }
+      }
+    }
+
+    replaceInfinities(minDistances);
+
+    return minDistances;
+  }
+
+  /**
+   * * O(v^2) time | O(v) space
+   */
+  // public int[] dijkstrasAlgorithm(int start, int[][][] edges) {
+  // 	int[] minDistances = new int[edges.length];
+  // 	Arrays.fill(minDistances, Integer.MAX_VALUE);
+  // 	minDistances[start] = 0;
+
+  // 	Set<Integer> visited = new HashSet<>();
+
+  // 	while (visited.size() != edges.length) {
+  // 		int[] vertexInfo = getVertexWithMinDistance(minDistances, visited);
+  // 		int srcVertex = vertexInfo[0], currentMinDistance = vertexInfo[1];
+
+  // 		if (currentMinDistance == Integer.MAX_VALUE) break;
+
+  // 		visited.add(srcVertex);
+
+  // 		for (int[] edge : edges[srcVertex]) {
+  // 			int destVertex = edge[0], newPathDistance = edge[1] + currentMinDistance;
+
+  // 			if (visited.contains(destVertex)) continue;
+
+  // 			if (newPathDistance < minDistances[destVertex])
+  // 				minDistances[destVertex] = newPathDistance;
+  // 		}
+  // 	}
+
+  // 	replaceInfinities(minDistances);
+
+  //   return minDistances;
+  // }
+
+  // private int[] getVertexWithMinDistance(int[] distances, Set<Integer> visited) {
+  // 	int minVertex = -1, minDistance = Integer.MAX_VALUE;
+
+  // 	for (int vertex = 0; vertex < distances.length; vertex++) {
+  // 		if (visited.contains(vertex)) continue;
+
+  // 		if (distances[vertex] <= minDistance) {
+  // 			minDistance = distances[vertex];
+  // 			minVertex = vertex;
+  // 		}
+  // 	}
+
+  // 	return new int[] {minVertex, minDistance};
+  // }
+
+  private void replaceInfinities(int[] distances) {
+    for (int idx = 0; idx < distances.length; idx++) {
+      if (distances[idx] == Integer.MAX_VALUE) distances[idx] = -1;
+    }
+  }
+
+  static class Item {
+    int vertex;
+    int distance;
+
+    public Item(int vertex, int distance) {
+      this.vertex = vertex;
+      this.distance = distance;
+    }
+  }
+
+  static class MinHeap {
+    Map<Integer, Integer> vertexMap;
+    List<Item> heap;
+
+    public MinHeap(List<Item> array) {
+      vertexMap = buildVertexMap(array);
+      heap = buildHeap(array);
+    }
+
+    private List<Item> buildHeap(List<Item> array) {
+      int lastParentIdx = parent(array.size() - 1);
+
+      while (lastParentIdx >= 0) {
+        siftDown(lastParentIdx, array.size() - 1, array);
+        --lastParentIdx;
+      }
+
+      return array;
+    }
+
+    private Map<Integer, Integer> buildVertexMap(List<Item> array) {
+      Map<Integer, Integer> vertexMap = new HashMap<>();
+
+      for (int i = 0; i < array.size(); i++) {
+        Item item = array.get(i);
+        vertexMap.put(item.vertex, item.vertex);
+      }
+
+      return vertexMap;
+    }
+
+    private int parent(int index) {
+      return (int) Math.floor((index - 1) / 2);
+    }
+
+    private int left(int index) {
+      return (int) Math.floor((2 * index) + 1);
+    }
+
+    private int right(int index) {
+      return (int) Math.floor((2 * index) + 2);
+    }
+
+    private void swap(int firstIdx, int secondIdx) {
+      vertexMap.put(heap.get(firstIdx).vertex, secondIdx);
+      vertexMap.put(heap.get(secondIdx).vertex, firstIdx);
+      Item temp = heap.get(firstIdx);
+      heap.set(firstIdx, heap.get(secondIdx));
+      heap.set(secondIdx, temp);
+    }
+
+    private void siftDown(int currentIdx, int endIdx, List<Item> heap) {
+      int leftIdx = left(currentIdx);
+      int rightIdx = right(currentIdx);
+      int smallestIdx = currentIdx;
+
+      if (leftIdx <= endIdx && heap.get(leftIdx).distance < heap.get(currentIdx).distance)
+        smallestIdx = leftIdx;
+
+      if (rightIdx <= endIdx && heap.get(rightIdx).distance < heap.get(smallestIdx).distance)
+        smallestIdx = rightIdx;
+
+      if (smallestIdx != currentIdx) {
+        swap(currentIdx, smallestIdx);
+        siftDown(smallestIdx, endIdx, heap);
+      }
+    }
+
+    private void siftUp(int currentIdx, List<Item> heap) {
+      int parentIdx = parent(currentIdx);
+      while (currentIdx > 0 && heap.get(parentIdx).distance > heap.get(currentIdx).distance) {
+        swap(currentIdx, parentIdx);
+        currentIdx = parentIdx;
+        parentIdx = parent(currentIdx);
+      }
+    }
+
+    public Item peek() {
+      return heap.get(0);
+    }
+
+    public Item remove() {
+      if (isEmpty()) return null;
+
+      swap(0, heap.size() - 1);
+      Item lastItem = heap.remove(heap.size() - 1);
+
+      vertexMap.remove(lastItem.vertex);
+      siftDown(0, heap.size() - 1, heap);
+
+      return lastItem;
+    }
+
+    public void update(int vertex, int value) {
+      heap.set(vertexMap.get(vertex), new Item(vertex, value));
+      siftUp(vertexMap.get(vertex), heap);
+    }
+
+    public boolean isEmpty() {
+      return heap.size() == 0;
+    }
+  }
+```
+
+---
+
+### 100: Topological Sort:
+
+```java
+  /**
+   * * DFS Approach
+   *
+   * * TC: O(v + e)
+   * * SC: O(v)
+   */
+  public static List<Integer> topologicalSort(List<Integer> jobs, List<Integer[]> deps) {
+    return getOrderedJobs(createJobGraph(jobs, deps));
+  }
+
+  private static JobGraph createJobGraph(List<Integer> jobs, List<Integer[]> deps) {
+    JobGraph graph = new JobGraph(jobs);
+    for (Integer[] dep : deps) graph.addPrerequisite(dep[1], dep[0]);
+
+    return graph;
+  }
+
+  private static List<Integer> getOrderedJobs(JobGraph graph) {
+    List<Integer> orderedJobs = new ArrayList<>();
+    List<JobNode> nodes = new ArrayList<>(graph.nodes);
+    boolean hasCycle = false;
+
+    while (nodes.size() > 0) {
+      JobNode currentNode = nodes.remove(nodes.size() - 1);
+      hasCycle = depthFirstTraversal(currentNode, orderedJobs);
+
+      if (hasCycle) return new ArrayList<>();
+    }
+
+    return orderedJobs;
+  }
+
+  private static boolean depthFirstTraversal(JobNode node, List<Integer> orderedJobs) {
+    if (node.isVisited) return false;
+
+    if (node.isVisiting) return true;
+
+    node.isVisiting = true;
+    for (JobNode prerequisiteNode : node.prerequisites) {
+      boolean hasCycle = depthFirstTraversal(prerequisiteNode, orderedJobs);
+
+      if (hasCycle) return true;
+    }
+
+    node.isVisited = true;
+    node.isVisiting = false;
+    orderedJobs.add(node.job);
+    return false;
+  }
+
+  static class JobGraph {
+    List<JobNode> nodes;
+    Map<Integer, JobNode> graph;
+
+    public JobGraph(List<Integer> jobs) {
+      nodes = new ArrayList<>();
+      graph = new HashMap<>();
+      for (int job : jobs) addNode(job);
+    }
+
+    public void addPrerequisite(int job, int prerequisite) {
+      JobNode jobNode = getNode(job);
+      JobNode prerequisiteNode = getNode(prerequisite);
+
+      jobNode.prerequisites.add(prerequisiteNode);
+    }
+
+    private void addNode(int job) {
+      graph.put(job, new JobNode(job));
+      nodes.add(graph.get(job));
+    }
+
+    private JobNode getNode(int job) {
+      if (!graph.containsKey(job)) addNode(job);
+
+      return graph.get(job);
+    }
+  }
+
+  static class JobNode {
+    int job;
+    List<JobNode> prerequisites;
+    boolean isVisited;
+    boolean isVisiting;
+
+    public JobNode(int job) {
+      this.job = job;
+      prerequisites = new ArrayList<>();
+      isVisited = false;
+      isVisiting = false;
+    }
+  }
+
+  /**
+   * * Keeping Track of Dependencies Approach
+   *
+   * * TC: O(v + e)
+   * * SC: O(v)
+   */
+  // public static List<Integer> topologicalSort(
+  // 	List<Integer> jobs, List<Integer[]> deps
+  // ) {
+  // 	return getOrderedJobs(createJobGraph(jobs, deps));
+  // }
+
+  // private static JobGraph createJobGraph(
+  // 	List<Integer> jobs, List<Integer[]> deps
+  // ) {
+  // 	JobGraph graph = new JobGraph(jobs);
+  // 	for (Integer[] dep : deps) graph.addDependency(dep[0], dep[1]);
+
+  // 	return graph;
+  // }
+
+  // private static List<Integer> getOrderedJobs(JobGraph graph) {
+  // 	List<Integer> orderedJobs = new ArrayList<>();
+  // 	List<JobNode> nodesWithNoPrereqs = filter(graph.nodes);
+
+  // 	while (nodesWithNoPrereqs.size() > 0) {
+  // 		JobNode currentNode =
+  // 			nodesWithNoPrereqs.remove(nodesWithNoPrereqs.size() - 1);
+  // 		orderedJobs.add(currentNode.job);
+  // 		removeDependencies(currentNode, nodesWithNoPrereqs);
+  // 	}
+
+  // 	return graphHasEdges(graph.nodes) ? new ArrayList<>() : orderedJobs;
+  // }
+
+  // private static List<JobNode> filter(List<JobNode> nodes) {
+  // 	List<JobNode> filteredNodes = new ArrayList<>();
+  // 	for (JobNode node : nodes) {
+  // 		if (node.numberOfPrerequisites == 0) filteredNodes.add(node);
+  // 	}
+
+  // 	return filteredNodes;
+  // }
+
+  // private static void removeDependencies(
+  // 	JobNode node, List<JobNode> nodesWithNoPrereqs
+  // ) {
+  // 	while (node.dependencies.size() > 0) {
+  // 		JobNode dep = node.dependencies.remove(node.dependencies.size() - 1);
+  // 		dep.numberOfPrerequisites--;
+  // 		if (dep.numberOfPrerequisites == 0) nodesWithNoPrereqs.add(dep);
+  // 	}
+  // }
+
+  // private static boolean graphHasEdges(List<JobNode> nodes) {
+  // 	for (JobNode node : nodes)
+  // 		if (node.numberOfPrerequisites > 0) return true;
+
+  // 	return false;
+  // }
+
+  // static class JobGraph {
+  // 	List<JobNode> nodes;
+  // 	Map<Integer, JobNode> graph;
+
+  // 	public JobGraph(List<Integer> jobs) {
+  // 		nodes = new ArrayList<>();
+  // 		graph = new HashMap<>();
+  // 		for (int job : jobs) addNode(job);
+  // 	}
+
+  // 	public void addDependency(int job, int dependency) {
+  // 		JobNode jobNode = getNode(job);
+  // 		JobNode depNode = getNode(dependency);
+
+  // 		jobNode.dependencies.add(depNode);
+  // 		depNode.numberOfPrerequisites++;
+  // 	}
+
+  // 	private void addNode(int job) {
+  // 		graph.put(job, new JobNode(job));
+  // 		nodes.add(graph.get(job));
+  // 	}
+
+  // 	private JobNode getNode(int job) {
+  // 		if (!graph.containsKey(job)) addNode(job);
+
+  // 		return graph.get(job);
+  // 	}
+  // }
+
+  // static class JobNode {
+  // 	int job;
+  // 	List<JobNode> dependencies;
+  // 	int numberOfPrerequisites;
+
+  // 	public JobNode(int job) {
+  // 		this.job = job;
+  // 		dependencies = new ArrayList<>();
+  // 		numberOfPrerequisites = 0;
+  // 	}
+  // }
+```
+
+---
+
+### 102. Continuous Median:
+
+```java
+ // TC: O(log n), SC: O(n)
+  static class ContinuousMedianHandler {
+    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+    PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+    double median = 0;
+
+    public void insert(int number) {
+      if (maxHeap.isEmpty() || number < maxHeap.peek()) maxHeap.add(number);
+      else minHeap.add(number);
+
+      reBalanceHeaps();
+      updateMedian();
+    }
+
+    private void reBalanceHeaps() {
+      if (maxHeap.size() - minHeap.size() == 2) minHeap.add(maxHeap.poll());
+      else if (minHeap.size() - maxHeap.size() == 2) maxHeap.add(minHeap.poll());
+    }
+
+    private void updateMedian() {
+      if (maxHeap.size() == minHeap.size()) calcEvenMedian();
+      else calcOddMedian();
+    }
+
+    private void calcEvenMedian() {
+      median = (double) (minHeap.peek() + maxHeap.peek()) / 2;
+    }
+
+    private void calcOddMedian() {
+      median = maxHeap.size() > minHeap.size() ? maxHeap.peek() : minHeap.peek();
+    }
+
+    public double getMedian() {
+      return median;
+    }
+  }
+```
+
+---
+
 ### 103: Sort k sorted array:
 
 ```java
@@ -3846,5 +4353,31 @@ public static LinkedList reverseLinkedList(LinkedList head) {
       this.lowestCommonManager = lowestCommonManager;
       this.numberOfImpReports = numberOfImpReports;
     }
+  }
+```
+
+### 122. Largest Rectangle Under Skyline:
+
+```java
+  /* TC: O(n) , SC: O(n) */
+  public int largestRectangleUnderSkyline(ArrayList<Integer> buildings) {
+    List<Integer> extendedBuildings = new ArrayList<>(buildings);
+    extendedBuildings.add(0);
+    Stack<Integer> stack = new Stack<>();
+    int maxArea = 0;
+
+    for (int idx = 0; idx < extendedBuildings.size(); idx++) {
+      int currentHeight = extendedBuildings.get(idx);
+
+      while (!stack.isEmpty() && currentHeight < extendedBuildings.get(stack.peek())) {
+        int previousHeight = extendedBuildings.get(stack.pop());
+        int width = stack.isEmpty() ? idx : idx - stack.peek() - 1;
+        maxArea = Math.max(maxArea, width * previousHeight);
+      }
+
+      stack.push(idx);
+    }
+
+    return maxArea;
   }
 ```
