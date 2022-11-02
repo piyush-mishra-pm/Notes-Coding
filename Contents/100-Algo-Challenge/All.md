@@ -21,3 +21,16 @@ function absoluteValuesSumMinimization(arr:number[]):number{
 ```
 ---
 
+### 2: Add indefinite number of values:
+Write a function that returns the sum of all numbers regardless of # of params.
+```typescript
+function addIndefinite(...nums:number[]):number{
+    let sum = 0;
+    forEach((n)=>{
+        sum+=n;
+    })
+    return total;
+}
+```
+
+---
