@@ -34,3 +34,37 @@ function addIndefinite(...nums:number[]):number{
 ```
 
 ---
+### 3: Add Rectangular border to arrays of text:
+Given a rectangular matrix of characters, add a border of asterisks(*) to it.
+
+**Example**
+
+For
+
+    picture = ["abc",
+           "ded"]
+the output should be
+
+    addBorder(picture) = ["*****",
+                      "*abc*",
+                      "*ded*",
+                      "*****"]
+
+```typescript
+function addBorder(words:string[]):string[]{
+    const horizontalBorder = "*".repeat(words[0].length+2);
+
+    // adding horizontal borders: top and bottom:
+    //  Top border:
+    words.unshift(horizontalBorder);
+    //  Bottom border:
+    words.push(horizontalBorder);
+
+    // adding Vertical borders: * on both ends of each word.
+    for(let i=1; i<words.length-1; i++){
+        words[i] = "*".concat(words[i],"*");
+    }
+
+    return words;
+}
+```
