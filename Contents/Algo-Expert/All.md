@@ -4,7 +4,7 @@
 | ---------------------------------------------- | -------------------------------------------- | ------------------------------------------ | -------------------------------------------------- |
 | &check; 1. Two Number Sum                      | &check; 41. Invert Binary Tree               | &check; 81. Four Number Sum                | &check; 121. Shorten Path                          |
 | &check; 2. Validate Subsequence                | &check; 42. Binary Tree Diameter             | &check; 82. Subarray Sort                  | &check; 122. Largest Rectangle Under Skyline       |
-| &check; 3. Sorted Squared Array                | &check; 43. Find Successor                   | &check; 83. Largest Range                  | &cross; 123. Longest Substring Without Duplication |
+| &check; 3. Sorted Squared Array                | &check; 43. Find Successor                   | &check; 83. Largest Range                  | &check; 123. Longest Substring Without Duplication |
 | &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &check; 84. Min Rewards                    | &cross; 124. Underscorify Substring                |
 | &check; 5. Non-Constructible Change            | &check; 45. Max Subset Sum No Adjacent       | &check; 85. Zigzag Traverse                | &cross; 125. Pattern Matcher                       |
 | &check; 6. Find Closest Value In BST           | &check; 46. Number Of Ways To Make Change    | &check; 86. Same BSTs                      | &cross; 126. Multi String Search                   |
@@ -4379,5 +4379,44 @@ public static LinkedList reverseLinkedList(LinkedList head) {
     }
 
     return maxArea;
+  }
+```
+
+---
+
+### 123. Longest Substring :
+
+```java
+   // Sliding Window Approach TC: O(n) , SC: O(min(n, substring))
+  public static String longestSubstringWithoutDuplication(String str) {
+    Map<Character, Boolean> map = new HashMap<>();
+    int start = 0, end = 0;
+    int[] longestSubstringPosition = new int[] {0, 0};
+
+    while (end < str.length()) {
+      char currChar = str.charAt(end);
+      if (map.containsKey(currChar)) {
+        updateLongestSubstringPosition(start, end, longestSubstringPosition);
+        map.remove(str.charAt(start++));
+      } else {
+        map.put(currChar, true);
+        ++end;
+      }
+    }
+
+    updateLongestSubstringPosition(start, end, longestSubstringPosition);
+
+    return str.substring(longestSubstringPosition[0], longestSubstringPosition[1]);
+  }
+
+  private static void updateLongestSubstringPosition(
+      int start, int end, int[] longestSubstringPosition) {
+    int currentLength = end - start;
+    int maxLength = longestSubstringPosition[1] - longestSubstringPosition[0];
+
+    if (currentLength > maxLength) {
+      longestSubstringPosition[0] = start;
+      longestSubstringPosition[1] = end;
+    }
   }
 ```
