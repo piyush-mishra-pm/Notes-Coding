@@ -5,7 +5,7 @@
 | &check; 1. Two Number Sum                      | &check; 41. Invert Binary Tree               | &check; 81. Four Number Sum                | &check; 121. Shorten Path                          |
 | &check; 2. Validate Subsequence                | &check; 42. Binary Tree Diameter             | &check; 82. Subarray Sort                  | &check; 122. Largest Rectangle Under Skyline       |
 | &check; 3. Sorted Squared Array                | &check; 43. Find Successor                   | &check; 83. Largest Range                  | &check; 123. Longest Substring Without Duplication |
-| &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &check; 84. Min Rewards                    | &cross; 124. Underscorify Substring                |
+| &check; 4. Tournament Winner                   | &check; 44. Height Balanced Binary Tree      | &check; 84. Min Rewards                    | &check; 124. Underscorify Substring                |
 | &check; 5. Non-Constructible Change            | &check; 45. Max Subset Sum No Adjacent       | &check; 85. Zigzag Traverse                | &cross; 125. Pattern Matcher                       |
 | &check; 6. Find Closest Value In BST           | &check; 46. Number Of Ways To Make Change    | &check; 86. Same BSTs                      | &cross; 126. Multi String Search                   |
 | &check; 7. Branch Sums                         | &check; 47. Min Number Of Coins For Change   | &check; 87. Validate Three Nodes           | &cross; 127. Apartment Hunting                     |
@@ -4420,3 +4420,77 @@ public static LinkedList reverseLinkedList(LinkedList head) {
     }
   }
 ```
+
+---
+
+### 124. Underscorify Substring:
+
+```java
+  //TC: Average: O(n + m); Worst Upper-Bound: O(n * (n + m)) , SC: O(n)
+  public static String underscorifySubstring(String str, String substring) {
+    List<Integer[]> locations = collapse(getLocations(str, substring));
+    return underscorifySubstring(str, locations);
+  }
+
+  private static List<Integer[]> getLocations(String str, String substring) {
+    List<Integer[]> locations = new ArrayList<>();
+    int startIdx = 0;
+
+    while (startIdx < str.length()) {
+      int nextIdx = str.indexOf(substring, startIdx);
+      if (nextIdx == -1) break;
+
+      locations.add(new Integer[] {nextIdx, nextIdx + substring.length()});
+      startIdx = nextIdx + 1;
+    }
+
+    return locations;
+  }
+
+  private static List<Integer[]> collapse(List<Integer[]> locations) {
+    if (locations.size() == 0) return locations;
+
+    List<Integer[]> collapsedLocations = new ArrayList<>();
+    collapsedLocations.add(locations.get(0));
+    Integer[] previous = locations.get(0);
+
+    for (int i = 1; i < locations.size(); i++) {
+      Integer[] current = locations.get(i);
+
+      if (current[0] <= previous[1]) previous[1] = current[1];
+      else {
+        collapsedLocations.add(current);
+        previous = current;
+      }
+    }
+
+    return collapsedLocations;
+  }
+
+  private static String underscorifySubstring(String str, List<Integer[]> locations) {
+    int stringIdx = 0, locationsIdx = 0, i = 0;
+    boolean inBetweenUnderScores = false;
+    List<String> finalChars = new ArrayList<>();
+
+    while (stringIdx < str.length() && locationsIdx < locations.size()) {
+      if (stringIdx == locations.get(locationsIdx)[i]) {
+        finalChars.add("_");
+        inBetweenUnderScores = !inBetweenUnderScores;
+
+        if (!inBetweenUnderScores) locationsIdx++;
+
+        i = i == 0 ? 1 : 0;
+      }
+      finalChars.add(str.charAt(stringIdx) + "");
+      stringIdx++;
+    }
+
+    if (locationsIdx < locations.size()) finalChars.add("_");
+
+    if (stringIdx < str.length()) finalChars.add(str.substring(stringIdx));
+
+    return String.join("", finalChars);
+  }
+```
+
+---
