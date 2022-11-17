@@ -68,3 +68,23 @@ function addBorder(words:string[]):string[]{
     return words;
 }
 ```
+
+---
+### 4: Add the digits in a number:
+You are given a positive number n. Return the sum of its digits.
+
+**Example**
+
+For n = 29, the output should be
+addTwoDigits(n) = 11.
+
+```typescript
+function addDigitsInNumber(n: any): number {
+    const digitCharArray = n.toString().split('').map(i=>parseInt(i));
+
+    return digitCharArray.reduce((total: number, current: number) => {
+return total+current;
+    },0);
+}
+```
+---
