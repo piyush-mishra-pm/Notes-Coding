@@ -141,3 +141,43 @@ function getLongestWordsFromWordArray(words: string[]): string[]{
     return longestWords;
 }
 ```
+---
+### 7. Almost Increasing Sequence:
+
+Given a sequence of integers as an array, determine whether it is possible to obtain a strictly increasing sequence by removing no more than one element from the array.
+
+**Example**
+
+- For sequence = [1, 3, 2, 1], the output should be
+almostIncreasingSequence(sequence) = false;
+
+There is no one element in this array that can be removed in order to get a strictly increasing sequence.
+
+- For sequence = [1, 3, 2], the output should be
+almostIncreasingSequence(sequence) = true.
+
+You can remove 3 from the array to get the strictly increasing sequence [1, 2]. Alternately, you can remove 2 to get the strictly increasing sequence [1, 3].
+
+```typescript
+// If a drop happens, then just remove the max of drop causing numbers.
+// Will ensure that minimum of them remains, and help next sequence elements
+// be greater than itself.
+// sequence: 2,4,1,5 => remove 1 (or replace by 4) as 1<2
+// sequence: 2,4,3,5 => remove 4, as 3>2.
+// Also see: https://leetcode.com/problems/remove-one-element-to-make-the-array-strictly-increasing
+function almostIncreasingSequence(nums:number[]):boolean {
+    int numDrops = 0;
+    int peakSoFar = nums[0];
+    for (int i = 1; i < nums.length && numDrops < 2; ++i) {
+        if (peakSoFar >= nums[i]) {
+            ++numDrops;
+            if (i > 1 && nums[i - 2] >= nums[i]) {
+                peakSoFar = nums[i - 1];
+                continue;
+            }
+        }
+        peakSoFar = nums[i];
+    }
+    return numDrops < 2;
+}
+```
