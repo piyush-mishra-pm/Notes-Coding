@@ -109,3 +109,35 @@ function(arr:number[]):number{
     return largestProduct;
 }
 ```
+---
+### 6. Longest Words from Word Array:
+Given an array of strings, return another array containing all of its longest strings.
+
+**Example**
+
+For inputArray = ["aba", "aa", "ad", "vcd", "aba"], the output should be
+allLongestStrings(inputArray) = ["aba", "vcd", "aba"].
+
+```typescript
+function getLongestWordsFromWordArray(words: string[]): string[]{
+    let longestWordLength = 0; // Assuming empt word as longest.
+    const longestWords = [];
+
+    words.forEach(word=>{
+        // skip if word is shorted than longestWord found so far.
+        if(longestWordLength>word.length){
+            return;
+        }
+        // clean up if longest word so far is shorter than current word.
+        else if(longestWordLength<word.length){
+            longesWords = [];
+            longestWordLength=word.length;
+        }
+        // Equal to largest wordlength, or largest word length so far shorter
+        // than current word. In both cases, add to longestWord collection.
+        longestWords.push(word);
+    })
+
+    return longestWords;
+}
+```
