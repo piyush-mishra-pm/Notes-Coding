@@ -15,3 +15,7 @@ Link to all my Coding related Notes:
       1. Learning React - Modern Patterns for Developing React Apps (Alex Banks, Eve Porcello)
    2. Design Patterns:
       1. Head First Design Patterns (2nd Ed.)
+4. Java:
+	1. Spring,
+	2. ORM: Spring Data JPA, JPA, Hibernate:
+5. Golang
